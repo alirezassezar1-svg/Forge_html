@@ -43,9 +43,11 @@ const safeScript = s => s.replace(/<\/script/gi, '<\\/script').replace(/<!--/g, 
 const safeStyle = s => s.replace(/<\/style/gi, '<\\/style');
 const jsonForHtml = o => JSON.stringify(o).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 
+const WIN = process.platform === 'win32';
+const PY = WIN ? 'python' : 'python3';
 function sh(cmd, {cwd, env, timeout = 20 * 60 * 1000, allowFail = false} = {}) {
   note('$', cmd);
-  const r = spawnSync('bash', ['-c', cmd], {cwd, env: {...process.env, ...env}, encoding: 'utf8', timeout, maxBuffer: 1 << 28});
+  const r = spawnSync(cmd, {shell: true, cwd, env: {...process.env, ...env}, encoding: 'utf8', timeout, maxBuffer: 1 << 28});
   const out = (r.stdout || '') + (r.stderr || '');
   if (r.status !== 0 && !allowFail) throw new Error(`command failed (${r.status}): ${cmd}\n${out.slice(-1800)}`);
   return {ok: r.status === 0, out};
@@ -207,7 +209,7 @@ async function bundleModule(file, root) {
       entryPoints: [file], bundle: true, format: 'esm', write: false, minifyWhitespace: true, logLevel: 'silent', target: 'es2020',
       plugins: [{name: 'anyhtml-resolve', setup(b) {
         b.onResolve({filter: /^https?:/}, a => ({path: a.path, external: true}));
-        b.onResolve({filter: /^\/(?!\/)/}, a => { const p = path.join(root, a.path); return exists(p) ? {path: p} : {path: a.path, external: true}; });
+        b.onResolve({filter: /^\//}, a => { if (a.path.startsWith('//')) return {path: 'https:' + a.path, external: true}; const p = path.join(root, a.path); return exists(p) ? {path: p} : {path: a.path, external: true}; });
       }}],
     });
     return out.outputFiles[0].text;
@@ -255,6 +257,28 @@ async function inlineHtml(html, pageUrl, get, {root, extraRoots = []} = {}) {
     s.text(safeScript(code));
     const classicDeferred = type !== 'module' && ($el.attr('defer') !== undefined || $el.attr('async') !== undefined);
     if (classicDeferred) { late.push(s); $el.remove(); } else $el.replaceWith(s);
+  }
+  // inline <script type="module"> that imports local files (./state.js …): bundle it, and refuse to ship a dead page if imports can't be resolved
+  if (root) for (const el of $('script[type="module"]:not([src])').toArray()) {
+    const t = $(el).text();
+    if (!/\bimport\b|\bexport\b/.test(t)) continue;
+    let dir = root;
+    try { const u = new URL(pageUrl); if (u.origin === new URL(VIRT).origin) dir = path.join(root, path.dirname(decodeURIComponent(u.pathname)).replace(/^\/+/, '')); } catch {}
+    try {
+      const out = await esbuild.build({
+        stdin: {contents: t, resolveDir: dir, sourcefile: 'inline-module.js', loader: 'js'},
+        bundle: true, format: 'esm', write: false, minifyWhitespace: true, logLevel: 'silent', target: 'es2020',
+        plugins: [{name: 'anyhtml-resolve', setup(b) {
+          b.onResolve({filter: /^https?:/}, a => ({path: a.path, external: true}));
+          b.onResolve({filter: /^\//}, a => { if (a.path.startsWith('//')) return {path: 'https:' + a.path, external: true}; const p = path.join(root, a.path); return exists(p) ? {path: p} : {path: a.path, external: true}; });
+        }}],
+      });
+      $(el).text(safeScript(out.outputFiles[0].text));
+    } catch (e) {
+      const msg = String(e.message).split('\n').slice(0, 3).join(' ');
+      if (/Could not resolve|No matching export/.test(msg)) throw new Error('inline module imports missing files (' + msg + ') – the project is incomplete, upload the whole folder/zip');
+      note('inline module bundle skipped:', msg);
+    }
   }
   if (root) for (const el of $('script:not([src])').toArray()) {
     const t = $(el).text();
@@ -457,22 +481,24 @@ function servePlan(root, info) {
     else { const f = ['server.js', 'index.js', 'app.js', 'server.mjs', 'src/server.js', 'src/index.js'].find(has); if (f) run = () => `node ${f}`; }
     if (run) return {node: true, setup: [], run, buildFirst: !!(s.build && s.start)};
   }
-  if (info.manage) return {setup: [{cmd: 'python3 -m pip install -r requirements.txt --break-system-packages -q || python3 -m pip install -r requirements.txt -q'}], run: P => `python3 manage.py runserver 127.0.0.1:${P} --noreload`};
+  if (info.manage) return {setup: [{cmd: `${PY} -m pip install -r requirements.txt --break-system-packages -q || ${PY} -m pip install -r requirements.txt -q`}], run: P => `${PY} manage.py runserver 127.0.0.1:${P} --noreload`};
   if (info.py) {
     const t = read(path.join(root, info.py));
-    if (has('requirements.txt')) setup.push({cmd: 'python3 -m pip install -r requirements.txt --break-system-packages -q || python3 -m pip install -r requirements.txt -q'});
+    if (has('requirements.txt')) setup.push({cmd: `${PY} -m pip install -r requirements.txt --break-system-packages -q || ${PY} -m pip install -r requirements.txt -q`});
     const mod = info.py.replace(/\.py$/, '');
-    if (/FastAPI\(/.test(t)) { setup.push({cmd: 'python3 -m pip install uvicorn --break-system-packages -q'}); return {setup, run: P => `python3 -m uvicorn ${mod}:app --host 127.0.0.1 --port ${P}`}; }
-    if (/Flask\(/.test(t) && !/\.run\(/.test(t)) return {setup, run: P => `python3 -m flask --app ${info.py} run --port ${P}`};
-    return {setup, run: () => `python3 ${info.py}`};
+    if (/FastAPI\(/.test(t)) { setup.push({cmd: `${PY} -m pip install uvicorn --break-system-packages -q || ${PY} -m pip install uvicorn -q`}); return {setup, run: P => `${PY} -m uvicorn ${mod}:app --host 127.0.0.1 --port ${P}`}; }
+    if (/Flask\(/.test(t) && !/\.run\(/.test(t)) return {setup, run: P => `${PY} -m flask --app ${info.py} run --port ${P}`};
+    return {setup, run: () => `${PY} ${info.py}`};
   }
-  if (info.php) return {setup: [{cmd: 'command -v php >/dev/null || (sudo apt-get update -y -q && sudo apt-get install -y -q php-cli)'}], run: P => `php -S 127.0.0.1:${P}`};
+  if (info.php) return {setup: [{cmd: WIN ? 'php -v' : 'command -v php >/dev/null || (sudo apt-get update -y -q && sudo apt-get install -y -q php-cli)'}], run: P => `php -S 127.0.0.1:${P}`};
   return null;
 }
 
 async function launchBrowser() {
   const pw = await import('playwright-core');
-  const cands = [process.env.CHROME_PATH, undefined, '/opt/pw-browsers/chromium', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome'];
+  const pf = [process.env['ProgramFiles'], process.env['ProgramFiles(x86)'], process.env.LOCALAPPDATA].filter(Boolean);
+  const winCands = pf.flatMap(b => [b + '\\Google\\Chrome\\Application\\chrome.exe', b + '\\Microsoft\\Edge\\Application\\msedge.exe']);
+  const cands = [process.env.CHROME_PATH, undefined, '/opt/pw-browsers/chromium', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', ...winCands];
   let installed = false;
   for (let i = 0; i < cands.length; i++) {
     if (i > 0 && cands[i] !== undefined && !exists(cands[i])) continue;
@@ -480,7 +506,7 @@ async function launchBrowser() {
     try { return await pw.chromium.launch({executablePath: cands[i], args: ['--no-sandbox']}); } catch (e) {
       if (cands[i] === undefined && !installed) {
         installed = true;
-        sh(`cd "${HERE}" && npx playwright-core install --with-deps chromium`, {allowFail: true});
+        sh(`npx playwright-core install ${WIN ? '' : '--with-deps '}chromium`, {cwd: HERE, allowFail: true});
         try { return await pw.chromium.launch({args: ['--no-sandbox']}); } catch {}
       }
     }
@@ -553,12 +579,12 @@ async function strategyServe(root, info) {
   for (const s of plan.setup) sh(s.cmd, {cwd: root, allowFail: true});
   const PORT = 4100 + Math.floor(Math.random() * 400);
   let logs = '';
-  const child = spawn('bash', ['-c', plan.run(PORT)], {cwd: root, detached: true, env: {...process.env, PORT: String(PORT), HOST: '127.0.0.1', BROWSER: 'none'}});
+  const child = spawn(plan.run(PORT), {shell: true, windowsHide: true, cwd: root, detached: !WIN, env: {...process.env, PORT: String(PORT), HOST: '127.0.0.1', BROWSER: 'none'}});
   let exited = false;
   child.on('exit', () => { exited = true; });
   const onData = d => { logs += d.toString(); };
   child.stdout.on('data', onData); child.stderr.on('data', onData);
-  const kill = () => { try { process.kill(-child.pid, 'SIGKILL'); } catch {} };
+  const kill = () => { try { if (WIN) spawnSync('taskkill', ['/pid', String(child.pid), '/T', '/F']); else process.kill(-child.pid, 'SIGKILL'); } catch {} };
   try {
     note('serve: starting', plan.run(PORT));
     let base = null;
