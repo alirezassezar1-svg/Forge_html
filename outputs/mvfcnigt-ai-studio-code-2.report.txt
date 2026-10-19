@@ -1,0 +1,3 @@
+root: . | package.json: false | html files: 0 | py: - | php: false
+── strategy: explorer
+DONE via "explorer" → /home/runner/work/Forge_html/Forge_html/outputs/mvfcnigt-ai-studio-code-2.html (0.08 MB)
