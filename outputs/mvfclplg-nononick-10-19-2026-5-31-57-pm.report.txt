@@ -1,0 +1,4 @@
+root: . | package.json: false | html files: 1 | py: - | php: false
+── strategy: static
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvfclplg-nononick-10-19-2026-5-31-57-pm.html (0.15 MB)
