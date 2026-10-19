@@ -1,0 +1,5 @@
+root: . | package.json: false | html files: 1 | py: - | php: false
+── strategy: static
+asset not inlined: /vite.svg
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvfcju6v-website-4.html (0.51 MB)
