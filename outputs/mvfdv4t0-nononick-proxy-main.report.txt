@@ -1,0 +1,3 @@
+root: nononick-proxy-main | package.json: false | html files: 0 | py: - | php: false
+── strategy: explorer
+DONE via "explorer" → /home/runner/work/Forge_html/Forge_html/outputs/mvfdv4t0-nononick-proxy-main.html (0.09 MB)
