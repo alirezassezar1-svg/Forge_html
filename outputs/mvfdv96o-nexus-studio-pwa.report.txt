@@ -1,0 +1,4 @@
+root: . | package.json: false | html files: 1 | py: - | php: false
+── strategy: static
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvfdv96o-nexus-studio-pwa.html (0.03 MB)
