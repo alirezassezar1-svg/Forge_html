@@ -1,0 +1,8 @@
+root: . | package.json: true | html files: 1 | py: - | php: false
+── strategy: build
+$ npm ci --no-audit --no-fund --legacy-peer-deps
+$ npm install -D vite-plugin-singlefile --no-audit --no-fund --legacy-peer-deps
+$ npx vite build --config vite.config.anyhtml.mjs
+build: vite single-file bundle
+static: 1 page(s) inlined
+DONE via "build" → /home/runner/work/Forge_html/Forge_html/outputs/mvk5jwcg-ali-phone-clean-fixed.html (3.56 MB)
