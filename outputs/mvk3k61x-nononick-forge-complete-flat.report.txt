@@ -1,0 +1,6 @@
+root: forge-flat | package.json: true | html files: 1 | py: - | php: false
+── strategy: static
+esbuild bundle skipped: app.js Build failed with 1 error:
+asset not inlined: ./icon-192.png
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvk3k61x-nononick-forge-complete-flat.html (0.83 MB)
