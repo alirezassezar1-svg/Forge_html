@@ -1,0 +1,6 @@
+root: private-knowledge-pwa | package.json: false | html files: 1 | py: - | php: false
+── strategy: static
+esbuild bundle skipped: app.js Build failed with 1 error:
+strategy static failed: inline module imports missing files (Build failed with 9 errors: ../../../../../tmp/anyhtml-0Fmz8J/src/private-knowledge-pwa/inline-module.js:5:35: ERROR: Could not resolve "./db/db.js" ../../../../../tmp/anyhtml-0Fmz8J/src/private-knowledge-pwa/inline-module.js:6:37: ERROR: Could not resolve "./router.js") – the project is incomplete, upload the whole folder/zip
+── strategy: explorer
+DONE via "explorer" → /home/runner/work/Forge_html/Forge_html/outputs/mvk3hrlc-private-knowledge-pwa.html (0.16 MB)

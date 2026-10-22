@@ -1,0 +1,2313 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b0d12">
+<title>private-knowledge-pwa</title>
+<style>
+:root{--bg:#0b0d12;--panel:#12151c;--line:#232836;--fg:#e6e9f0;--mut:#8b93a7;--acc:#4f8cff}
+@media (prefers-color-scheme:light){:root{--bg:#f6f7fb;--panel:#fff;--line:#dfe3ee;--fg:#161a24;--mut:#667089;--acc:#1f5fe0}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Vazirmatn,sans-serif;min-height:100dvh;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+header{position:sticky;top:0;z-index:5;display:flex;gap:10px;align-items:center;padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--line)}
+header b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+button{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:7px 12px;cursor:pointer}
+button.on{border-color:var(--acc);color:var(--acc)}
+nav{position:fixed;inset:0 0 0 auto;width:min(86vw,340px);background:var(--panel);border-inline-start:1px solid var(--line);transform:translateX(105%);transition:transform .2s;z-index:10;overflow:auto;padding:12px;padding-top:max(12px,env(safe-area-inset-top))}
+[dir=rtl] nav{inset:0 auto 0 0;transform:translateX(-105%)}
+nav.open{transform:none}
+#scrim{position:fixed;inset:0;background:#0008;z-index:9;display:none}#scrim.open{display:block}
+nav a{display:block;padding:8px 10px;border-radius:8px;color:var(--fg);text-decoration:none;font:13px/1.4 ui-monospace,Menlo,monospace;direction:ltr;text-align:left;word-break:break-all;cursor:pointer}
+nav a small{display:block;color:var(--mut)}nav a.sel{background:color-mix(in srgb,var(--acc) 18%,transparent);color:var(--acc)}
+main{padding:14px;max-width:1100px;margin:0 auto}
+.meta{color:var(--mut);font:12px ui-monospace,Menlo,monospace;direction:ltr;text-align:left;margin-bottom:10px;word-break:break-all}
+pre{direction:ltr;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;overflow:auto;font:12.5px/1.55 ui-monospace,Menlo,monospace;white-space:pre;tab-size:2}
+.wrap pre{white-space:pre-wrap;word-break:break-word}
+img,video{max-width:100%;border-radius:10px;background:repeating-conic-gradient(#8883 0 25%,transparent 0 50%) 0 0/16px 16px}
+iframe{width:100%;height:78dvh;border:1px solid var(--line);border-radius:12px;background:#fff}
+table{border-collapse:collapse;direction:ltr;font-size:13px;display:block;overflow:auto;max-width:100%}
+td,th{border:1px solid var(--line);padding:5px 9px;white-space:nowrap}th{background:var(--panel);position:sticky;top:0}
+.btns{display:flex;gap:8px;margin:0 0 12px;flex-wrap:wrap}
+a.dl{color:var(--acc)}
+@media(min-width:900px){nav{position:fixed;transform:none!important;inset:0 auto 0 0;width:320px;padding-top:60px}[dir=rtl] nav{inset:0 0 0 auto;border-inline-start:0;border-inline-end:0;border-inline-start:1px solid var(--line)}
+ #menu{display:none}main{margin-inline-start:0;margin-inline-end:330px}header{margin-inline-end:320px}}
+</style>
+</head>
+<body>
+<header><button id="menu" aria-label="فهرست">☰ فایل‌ها</button><b id="ttl"></b><button id="wrapb">شکستن خط</button></header>
+<div id="scrim"></div><nav id="nav"></nav><main id="view"></main>
+<script id="data" type="application/json">{"title":"private-knowledge-pwa","files":[{"path":"⟡ گزارش تبدیل.txt","size":0,"kind":"text","ext":"txt","mime":"text/plain","text":"root: private-knowledge-pwa | package.json: false | html files: 1 | py: - | php: false\n── strategy: static\nesbuild bundle skipped: app.js Build failed with 1 error:\nstrategy static failed: inline module imports missing files (Build failed with 9 errors: ../../../../../tmp/anyhtml-0Fmz8J/src/private-knowledge-pwa/inline-module.js:5:35: ERROR: Could not resolve \"./db/db.js\" ../../../../../tmp/anyhtml-0Fmz8J/src/private-knowledge-pwa/inline-module.js:6:37: ERROR: Could not resolve \"./router.js\") – the project is incomplete, upload the whole folder/zip\n── strategy: explorer\n\nاین پروژه به‌صورت صفحه اجرایی تبدیل نشد، پس محتوایش در یک مرورگر فایل نمایش داده می‌شود."},{"path":"css/base.css","size":4078,"mime":"text/css","ext":"css","kind":"text","text":"/* ===== Reset & Base ===== */\n*, *::before, *::after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\n:root {\n  --safe-top: env(safe-area-inset-top, 0px);\n  --safe-bottom: env(safe-area-inset-bottom, 0px);\n  --safe-left: env(safe-area-inset-left, 0px);\n  --safe-right: env(safe-area-inset-right, 0px);\n\n  --font-fa: \"Vazirmatn\", \"Tahoma\", \"Segoe UI\", system-ui, sans-serif;\n  --font-mono: \"JetBrains Mono\", \"Fira Code\", monospace;\n\n  --radius-sm: 8px;\n  --radius-md: 12px;\n  --radius-lg: 16px;\n  --radius-xl: 24px;\n\n  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);\n  --shadow-md: 0 4px 12px rgba(0,0,0,0.15);\n  --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);\n\n  --transition: 0.2s ease;\n  --nav-height: 64px;\n}\n\nhtml {\n  font-size: 16px;\n  -webkit-text-size-adjust: 100%;\n  height: 100%;\n}\n\nbody {\n  font-family: var(--font-fa);\n  line-height: 1.6;\n  min-height: 100%;\n  height: 100%;\n  overflow: hidden;\n  background: var(--bg-primary);\n  color: var(--text-primary);\n  -webkit-font-smoothing: antialiased;\n}\n\n#app {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n}\n\n/* ===== Status Bar ===== */\n.status-bar {\n  background: var(--warning);\n  color: #000;\n  text-align: center;\n  padding: 6px 12px;\n  font-size: 0.85rem;\n  font-weight: 500;\n  z-index: 1000;\n}\n.status-bar.hidden { display: none; }\n.status-bar.online { background: var(--success); color: #fff; }\n\n/* ===== App Shell ===== */\n.app-shell {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow: hidden;\n}\n\n/* ===== Navigation ===== */\n.main-nav {\n  display: flex;\n  background: var(--bg-secondary);\n  border-top: 1px solid var(--border);\n  padding: 4px var(--safe-right) calc(4px + var(--safe-bottom)) var(--safe-left);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  z-index: 100;\n  height: calc(var(--nav-height) + var(--safe-bottom));\n  justify-content: space-around;\n  align-items: center;\n}\n\n.nav-item {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  text-decoration: none;\n  color: var(--text-secondary);\n  font-size: 0.7rem;\n  padding: 6px 8px;\n  border-radius: var(--radius-sm);\n  min-width: 56px;\n  transition: color var(--transition), background var(--transition);\n  -webkit-tap-highlight-color: transparent;\n}\n\n.nav-item .nav-icon {\n  font-size: 1.35rem;\n  line-height: 1.2;\n  margin-bottom: 2px;\n}\n\n.nav-item.active {\n  color: var(--accent);\n  font-weight: 600;\n}\n\n.nav-item:active {\n  background: var(--bg-hover);\n}\n\n/* ===== Main Content ===== */\n.main-content {\n  flex: 1;\n  overflow-y: auto;\n  overflow-x: hidden;\n  padding: var(--safe-top) 0 calc(var(--nav-height) + var(--safe-bottom) + 12px) 0;\n  -webkit-overflow-scrolling: touch;\n}\n\n#page-container {\n  max-width: 720px;\n  margin: 0 auto;\n  padding: 16px;\n  min-height: 100%;\n}\n\n/* ===== Loading ===== */\n.loading-screen {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  min-height: 50vh;\n  gap: 16px;\n  color: var(--text-secondary);\n}\n\n.spinner {\n  width: 36px;\n  height: 36px;\n  border: 3px solid var(--border);\n  border-top-color: var(--accent);\n  border-radius: 50%;\n  animation: spin 0.8s linear infinite;\n}\n\n@keyframes spin {\n  to { transform: rotate(360deg); }\n}\n\n/* ===== Desktop Sidebar ===== */\n@media (min-width: 768px) {\n  .app-shell {\n    flex-direction: row;\n  }\n\n  .main-nav {\n    position: relative;\n    flex-direction: column;\n    width: 88px;\n    height: 100%;\n    border-top: none;\n    border-left: 1px solid var(--border);\n    padding: 16px 8px;\n    justify-content: flex-start;\n    gap: 8px;\n  }\n\n  .nav-item {\n    width: 100%;\n    padding: 12px 8px;\n  }\n\n  .main-content {\n    padding: var(--safe-top) 0 var(--safe-bottom) 0;\n  }\n\n  #page-container {\n    max-width: 800px;\n    padding: 24px;\n  }\n}\n\n@media (min-width: 1024px) {\n  .main-nav {\n    width: 200px;\n    align-items: stretch;\n  }\n\n  .nav-item {\n    flex-direction: row;\n    justify-content: flex-start;\n    gap: 12px;\n    font-size: 0.9rem;\n    padding: 12px 16px;\n  }\n\n  .nav-item .nav-icon {\n    margin-bottom: 0;\n  }\n}\n","truncated":false},{"path":"css/components.css","size":7205,"mime":"text/css","ext":"css","kind":"text","text":"/* ===== Cards ===== */\n.card {\n  background: var(--bg-card);\n  border: 1px solid var(--border);\n  border-radius: var(--radius-md);\n  padding: 16px;\n  margin-bottom: 12px;\n  box-shadow: var(--shadow-sm);\n}\n\n.card-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: flex-start;\n  gap: 12px;\n  margin-bottom: 8px;\n}\n\n.card-title {\n  font-size: 1.05rem;\n  font-weight: 600;\n  color: var(--text-primary);\n  line-height: 1.4;\n}\n\n.card-meta {\n  font-size: 0.8rem;\n  color: var(--text-secondary);\n  margin-top: 4px;\n}\n\n.card-body {\n  font-size: 0.95rem;\n  color: var(--text-secondary);\n  line-height: 1.6;\n}\n\n/* ===== Buttons ===== */\n.btn {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: 8px;\n  padding: 10px 18px;\n  font-family: inherit;\n  font-size: 0.95rem;\n  font-weight: 500;\n  border: none;\n  border-radius: var(--radius-sm);\n  cursor: pointer;\n  transition: background var(--transition), transform 0.1s;\n  -webkit-tap-highlight-color: transparent;\n  min-height: 44px;\n}\n\n.btn:active { transform: scale(0.97); }\n.btn:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n  transform: none;\n}\n\n.btn-primary {\n  background: var(--accent);\n  color: var(--text-inverse);\n}\n.btn-primary:hover:not(:disabled) { background: var(--accent-hover); }\n\n.btn-secondary {\n  background: var(--bg-tertiary);\n  color: var(--text-primary);\n  border: 1px solid var(--border);\n}\n.btn-secondary:hover:not(:disabled) { background: var(--bg-hover); }\n\n.btn-danger {\n  background: var(--danger);\n  color: #fff;\n}\n\n.btn-ghost {\n  background: transparent;\n  color: var(--accent);\n}\n.btn-ghost:hover:not(:disabled) { background: var(--accent-soft); }\n\n.btn-block { width: 100%; }\n.btn-sm { padding: 6px 12px; min-height: 36px; font-size: 0.85rem; }\n\n/* ===== Forms ===== */\n.form-group {\n  margin-bottom: 16px;\n}\n\n.form-label {\n  display: block;\n  font-size: 0.9rem;\n  font-weight: 500;\n  margin-bottom: 6px;\n  color: var(--text-primary);\n}\n\n.form-input,\n.form-textarea,\n.form-select {\n  width: 100%;\n  padding: 12px 14px;\n  font-family: inherit;\n  font-size: 1rem;\n  border: 1px solid var(--border);\n  border-radius: var(--radius-sm);\n  background: var(--bg-secondary);\n  color: var(--text-primary);\n  transition: border-color var(--transition);\n  min-height: 48px;\n}\n\n.form-input:focus,\n.form-textarea:focus,\n.form-select:focus {\n  outline: none;\n  border-color: var(--accent);\n  box-shadow: 0 0 0 3px var(--accent-soft);\n}\n\n.form-textarea {\n  min-height: 120px;\n  resize: vertical;\n  line-height: 1.5;\n}\n\n.form-hint {\n  font-size: 0.8rem;\n  color: var(--text-muted);\n  margin-top: 4px;\n}\n\n.form-error {\n  font-size: 0.85rem;\n  color: var(--danger);\n  margin-top: 4px;\n}\n\n/* ===== Badges ===== */\n.badge {\n  display: inline-block;\n  padding: 2px 8px;\n  font-size: 0.75rem;\n  font-weight: 500;\n  border-radius: 999px;\n  background: var(--bg-tertiary);\n  color: var(--text-secondary);\n}\n\n.badge-success { background: #d1fae5; color: #065f46; }\n.badge-warning { background: #fef3c7; color: #92400e; }\n.badge-danger  { background: #fee2e2; color: #991b1b; }\n.badge-info    { background: #cffafe; color: #155e75; }\n\n[data-theme=\"dark\"] .badge-success { background: #064e3b; color: #6ee7b7; }\n[data-theme=\"dark\"] .badge-warning { background: #78350f; color: #fcd34d; }\n[data-theme=\"dark\"] .badge-danger  { background: #7f1d1d; color: #fca5a5; }\n[data-theme=\"dark\"] .badge-info    { background: #164e63; color: #67e8f9; }\n\n/* ===== Empty State ===== */\n.empty-state {\n  text-align: center;\n  padding: 48px 24px;\n  color: var(--text-secondary);\n}\n\n.empty-state-icon {\n  font-size: 3rem;\n  margin-bottom: 16px;\n  opacity: 0.5;\n}\n\n.empty-state h3 {\n  font-size: 1.2rem;\n  color: var(--text-primary);\n  margin-bottom: 8px;\n}\n\n/* ===== Toast ===== */\n.toast-container {\n  position: fixed;\n  top: calc(var(--safe-top) + 12px);\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 2000;\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n  width: min(360px, calc(100% - 32px));\n  pointer-events: none;\n}\n\n.toast {\n  background: var(--bg-secondary);\n  border: 1px solid var(--border);\n  border-radius: var(--radius-md);\n  padding: 12px 16px;\n  box-shadow: var(--shadow-md);\n  font-size: 0.9rem;\n  animation: toast-in 0.3s ease;\n  pointer-events: auto;\n}\n\n.toast-success { border-right: 4px solid var(--success); }\n.toast-error   { border-right: 4px solid var(--danger); }\n.toast-info    { border-right: 4px solid var(--info); }\n\n@keyframes toast-in {\n  from { opacity: 0; transform: translateY(-12px); }\n  to   { opacity: 1; transform: translateY(0); }\n}\n\n/* ===== Page Headers ===== */\n.page-header {\n  margin-bottom: 20px;\n}\n\n.page-title {\n  font-size: 1.5rem;\n  font-weight: 700;\n  color: var(--text-primary);\n  margin-bottom: 4px;\n}\n\n.page-subtitle {\n  font-size: 0.9rem;\n  color: var(--text-secondary);\n}\n\n/* ===== Chat specific ===== */\n.chat-messages {\n  display: flex;\n  flex-direction: column;\n  gap: 16px;\n  padding-bottom: 100px;\n}\n\n.message {\n  max-width: 90%;\n  padding: 12px 16px;\n  border-radius: var(--radius-md);\n  line-height: 1.6;\n  font-size: 0.95rem;\n}\n\n.message-user {\n  align-self: flex-start;\n  background: var(--accent);\n  color: var(--text-inverse);\n  border-bottom-right-radius: 4px;\n}\n\n.message-assistant {\n  align-self: flex-end;\n  background: var(--bg-secondary);\n  border: 1px solid var(--border);\n  border-bottom-left-radius: 4px;\n}\n\n.message-meta {\n  font-size: 0.75rem;\n  opacity: 0.7;\n  margin-top: 6px;\n}\n\n.chat-input-bar {\n  position: fixed;\n  bottom: calc(var(--nav-height) + var(--safe-bottom));\n  left: 0;\n  right: 0;\n  background: var(--bg-secondary);\n  border-top: 1px solid var(--border);\n  padding: 10px 16px;\n  display: flex;\n  gap: 10px;\n  z-index: 50;\n}\n\n.chat-input-bar .form-input {\n  flex: 1;\n  min-height: 44px;\n}\n\n/* ===== Quality Report ===== */\n.quality-report {\n  background: var(--bg-tertiary);\n  border-radius: var(--radius-sm);\n  padding: 12px;\n  margin: 12px 0;\n  font-size: 0.85rem;\n}\n\n.quality-item {\n  display: flex;\n  justify-content: space-between;\n  padding: 4px 0;\n}\n\n.quality-ok { color: var(--success); }\n.quality-warn { color: var(--warning); }\n.quality-bad { color: var(--danger); }\n\n/* ===== Progress ===== */\n.progress-bar {\n  height: 6px;\n  background: var(--bg-tertiary);\n  border-radius: 3px;\n  overflow: hidden;\n  margin: 8px 0;\n}\n\n.progress-fill {\n  height: 100%;\n  background: var(--accent);\n  transition: width 0.3s ease;\n  border-radius: 3px;\n}\n\n/* ===== Citation ===== */\n.citation {\n  display: inline-flex;\n  align-items: center;\n  gap: 4px;\n  background: var(--accent-soft);\n  color: var(--accent);\n  padding: 2px 8px;\n  border-radius: 4px;\n  font-size: 0.8rem;\n  text-decoration: none;\n  margin: 2px;\n  cursor: pointer;\n}\n\n.citation:hover {\n  background: var(--accent);\n  color: var(--text-inverse);\n}\n\n/* ===== Utility ===== */\n.hidden { display: none !important; }\n.text-center { text-align: center; }\n.mt-1 { margin-top: 8px; }\n.mt-2 { margin-top: 16px; }\n.mt-3 { margin-top: 24px; }\n.mb-1 { margin-bottom: 8px; }\n.mb-2 { margin-bottom: 16px; }\n.flex { display: flex; }\n.flex-between { display: flex; justify-content: space-between; align-items: center; }\n.gap-1 { gap: 8px; }\n.gap-2 { gap: 16px; }\n","truncated":false},{"path":"css/rtl.css","size":1492,"mime":"text/css","ext":"css","kind":"text","text":"/* RTL-specific adjustments */\n\nhtml[dir=\"rtl\"] {\n  direction: rtl;\n}\n\n/* Keep URLs, code, numbers LTR */\n.ltr, a[href^=\"http\"], code, .url, .hash, .mono {\n  direction: ltr;\n  unicode-bidi: isolate;\n  text-align: left;\n}\n\n/* Form inputs that contain URLs should be LTR */\ninput[type=\"url\"],\ninput.url-input {\n  direction: ltr;\n  text-align: left;\n}\n\n/* Navigation labels stay RTL */\n.nav-label {\n  font-family: var(--font-fa);\n}\n\n/* Message bubbles: user on right in RTL? Actually for chat we keep user on start (right in RTL) */\nhtml[dir=\"rtl\"] .message-user {\n  align-self: flex-start; /* right side in RTL */\n  border-radius: var(--radius-md);\n  border-bottom-left-radius: 4px;\n  border-bottom-right-radius: var(--radius-md);\n}\n\nhtml[dir=\"rtl\"] .message-assistant {\n  align-self: flex-end; /* left side in RTL */\n  border-radius: var(--radius-md);\n  border-bottom-right-radius: 4px;\n  border-bottom-left-radius: var(--radius-md);\n}\n\n/* Toast border on the correct side */\nhtml[dir=\"rtl\"] .toast-success { border-right: none; border-left: 4px solid var(--success); }\nhtml[dir=\"rtl\"] .toast-error   { border-right: none; border-left: 4px solid var(--danger); }\nhtml[dir=\"rtl\"] .toast-info    { border-right: none; border-left: 4px solid var(--info); }\n\n/* Desktop sidebar on the right in RTL */\n@media (min-width: 768px) {\n  html[dir=\"rtl\"] .main-nav {\n    border-left: none;\n    border-right: 1px solid var(--border);\n    order: 1;\n  }\n  html[dir=\"rtl\"] .main-content {\n    order: 0;\n  }\n}\n","truncated":false},{"path":"css/themes.css","size":1719,"mime":"text/css","ext":"css","kind":"text","text":"/* ===== Light Theme (default) ===== */\n:root, [data-theme=\"light\"] {\n  --bg-primary: #f8fafc;\n  --bg-secondary: #ffffff;\n  --bg-tertiary: #f1f5f9;\n  --bg-hover: #e2e8f0;\n  --bg-card: #ffffff;\n\n  --text-primary: #0f172a;\n  --text-secondary: #64748b;\n  --text-muted: #94a3b8;\n  --text-inverse: #ffffff;\n\n  --border: #e2e8f0;\n  --border-strong: #cbd5e1;\n\n  --accent: #3b82f6;\n  --accent-hover: #2563eb;\n  --accent-soft: #dbeafe;\n\n  --success: #10b981;\n  --warning: #f59e0b;\n  --danger: #ef4444;\n  --info: #06b6d4;\n\n  --shadow-color: rgba(15, 23, 42, 0.08);\n}\n\n/* ===== Dark Theme ===== */\n[data-theme=\"dark\"] {\n  --bg-primary: #0f172a;\n  --bg-secondary: #1e293b;\n  --bg-tertiary: #334155;\n  --bg-hover: #475569;\n  --bg-card: #1e293b;\n\n  --text-primary: #f1f5f9;\n  --text-secondary: #94a3b8;\n  --text-muted: #64748b;\n  --text-inverse: #0f172a;\n\n  --border: #334155;\n  --border-strong: #475569;\n\n  --accent: #60a5fa;\n  --accent-hover: #3b82f6;\n  --accent-soft: #1e3a5f;\n\n  --success: #34d399;\n  --warning: #fbbf24;\n  --danger: #f87171;\n  --info: #22d3ee;\n\n  --shadow-color: rgba(0, 0, 0, 0.3);\n}\n\n/* Auto dark preference */\n@media (prefers-color-scheme: dark) {\n  :root:not([data-theme=\"light\"]) {\n    --bg-primary: #0f172a;\n    --bg-secondary: #1e293b;\n    --bg-tertiary: #334155;\n    --bg-hover: #475569;\n    --bg-card: #1e293b;\n\n    --text-primary: #f1f5f9;\n    --text-secondary: #94a3b8;\n    --text-muted: #64748b;\n    --text-inverse: #0f172a;\n\n    --border: #334155;\n    --border-strong: #475569;\n\n    --accent: #60a5fa;\n    --accent-hover: #3b82f6;\n    --accent-soft: #1e3a5f;\n\n    --success: #34d399;\n    --warning: #fbbf24;\n    --danger: #f87171;\n    --info: #22d3ee;\n\n    --shadow-color: rgba(0, 0, 0, 0.3);\n  }\n}\n","truncated":false},{"path":"icons/icon-192-maskable.png","size":67,"mime":"image/png","ext":"png","kind":"image","b64":"iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAACezh6TAAAADElEQVR4nGP4DwABAQEAGN2NtAAAAABJRU5ErkJggg=="},{"path":"icons/icon-192.png","size":67,"mime":"image/png","ext":"png","kind":"image","b64":"iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAACezh6TAAAADElEQVR4nGP4DwABAQEAGN2NtAAAAABJRU5ErkJggg=="},{"path":"icons/icon-512-maskable.png","size":67,"mime":"image/png","ext":"png","kind":"image","b64":"iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAACezh6TAAAADElEQVR4nGP4DwABAQEAGN2NtAAAAABJRU5ErkJggg=="},{"path":"icons/icon-512.png","size":67,"mime":"image/png","ext":"png","kind":"image","b64":"iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAACezh6TAAAADElEQVR4nGP4DwABAQEAGN2NtAAAAABJRU5ErkJggg=="},{"path":"index.html","size":3607,"mime":"text/html","ext":"html","kind":"text","text":"\u003c!DOCTYPE html>\n\u003chtml lang=\"fa\" dir=\"rtl\">\n\u003chead>\n  \u003cmeta charset=\"UTF-8\" />\n  \u003cmeta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1\" />\n  \u003cmeta name=\"theme-color\" content=\"#0f172a\" />\n  \u003cmeta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n  \u003cmeta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\" />\n  \u003cmeta name=\"apple-mobile-web-app-title\" content=\"دانش خصوصی\" />\n  \u003ctitle>دانش خصوصی — Private Knowledge\u003c/title>\n  \u003clink rel=\"manifest\" href=\"/manifest.webmanifest\" />\n  \u003clink rel=\"apple-touch-icon\" href=\"/icons/icon-192.png\" />\n  \u003clink rel=\"stylesheet\" href=\"/css/base.css\" />\n  \u003clink rel=\"stylesheet\" href=\"/css/themes.css\" />\n  \u003clink rel=\"stylesheet\" href=\"/css/components.css\" />\n  \u003clink rel=\"stylesheet\" href=\"/css/rtl.css\" />\n\u003c/head>\n\u003cbody>\n  \u003cdiv id=\"app\">\n    \u003c!-- Offline / Status Bar -->\n    \u003cdiv id=\"status-bar\" class=\"status-bar hidden\">\n      \u003cspan id=\"status-text\">آفلاین\u003c/span>\n    \u003c/div>\n\n    \u003c!-- App Shell -->\n    \u003cdiv class=\"app-shell\">\n      \u003c!-- Sidebar (desktop) / Bottom Nav (mobile) -->\n      \u003cnav id=\"main-nav\" class=\"main-nav\" aria-label=\"منوی اصلی\">\n        \u003ca href=\"/\" data-route=\"/\" class=\"nav-item active\" title=\"داشبورد\">\n          \u003cspan class=\"nav-icon\">⌂\u003c/span>\n          \u003cspan class=\"nav-label\">داشبورد\u003c/span>\n        \u003c/a>\n        \u003ca href=\"/chat\" data-route=\"/chat\" class=\"nav-item\" title=\"گفتگو\">\n          \u003cspan class=\"nav-icon\">💬\u003c/span>\n          \u003cspan class=\"nav-label\">گفتگو\u003c/span>\n        \u003c/a>\n        \u003ca href=\"/sources\" data-route=\"/sources\" class=\"nav-item\" title=\"منابع\">\n          \u003cspan class=\"nav-icon\">📚\u003c/span>\n          \u003cspan class=\"nav-label\">منابع\u003c/span>\n        \u003c/a>\n        \u003ca href=\"/ingest\" data-route=\"/ingest\" class=\"nav-item\" title=\"افزودن\">\n          \u003cspan class=\"nav-icon\">＋\u003c/span>\n          \u003cspan class=\"nav-label\">افزودن\u003c/span>\n        \u003c/a>\n        \u003ca href=\"/search\" data-route=\"/search\" class=\"nav-item\" title=\"جستجو\">\n          \u003cspan class=\"nav-icon\">🔍\u003c/span>\n          \u003cspan class=\"nav-label\">جستجو\u003c/span>\n        \u003c/a>\n        \u003ca href=\"/settings\" data-route=\"/settings\" class=\"nav-item\" title=\"تنظیمات\">\n          \u003cspan class=\"nav-icon\">⚙\u003c/span>\n          \u003cspan class=\"nav-label\">تنظیمات\u003c/span>\n        \u003c/a>\n      \u003c/nav>\n\n      \u003c!-- Main Content -->\n      \u003cmain id=\"main-content\" class=\"main-content\" role=\"main\">\n        \u003cdiv id=\"page-container\">\n          \u003c!-- Pages are injected here by the router -->\n          \u003cdiv class=\"loading-screen\">\n            \u003cdiv class=\"spinner\">\u003c/div>\n            \u003cp>در حال بارگذاری...\u003c/p>\n          \u003c/div>\n        \u003c/div>\n      \u003c/main>\n    \u003c/div>\n\n    \u003c!-- Toast / Notifications -->\n    \u003cdiv id=\"toast-container\" class=\"toast-container\" aria-live=\"polite\">\u003c/div>\n\n    \u003c!-- Modal Root -->\n    \u003cdiv id=\"modal-root\">\u003c/div>\n  \u003c/div>\n\n  \u003c!-- Libraries (CDN for simplicity in this version) -->\n  \u003cscript src=\"https://cdn.jsdelivr.net/npm/dexie@3.2.7/dist/dexie.min.js\">\u003c/script>\n  \u003cscript src=\"https://cdn.jsdelivr.net/npm/minisearch@6.3.0/dist/umd/index.min.js\">\u003c/script>\n\n  \u003c!-- App Modules -->\n  \u003cscript type=\"module\" src=\"/js/app.js\">\u003c/script>\n\n  \u003cscript>\n    // Register Service Worker\n    if ('serviceWorker' in navigator) {\n      window.addEventListener('load', () => {\n        navigator.serviceWorker.register('/sw.js')\n          .then(reg => console.log('SW registered', reg.scope))\n          .catch(err => console.warn('SW registration failed', err));\n      });\n    }\n  \u003c/script>\n\u003c/body>\n\u003c/html>\n","truncated":false},{"path":"js/app.js","size":2292,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Private Knowledge AI – Client-Only PWA\n * Entry Point\n */\nimport { initDB, getSetting } from './db/db.js';\nimport { initRouter, register } from './router.js';\nimport { renderDashboard } from './pages/dashboard.js';\nimport { renderIngest } from './pages/ingest.js';\nimport { renderSources } from './pages/sources.js';\nimport { renderChat } from './pages/chat.js';\nimport { renderSearch } from './pages/search.js';\nimport { renderSettings, applyTheme } from './pages/settings.js';\nimport { buildIndex } from './services/retriever.js';\n\nasync function bootstrap() {\n  try {\n    // 1. Init DB\n    await initDB();\n\n    // 2. Apply theme\n    const theme = await getSetting('theme');\n    applyTheme(theme || 'auto');\n\n    // 3. Register routes\n    register('/', renderDashboard);\n    register('/ingest', renderIngest);\n    register('/sources', renderSources);\n    register('/chat', renderChat);\n    register('/search', renderSearch);\n    register('/settings', renderSettings);\n\n    // 4. Init router\n    initRouter('#page-container');\n\n    // 5. Build search index in background\n    buildIndex().catch(err => console.warn('Index build failed', err));\n\n    // 6. Online/Offline status\n    updateOnlineStatus();\n    window.addEventListener('online', updateOnlineStatus);\n    window.addEventListener('offline', updateOnlineStatus);\n\n    console.log('[App] Private Knowledge AI ready (Client-Only)');\n  } catch (err) {\n    console.error('[App] Bootstrap failed', err);\n    document.getElementById('page-container').innerHTML = `\n      \u003cdiv class=\"empty-state\">\n        \u003cdiv class=\"empty-state-icon\">⚠️\u003c/div>\n        \u003ch3>خطا در راه‌اندازی\u003c/h3>\n        \u003cp>${err.message}\u003c/p>\n        \u003cp class=\"mt-1\">لطفاً صفحه را رفرش کنید یا حافظه مرورگر را پاک کنید.\u003c/p>\n      \u003c/div>\n    `;\n  }\n}\n\nfunction updateOnlineStatus() {\n  const bar = document.getElementById('status-bar');\n  const text = document.getElementById('status-text');\n  if (!bar || !text) return;\n\n  if (navigator.onLine) {\n    bar.classList.add('hidden');\n  } else {\n    bar.classList.remove('hidden');\n    bar.classList.remove('online');\n    text.textContent = 'حالت آفلاین — فقط دانش ذخیره‌شده در دسترس است';\n  }\n}\n\n// Start\nbootstrap();\n","truncated":false},{"path":"js/db/db.js","size":7409,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Database layer using Dexie.js\n */\nimport { DB_NAME, DB_VERSION, stores, defaultSettings } from './schema.js';\n\nconst db = new Dexie(DB_NAME);\n\ndb.version(DB_VERSION).stores(stores);\n\n/**\n * Initialize database and default settings\n */\nexport async function initDB() {\n  try {\n    await db.open();\n    // Ensure default settings exist\n    const existing = await db.settings.get('theme');\n    if (!existing) {\n      const entries = Object.entries(defaultSettings).map(([key, value]) => ({ key, value }));\n      await db.settings.bulkPut(entries);\n    }\n    console.log('[DB] Initialized successfully');\n    return true;\n  } catch (err) {\n    console.error('[DB] Init failed', err);\n    throw err;\n  }\n}\n\n/**\n * Settings helpers\n */\nexport async function getSetting(key) {\n  const row = await db.settings.get(key);\n  return row ? row.value : defaultSettings[key];\n}\n\nexport async function setSetting(key, value) {\n  await db.settings.put({ key, value });\n}\n\nexport async function getAllSettings() {\n  const rows = await db.settings.toArray();\n  const obj = { ...defaultSettings };\n  rows.forEach(r => { obj[r.key] = r.value; });\n  return obj;\n}\n\n/**\n * Sources\n */\nexport async function createSource({ url, finalUrl, title }) {\n  const now = Date.now();\n  const id = await db.sources.add({\n    url,\n    finalUrl: finalUrl || url,\n    title: title || url,\n    createdAt: now,\n    updatedAt: now,\n    status: 'pending',\n    tags: []\n  });\n  return id;\n}\n\nexport async function getSources() {\n  return db.sources.orderBy('updatedAt').reverse().toArray();\n}\n\nexport async function getSource(id) {\n  return db.sources.get(id);\n}\n\nexport async function updateSource(id, changes) {\n  changes.updatedAt = Date.now();\n  await db.sources.update(id, changes);\n}\n\n/**\n * Versions (immutable after creation except approval)\n */\nexport async function createVersion(data) {\n  const existing = await db.versions\n    .where({ sourceId: data.sourceId })\n    .toArray();\n  const versionNumber = existing.length + 1;\n\n  const id = await db.versions.add({\n    sourceId: data.sourceId,\n    versionNumber,\n    contentHash: data.contentHash,\n    title: data.title,\n    extractedText: data.extractedText,\n    qualityReport: data.qualityReport,\n    retrievedAt: data.retrievedAt || Date.now(),\n    httpStatus: data.httpStatus,\n    contentType: data.contentType,\n    finalUrl: data.finalUrl,\n    approved: false,\n    approvedAt: null,\n    status: 'preview',\n    extractionMethod: data.extractionMethod || 'readability-v1'\n  });\n  return id;\n}\n\nexport async function getVersions(sourceId) {\n  return db.versions.where('sourceId').equals(sourceId).reverse().sortBy('versionNumber');\n}\n\nexport async function getVersion(id) {\n  return db.versions.get(id);\n}\n\nexport async function approveVersion(versionId) {\n  const version = await db.versions.get(versionId);\n  if (!version) throw new Error('Version not found');\n\n  await db.transaction('rw', db.versions, db.sources, async () => {\n    await db.versions.update(versionId, {\n      approved: true,\n      approvedAt: Date.now(),\n      status: 'approved'\n    });\n    await db.sources.update(version.sourceId, {\n      status: 'active',\n      title: version.title,\n      updatedAt: Date.now()\n    });\n  });\n}\n\n/**\n * Chunks\n */\nexport async function saveChunks(versionId, sourceId, chunks) {\n  const records = chunks.map((c, i) => ({\n    versionId,\n    sourceId,\n    order: i,\n    heading: c.heading || null,\n    text: c.text,\n    textLength: c.text.length,\n    startOffset: c.startOffset || 0,\n    endOffset: c.endOffset || c.text.length\n  }));\n  await db.chunks.bulkAdd(records);\n  return records.length;\n}\n\nexport async function getChunksByVersion(versionId) {\n  return db.chunks.where('versionId').equals(versionId).sortBy('order');\n}\n\nexport async function getApprovedChunks() {\n  const approvedVersions = await db.versions.where('approved').equals(1).primaryKeys();\n  if (!approvedVersions.length) return [];\n  return db.chunks.where('versionId').anyOf(approvedVersions).toArray();\n}\n\n/**\n * Conversations & Messages\n */\nexport async function createConversation(title = 'گفتگوی جدید') {\n  const now = Date.now();\n  return db.conversations.add({\n    title,\n    createdAt: now,\n    updatedAt: now\n  });\n}\n\nexport async function getConversations() {\n  return db.conversations.orderBy('updatedAt').reverse().toArray();\n}\n\nexport async function addMessage(conversationId, role, content, meta = {}) {\n  const id = await db.messages.add({\n    conversationId,\n    role,\n    content,\n    createdAt: Date.now(),\n    ...meta\n  });\n  await db.conversations.update(conversationId, { updatedAt: Date.now() });\n  return id;\n}\n\nexport async function getMessages(conversationId) {\n  return db.messages.where('conversationId').equals(conversationId).sortBy('createdAt');\n}\n\n/**\n * Evidence\n */\nexport async function saveEvidence(messageId, items) {\n  const records = items.map(item => ({\n    messageId,\n    chunkId: item.chunkId,\n    versionId: item.versionId,\n    score: item.score,\n    excerpt: item.excerpt\n  }));\n  await db.evidence.bulkAdd(records);\n}\n\nexport async function getEvidence(messageId) {\n  return db.evidence.where('messageId').equals(messageId).toArray();\n}\n\n/**\n * Jobs\n */\nexport async function createJob(type, payload = {}) {\n  return db.jobs.add({\n    type,\n    status: 'pending',\n    progress: 0,\n    payload,\n    result: null,\n    error: null,\n    createdAt: Date.now(),\n    updatedAt: Date.now()\n  });\n}\n\nexport async function updateJob(id, changes) {\n  changes.updatedAt = Date.now();\n  await db.jobs.update(id, changes);\n}\n\nexport async function getJob(id) {\n  return db.jobs.get(id);\n}\n\n/**\n * Export / Import helpers\n */\nexport async function exportAllData() {\n  const data = {\n    exportedAt: new Date().toISOString(),\n    version: DB_VERSION,\n    settings: await db.settings.toArray(),\n    sources: await db.sources.toArray(),\n    versions: await db.versions.toArray(),\n    chunks: await db.chunks.toArray(),\n    conversations: await db.conversations.toArray(),\n    messages: await db.messages.toArray(),\n    evidence: await db.evidence.toArray()\n  };\n  return data;\n}\n\nexport async function importData(data) {\n  if (!data || !data.version) throw new Error('Invalid backup file');\n\n  await db.transaction('rw',\n    db.settings, db.sources, db.versions, db.chunks,\n    db.conversations, db.messages, db.evidence,\n    async () => {\n      await Promise.all([\n        db.settings.clear(),\n        db.sources.clear(),\n        db.versions.clear(),\n        db.chunks.clear(),\n        db.conversations.clear(),\n        db.messages.clear(),\n        db.evidence.clear()\n      ]);\n\n      if (data.settings?.length) await db.settings.bulkPut(data.settings);\n      if (data.sources?.length) await db.sources.bulkPut(data.sources);\n      if (data.versions?.length) await db.versions.bulkPut(data.versions);\n      if (data.chunks?.length) await db.chunks.bulkPut(data.chunks);\n      if (data.conversations?.length) await db.conversations.bulkPut(data.conversations);\n      if (data.messages?.length) await db.messages.bulkPut(data.messages);\n      if (data.evidence?.length) await db.evidence.bulkPut(data.evidence);\n    }\n  );\n}\n\nexport async function wipeAllData() {\n  await db.delete();\n  await db.open();\n  const entries = Object.entries(defaultSettings).map(([key, value]) => ({ key, value }));\n  await db.settings.bulkPut(entries);\n}\n\nexport { db };\nexport default db;\n","truncated":false},{"path":"js/db/schema.js","size":1106,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * IndexedDB Schema Definition for Private Knowledge AI (Client-Only)\n */\n\nexport const DB_NAME = 'PrivateKnowledgeDB';\nexport const DB_VERSION = 1;\n\n/**\n * Dexie schema stores\n */\nexport const stores = {\n  settings: 'key, value',\n  sources: '++id, url, finalUrl, title, createdAt, updatedAt, status, *tags',\n  versions: '++id, sourceId, versionNumber, contentHash, title, retrievedAt, approved, approvedAt, status',\n  chunks: '++id, versionId, sourceId, order, heading, textLength',\n  embeddings: '++id, chunkId, versionId, model',\n  conversations: '++id, title, createdAt, updatedAt',\n  messages: '++id, conversationId, role, createdAt',\n  evidence: '++id, messageId, chunkId, versionId, score',\n  jobs: '++id, type, status, createdAt, updatedAt',\n  audit: '++id, action, timestamp'\n};\n\n/**\n * Default settings\n */\nexport const defaultSettings = {\n  theme: 'auto',\n  language: 'fa',\n  embeddingModel: 'Xenova/all-MiniLM-L6-v2',\n  llmModel: null,               // set when WebLLM is loaded\n  chunkSize: 500,\n  chunkOverlap: 80,\n  topK: 6,\n  pinEnabled: false,\n  pinHash: null,\n  lastBackupAt: null\n};\n","truncated":false},{"path":"js/pages/chat.js","size":6517,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Chat Page – Evidence-based answers using local retrieval\n */\nimport {\n  createConversation,\n  getConversations,\n  addMessage,\n  getMessages,\n  saveEvidence\n} from '../db/db.js';\nimport { search, buildContext } from '../services/retriever.js';\nimport { showToast } from '../utils/toast.js';\n\nlet currentConversationId = null;\n\nexport async function renderChat() {\n  const container = document.getElementById('page-container');\n\n  // Get or create a conversation\n  let conversations = await getConversations();\n  if (conversations.length === 0) {\n    currentConversationId = await createConversation('گفتگوی اصلی');\n  } else {\n    currentConversationId = conversations[0].id;\n  }\n\n  const messages = await getMessages(currentConversationId);\n\n  container.innerHTML = `\n    \u003cdiv class=\"page-header\">\n      \u003ch1 class=\"page-title\">گفتگو با دانش\u003c/h1>\n      \u003cp class=\"page-subtitle\">پاسخ‌ها بر اساس منابع تأییدشده شما تولید می‌شوند\u003c/p>\n    \u003c/div>\n\n    \u003cdiv id=\"chat-messages\" class=\"chat-messages\">\n      ${messages.length === 0 ? `\n        \u003cdiv class=\"empty-state\">\n          \u003cdiv class=\"empty-state-icon\">💬\u003c/div>\n          \u003ch3>هنوز پیامی نیست\u003c/h3>\n          \u003cp>سؤال خود را در مورد منابع ذخیره‌شده بپرسید.\u003c/p>\n        \u003c/div>\n      ` : messages.map(m => renderMessage(m)).join('')}\n    \u003c/div>\n\n    \u003cdiv class=\"chat-input-bar\">\n      \u003cinput type=\"text\" id=\"chat-input\" class=\"form-input\"\n             placeholder=\"سؤال خود را بنویسید...\" autocomplete=\"off\" />\n      \u003cbutton id=\"btn-send\" class=\"btn btn-primary\">ارسال\u003c/button>\n    \u003c/div>\n  `;\n\n  const input = document.getElementById('chat-input');\n  const btn = document.getElementById('btn-send');\n\n  btn.addEventListener('click', () => sendMessage());\n  input.addEventListener('keydown', (e) => {\n    if (e.key === 'Enter' && !e.shiftKey) {\n      e.preventDefault();\n      sendMessage();\n    }\n  });\n\n  // Scroll to bottom\n  scrollToBottom();\n}\n\nfunction renderMessage(m) {\n  const cls = m.role === 'user' ? 'message-user' : 'message-assistant';\n  return `\n    \u003cdiv class=\"message ${cls}\" data-id=\"${m.id}\">\n      \u003cdiv>${escapeHtml(m.content)}\u003c/div>\n      \u003cdiv class=\"message-meta\">${formatTime(m.createdAt)}\u003c/div>\n    \u003c/div>\n  `;\n}\n\nasync function sendMessage() {\n  const input = document.getElementById('chat-input');\n  const btn = document.getElementById('btn-send');\n  const text = input.value.trim();\n  if (!text) return;\n\n  input.value = '';\n  btn.disabled = true;\n\n  // Add user message\n  const userMsgId = await addMessage(currentConversationId, 'user', text);\n  appendMessage({ id: userMsgId, role: 'user', content: text, createdAt: Date.now() });\n\n  // Show thinking\n  const thinkingId = 'thinking-' + Date.now();\n  const messagesEl = document.getElementById('chat-messages');\n  messagesEl.insertAdjacentHTML('beforeend', `\n    \u003cdiv class=\"message message-assistant\" id=\"${thinkingId}\">\n      \u003cdiv>در حال جستجو در دانش...\u003c/div>\n    \u003c/div>\n  `);\n  scrollToBottom();\n\n  try {\n    // Retrieve\n    const { results, mode, message } = await search(text, { topK: 5 });\n\n    let answer;\n    let evidenceItems = [];\n\n    if (!results.length) {\n      answer = message || 'متأسفانه در منابع تأییدشده شما مدرک کافی برای پاسخ به این سؤال پیدا نشد. لطفاً منابع مرتبط بیشتری اضافه کنید.';\n    } else {\n      // Build a simple evidence-based answer (no real LLM in this base version)\n      // In a full version this would call WebLLM with the context\n      const context = buildContext(results);\n      answer = generateSimpleAnswer(text, results);\n      evidenceItems = results.map(r => ({\n        chunkId: r.chunkId,\n        versionId: r.versionId,\n        score: r.score,\n        excerpt: r.excerpt\n      }));\n    }\n\n    // Remove thinking\n    document.getElementById(thinkingId)?.remove();\n\n    // Save assistant message\n    const assistantMsgId = await addMessage(currentConversationId, 'assistant', answer);\n    if (evidenceItems.length) {\n      await saveEvidence(assistantMsgId, evidenceItems);\n    }\n\n    // Render with citations\n    const msgEl = document.createElement('div');\n    msgEl.className = 'message message-assistant';\n    msgEl.dataset.id = assistantMsgId;\n    msgEl.innerHTML = `\n      \u003cdiv>${escapeHtml(answer)}\u003c/div>\n      ${results.length ? `\n        \u003cdiv class=\"mt-1\">\n          ${results.map((r, i) => `\n            \u003cspan class=\"citation\" title=\"${escapeHtml(r.sourceTitle)}\">\n              [${i + 1}] ${escapeHtml(r.sourceTitle.substring(0, 30))}\n            \u003c/span>\n          `).join('')}\n        \u003c/div>\n      ` : ''}\n      \u003cdiv class=\"message-meta\">${formatTime(Date.now())}\u003c/div>\n    `;\n    messagesEl.appendChild(msgEl);\n    scrollToBottom();\n\n  } catch (err) {\n    document.getElementById(thinkingId)?.remove();\n    showToast('خطا در تولید پاسخ: ' + err.message, 'error');\n  } finally {\n    btn.disabled = false;\n    input.focus();\n  }\n}\n\n/**\n * Simple extractive answer generator (placeholder for real local LLM)\n */\nfunction generateSimpleAnswer(question, results) {\n  if (!results.length) {\n    return 'مدرک کافی یافت نشد.';\n  }\n\n  let answer = `بر اساس ${results.length} بخش مرتبط از منابع شما:\\n\\n`;\n\n  results.slice(0, 3).forEach((r, i) => {\n    answer += `${i + 1}. از «${r.sourceTitle}»:\\n${r.excerpt}\\n\\n`;\n  });\n\n  answer += '---\\nتوجه: این پاسخ استخراجی از منابع شماست. برای پاسخ‌های تولیدی پیشرفته‌تر می‌توانید مدل زبانی محلی (WebLLM) را فعال کنید.';\n\n  return answer;\n}\n\nfunction appendMessage(m) {\n  const messagesEl = document.getElementById('chat-messages');\n  // Remove empty state if present\n  const empty = messagesEl.querySelector('.empty-state');\n  if (empty) empty.remove();\n\n  messagesEl.insertAdjacentHTML('beforeend', renderMessage(m));\n  scrollToBottom();\n}\n\nfunction scrollToBottom() {\n  const el = document.getElementById('chat-messages');\n  if (el) el.scrollTop = el.scrollHeight;\n}\n\nfunction formatTime(ts) {\n  return new Date(ts).toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' });\n}\n\nfunction escapeHtml(str) {\n  if (!str) return '';\n  return String(str)\n    .replace(/&/g, '&amp;')\n    .replace(/\u003c/g, '&lt;')\n    .replace(/>/g, '&gt;')\n    .replace(/\"/g, '&quot;')\n    .replace(/\\n/g, '\u003cbr>');\n}\n","truncated":false},{"path":"js/pages/dashboard.js","size":3261,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Dashboard Page\n */\nimport { getSources, getConversations } from '../db/db.js';\n\nexport async function renderDashboard() {\n  const sources = await getSources();\n  const conversations = await getConversations();\n  const approvedCount = sources.filter(s => s.status === 'active').length;\n\n  const container = document.getElementById('page-container');\n  container.innerHTML = `\n    \u003cdiv class=\"page-header\">\n      \u003ch1 class=\"page-title\">داشبورد\u003c/h1>\n      \u003cp class=\"page-subtitle\">دانش شخصی کاملاً محلی\u003c/p>\n    \u003c/div>\n\n    \u003cdiv class=\"card\">\n      \u003cdiv class=\"card-header\">\n        \u003cdiv>\n          \u003cdiv class=\"card-title\">خلاصه وضعیت\u003c/div>\n        \u003c/div>\n      \u003c/div>\n      \u003cdiv class=\"card-body\">\n        \u003cdiv class=\"flex gap-2\" style=\"flex-wrap: wrap;\">\n          \u003cdiv style=\"flex:1; min-width:120px;\">\n            \u003cdiv style=\"font-size:1.8rem; font-weight:700; color:var(--accent);\">${sources.length}\u003c/div>\n            \u003cdiv class=\"card-meta\">کل منابع\u003c/div>\n          \u003c/div>\n          \u003cdiv style=\"flex:1; min-width:120px;\">\n            \u003cdiv style=\"font-size:1.8rem; font-weight:700; color:var(--success);\">${approvedCount}\u003c/div>\n            \u003cdiv class=\"card-meta\">تأیید شده\u003c/div>\n          \u003c/div>\n          \u003cdiv style=\"flex:1; min-width:120px;\">\n            \u003cdiv style=\"font-size:1.8rem; font-weight:700;\">${conversations.length}\u003c/div>\n            \u003cdiv class=\"card-meta\">گفتگوها\u003c/div>\n          \u003c/div>\n        \u003c/div>\n      \u003c/div>\n    \u003c/div>\n\n    \u003cdiv class=\"card\">\n      \u003cdiv class=\"card-header\">\n        \u003cdiv class=\"card-title\">شروع سریع\u003c/div>\n      \u003c/div>\n      \u003cdiv class=\"card-body\">\n        \u003cp class=\"mb-2\">برای شروع یک آدرس وب اضافه کنید یا سؤال بپرسید.\u003c/p>\n        \u003cdiv class=\"flex gap-1\" style=\"flex-wrap:wrap;\">\n          \u003ca href=\"/ingest\" data-route=\"/ingest\" class=\"btn btn-primary\">افزودن منبع\u003c/a>\n          \u003ca href=\"/chat\" data-route=\"/chat\" class=\"btn btn-secondary\">شروع گفتگو\u003c/a>\n          \u003ca href=\"/sources\" data-route=\"/sources\" class=\"btn btn-ghost\">مشاهده منابع\u003c/a>\n        \u003c/div>\n      \u003c/div>\n    \u003c/div>\n\n    ${sources.length === 0 ? `\n      \u003cdiv class=\"empty-state\">\n        \u003cdiv class=\"empty-state-icon\">📚\u003c/div>\n        \u003ch3>هنوز منبعی ندارید\u003c/h3>\n        \u003cp>اولین آدرس وب خود را اضافه کنید تا دانش خصوصی‌تان شکل بگیرد.\u003c/p>\n      \u003c/div>\n    ` : `\n      \u003ch2 style=\"font-size:1.1rem; margin:20px 0 12px;\">آخرین منابع\u003c/h2>\n      ${sources.slice(0, 5).map(s => `\n        \u003cdiv class=\"card\">\n          \u003cdiv class=\"card-header\">\n            \u003cdiv>\n              \u003cdiv class=\"card-title\">${escapeHtml(s.title || s.url)}\u003c/div>\n              \u003cdiv class=\"card-meta ltr\">${escapeHtml(s.finalUrl || s.url)}\u003c/div>\n            \u003c/div>\n            \u003cspan class=\"badge ${s.status === 'active' ? 'badge-success' : 'badge-warning'}\">\n              ${s.status === 'active' ? 'فعال' : 'در انتظار'}\n            \u003c/span>\n          \u003c/div>\n        \u003c/div>\n      `).join('')}\n    `}\n  `;\n}\n\nfunction escapeHtml(str) {\n  if (!str) return '';\n  return str.replace(/&/g,'&amp;').replace(/\u003c/g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');\n}\n","truncated":false},{"path":"js/pages/ingest.js","size":5991,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Ingestion / Add Source Page\n */\nimport { previewUrl, savePreview } from '../services/ingestion.js';\nimport { approveVersion } from '../db/db.js';\nimport { indexVersion } from '../services/retriever.js';\nimport { showToast } from '../utils/toast.js';\n\nlet currentPreview = null;\nlet currentVersionId = null;\n\nexport async function renderIngest() {\n  const container = document.getElementById('page-container');\n  container.innerHTML = `\n    \u003cdiv class=\"page-header\">\n      \u003ch1 class=\"page-title\">افزودن منبع\u003c/h1>\n      \u003cp class=\"page-subtitle\">آدرس وب مورد نظر را وارد کنید\u003c/p>\n    \u003c/div>\n\n    \u003cdiv class=\"card\">\n      \u003cdiv class=\"form-group\">\n        \u003clabel class=\"form-label\" for=\"url-input\">آدرس صفحه\u003c/label>\n        \u003cinput type=\"url\" id=\"url-input\" class=\"form-input url-input\"\n               placeholder=\"https://example.com/article\" dir=\"ltr\" />\n        \u003cp class=\"form-hint\">فقط آدرس‌هایی که خودتان انتخاب می‌کنید پردازش می‌شوند.\u003c/p>\n      \u003c/div>\n      \u003cbutton id=\"btn-preview\" class=\"btn btn-primary btn-block\">بررسی و استخراج\u003c/button>\n    \u003c/div>\n\n    \u003cdiv id=\"preview-area\" class=\"hidden\">\u003c/div>\n  `;\n\n  document.getElementById('btn-preview').addEventListener('click', handlePreview);\n  document.getElementById('url-input').addEventListener('keydown', (e) => {\n    if (e.key === 'Enter') handlePreview();\n  });\n}\n\nasync function handlePreview() {\n  const input = document.getElementById('url-input');\n  const btn = document.getElementById('btn-preview');\n  const area = document.getElementById('preview-area');\n\n  const url = input.value.trim();\n  if (!url) {\n    showToast('لطفاً یک آدرس وارد کنید', 'error');\n    return;\n  }\n\n  btn.disabled = true;\n  btn.textContent = 'در حال دریافت...';\n  area.classList.add('hidden');\n  currentPreview = null;\n  currentVersionId = null;\n\n  try {\n    const preview = await previewUrl(url);\n    currentPreview = preview;\n\n    const q = preview.qualityReport;\n    const levelClass = q.level === 'good' ? 'quality-ok' :\n                       q.level === 'medium' ? 'quality-warn' : 'quality-bad';\n\n    area.innerHTML = `\n      \u003cdiv class=\"card mt-2\">\n        \u003cdiv class=\"card-header\">\n          \u003cdiv>\n            \u003cdiv class=\"card-title\">${escapeHtml(preview.title)}\u003c/div>\n            \u003cdiv class=\"card-meta ltr\">${escapeHtml(preview.finalUrl)}\u003c/div>\n          \u003c/div>\n          \u003cspan class=\"badge ${q.level === 'good' ? 'badge-success' : q.level === 'medium' ? 'badge-warning' : 'badge-danger'}\">\n            امتیاز کیفیت: ${q.score}\n          \u003c/span>\n        \u003c/div>\n\n        \u003cdiv class=\"quality-report\">\n          \u003cdiv class=\"quality-item\">\n            \u003cspan>طول متن\u003c/span>\n            \u003cspan class=\"${levelClass}\">${q.textLength.toLocaleString('fa-IR')} کاراکتر\u003c/span>\n          \u003c/div>\n          \u003cdiv class=\"quality-item\">\n            \u003cspan>وضعیت HTTP\u003c/span>\n            \u003cspan>${q.httpStatus || '—'}\u003c/span>\n          \u003c/div>\n          ${q.warnings.length ? `\n            \u003cdiv class=\"mt-1\">\n              \u003cstrong>هشدارها:\u003c/strong>\n              \u003cul style=\"margin:6px 0 0 16px; padding:0;\">\n                ${q.warnings.map(w => `\u003cli class=\"quality-warn\">${escapeHtml(w)}\u003c/li>`).join('')}\n              \u003c/ul>\n            \u003c/div>\n          ` : '\u003cp class=\"quality-ok mt-1\">هشدار خاصی وجود ندارد\u003c/p>'}\n        \u003c/div>\n\n        \u003cdiv class=\"card-body\" style=\"max-height:240px; overflow-y:auto; white-space:pre-wrap; font-size:0.9rem;\">\n          ${escapeHtml(preview.extractedText.substring(0, 2000))}\n          ${preview.extractedText.length > 2000 ? '…' : ''}\n        \u003c/div>\n\n        \u003cdiv class=\"mt-2 flex gap-1\">\n          \u003cbutton id=\"btn-approve\" class=\"btn btn-primary\">تأیید و افزودن به دانش\u003c/button>\n          \u003cbutton id=\"btn-discard\" class=\"btn btn-secondary\">رد کردن\u003c/button>\n        \u003c/div>\n      \u003c/div>\n    `;\n\n    area.classList.remove('hidden');\n\n    document.getElementById('btn-approve').addEventListener('click', handleApprove);\n    document.getElementById('btn-discard').addEventListener('click', () => {\n      area.classList.add('hidden');\n      currentPreview = null;\n      showToast('پیش‌نمایش رد شد', 'info');\n    });\n\n  } catch (err) {\n    showToast(err.message, 'error', 5000);\n    area.innerHTML = `\n      \u003cdiv class=\"card mt-2\">\n        \u003cdiv class=\"card-body\" style=\"color:var(--danger);\">\n          \u003cstrong>خطا:\u003c/strong> ${escapeHtml(err.message)}\n        \u003c/div>\n      \u003c/div>\n    `;\n    area.classList.remove('hidden');\n  } finally {\n    btn.disabled = false;\n    btn.textContent = 'بررسی و استخراج';\n  }\n}\n\nasync function handleApprove() {\n  if (!currentPreview) return;\n\n  const btn = document.getElementById('btn-approve');\n  btn.disabled = true;\n  btn.textContent = 'در حال ذخیره...';\n\n  try {\n    const { sourceId, versionId } = await savePreview(currentPreview);\n    currentVersionId = versionId;\n\n    // Approve immediately for simplicity in this version\n    await approveVersion(versionId);\n    await indexVersion(versionId);\n\n    showToast('منبع با موفقیت اضافه و ایندکس شد', 'success');\n    document.getElementById('preview-area').innerHTML = `\n      \u003cdiv class=\"card mt-2\">\n        \u003cdiv class=\"card-body text-center\">\n          \u003cp style=\"color:var(--success); font-weight:600;\">✓ منبع تأیید و به پایگاه دانش اضافه شد\u003c/p>\n          \u003ca href=\"/sources\" data-route=\"/sources\" class=\"btn btn-secondary mt-2\">مشاهده منابع\u003c/a>\n        \u003c/div>\n      \u003c/div>\n    `;\n  } catch (err) {\n    showToast(err.message, 'error');\n    btn.disabled = false;\n    btn.textContent = 'تأیید و افزودن به دانش';\n  }\n}\n\nfunction escapeHtml(str) {\n  if (!str) return '';\n  return String(str)\n    .replace(/&/g, '&amp;')\n    .replace(/\u003c/g, '&lt;')\n    .replace(/>/g, '&gt;')\n    .replace(/\"/g, '&quot;');\n}\n","truncated":false},{"path":"js/pages/search.js","size":3091,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Full-text Search Page\n */\nimport { search } from '../services/retriever.js';\nimport { showToast } from '../utils/toast.js';\n\nexport async function renderSearch() {\n  const container = document.getElementById('page-container');\n  container.innerHTML = `\n    \u003cdiv class=\"page-header\">\n      \u003ch1 class=\"page-title\">جستجو در دانش\u003c/h1>\n      \u003cp class=\"page-subtitle\">جستجوی کامل‌متن روی منابع تأییدشده\u003c/p>\n    \u003c/div>\n\n    \u003cdiv class=\"card\">\n      \u003cdiv class=\"form-group\">\n        \u003cinput type=\"search\" id=\"search-input\" class=\"form-input\"\n               placeholder=\"عبارت مورد نظر را بنویسید...\" />\n      \u003c/div>\n      \u003cbutton id=\"btn-search\" class=\"btn btn-primary btn-block\">جستجو\u003c/button>\n    \u003c/div>\n\n    \u003cdiv id=\"search-results\" class=\"mt-2\">\u003c/div>\n  `;\n\n  const input = document.getElementById('search-input');\n  const btn = document.getElementById('btn-search');\n\n  const doSearch = async () => {\n    const q = input.value.trim();\n    if (!q) return;\n\n    btn.disabled = true;\n    btn.textContent = 'در حال جستجو...';\n    const resultsEl = document.getElementById('search-results');\n    resultsEl.innerHTML = `\u003cdiv class=\"loading-screen\">\u003cdiv class=\"spinner\">\u003c/div>\u003c/div>`;\n\n    try {\n      const { results, mode, total, message } = await search(q, { topK: 12 });\n\n      if (!results.length) {\n        resultsEl.innerHTML = `\n          \u003cdiv class=\"empty-state\">\n            \u003ch3>نتیجه‌ای یافت نشد\u003c/h3>\n            \u003cp>${message || 'عبارت دیگری را امتحان کنید یا منابع بیشتری اضافه کنید.'}\u003c/p>\n          \u003c/div>\n        `;\n        return;\n      }\n\n      resultsEl.innerHTML = `\n        \u003cp class=\"card-meta mb-1\">${total} نتیجه (حالت: ${mode === 'fulltext' ? 'کامل‌متن' : mode})\u003c/p>\n        ${results.map(r => `\n          \u003cdiv class=\"card\">\n            \u003cdiv class=\"card-header\">\n              \u003cdiv>\n                \u003cdiv class=\"card-title\">${escapeHtml(r.sourceTitle)}\u003c/div>\n                \u003cdiv class=\"card-meta\">نسخه ${r.versionNumber} · امتیاز ${r.score?.toFixed(2) || '—'}\u003c/div>\n              \u003c/div>\n            \u003c/div>\n            \u003cdiv class=\"card-body\" style=\"font-size:0.9rem;\">\n              ${r.heading ? `\u003cstrong>${escapeHtml(r.heading)}\u003c/strong>\u003cbr>` : ''}\n              ${escapeHtml(r.excerpt)}\n            \u003c/div>\n            ${r.sourceUrl ? `\u003cdiv class=\"card-meta ltr\" style=\"font-size:0.75rem; word-break:break-all;\">${escapeHtml(r.sourceUrl)}\u003c/div>` : ''}\n          \u003c/div>\n        `).join('')}\n      `;\n    } catch (err) {\n      showToast(err.message, 'error');\n      resultsEl.innerHTML = '';\n    } finally {\n      btn.disabled = false;\n      btn.textContent = 'جستجو';\n    }\n  };\n\n  btn.addEventListener('click', doSearch);\n  input.addEventListener('keydown', e => {\n    if (e.key === 'Enter') doSearch();\n  });\n}\n\nfunction escapeHtml(str) {\n  if (!str) return '';\n  return String(str)\n    .replace(/&/g, '&amp;')\n    .replace(/\u003c/g, '&lt;')\n    .replace(/>/g, '&gt;')\n    .replace(/\"/g, '&quot;');\n}\n","truncated":false},{"path":"js/pages/settings.js","size":4899,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Settings Page\n */\nimport {\n  getAllSettings,\n  setSetting,\n  exportAllData,\n  importData,\n  wipeAllData\n} from '../db/db.js';\nimport { showToast } from '../utils/toast.js';\n\nexport async function renderSettings() {\n  const settings = await getAllSettings();\n  const container = document.getElementById('page-container');\n\n  container.innerHTML = `\n    \u003cdiv class=\"page-header\">\n      \u003ch1 class=\"page-title\">تنظیمات\u003c/h1>\n      \u003cp class=\"page-subtitle\">پیکربندی محلی و پشتیبان‌گیری\u003c/p>\n    \u003c/div>\n\n    \u003cdiv class=\"card\">\n      \u003cdiv class=\"card-title mb-1\">ظاهر\u003c/div>\n      \u003cdiv class=\"form-group\">\n        \u003clabel class=\"form-label\">پوسته\u003c/label>\n        \u003cselect id=\"theme-select\" class=\"form-select\">\n          \u003coption value=\"auto\" ${settings.theme === 'auto' ? 'selected' : ''}>خودکار (سیستم)\u003c/option>\n          \u003coption value=\"light\" ${settings.theme === 'light' ? 'selected' : ''}>روشن\u003c/option>\n          \u003coption value=\"dark\" ${settings.theme === 'dark' ? 'selected' : ''}>تاریک\u003c/option>\n        \u003c/select>\n      \u003c/div>\n    \u003c/div>\n\n    \u003cdiv class=\"card\">\n      \u003cdiv class=\"card-title mb-1\">پشتیبان‌گیری و بازیابی\u003c/div>\n      \u003cp class=\"card-meta mb-2\">تمام داده‌ها فقط روی این دستگاه ذخیره می‌شوند. پشتیبان‌گیری منظم توصیه می‌شود.\u003c/p>\n      \u003cdiv class=\"flex gap-1\" style=\"flex-wrap:wrap;\">\n        \u003cbutton id=\"btn-export\" class=\"btn btn-primary\">خروجی پشتیبان (JSON)\u003c/button>\n        \u003clabel class=\"btn btn-secondary\" style=\"cursor:pointer;\">\n          بازیابی از فایل\n          \u003cinput type=\"file\" id=\"import-file\" accept=\".json\" hidden />\n        \u003c/label>\n      \u003c/div>\n    \u003c/div>\n\n    \u003cdiv class=\"card\">\n      \u003cdiv class=\"card-title mb-1\" style=\"color:var(--danger);\">منطقه خطر\u003c/div>\n      \u003cp class=\"card-meta mb-2\">پاک کردن تمام داده‌ها غیرقابل بازگشت است.\u003c/p>\n      \u003cbutton id=\"btn-wipe\" class=\"btn btn-danger\">پاک کردن تمام دانش\u003c/button>\n    \u003c/div>\n\n    \u003cdiv class=\"card\">\n      \u003cdiv class=\"card-title mb-1\">درباره\u003c/div>\n      \u003cdiv class=\"card-body\" style=\"font-size:0.9rem;\">\n        \u003cp>\u003cstrong>دانش خصوصی\u003c/strong> — نسخه کاملاً بدون سرور\u003c/p>\n        \u003cp class=\"mt-1\">تمام پردازش‌ها و ذخیره‌سازی روی دستگاه شما انجام می‌شود.\u003c/p>\n        \u003cp class=\"mt-1 card-meta\">نسخه ۱.۰ · Client-Only PWA\u003c/p>\n      \u003c/div>\n    \u003c/div>\n  `;\n\n  // Theme\n  document.getElementById('theme-select').addEventListener('change', async (e) => {\n    const value = e.target.value;\n    await setSetting('theme', value);\n    applyTheme(value);\n    showToast('پوسته تغییر کرد', 'success');\n  });\n\n  // Export\n  document.getElementById('btn-export').addEventListener('click', async () => {\n    try {\n      const data = await exportAllData();\n      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });\n      const url = URL.createObjectURL(blob);\n      const a = document.createElement('a');\n      a.href = url;\n      a.download = `private-knowledge-backup-${new Date().toISOString().slice(0,10)}.json`;\n      a.click();\n      URL.revokeObjectURL(url);\n      showToast('فایل پشتیبان دانلود شد', 'success');\n    } catch (err) {\n      showToast('خطا در خروجی: ' + err.message, 'error');\n    }\n  });\n\n  // Import\n  document.getElementById('import-file').addEventListener('change', async (e) => {\n    const file = e.target.files[0];\n    if (!file) return;\n    try {\n      const text = await file.text();\n      const data = JSON.parse(text);\n      if (!confirm('تمام داده‌های فعلی با محتوای فایل جایگزین می‌شوند. ادامه می‌دهید؟')) return;\n      await importData(data);\n      showToast('بازیابی با موفقیت انجام شد. صفحه را رفرش کنید.', 'success');\n    } catch (err) {\n      showToast('خطا در بازیابی: ' + err.message, 'error');\n    }\n  });\n\n  // Wipe\n  document.getElementById('btn-wipe').addEventListener('click', async () => {\n    if (!confirm('آیا مطمئن هستید؟ تمام منابع، گفتگوها و تنظیمات پاک خواهند شد.')) return;\n    if (!confirm('این عمل غیرقابل بازگشت است. تأیید نهایی؟')) return;\n    try {\n      await wipeAllData();\n      showToast('تمام داده‌ها پاک شدند', 'success');\n      setTimeout(() => location.reload(), 1000);\n    } catch (err) {\n      showToast('خطا: ' + err.message, 'error');\n    }\n  });\n}\n\nexport function applyTheme(theme) {\n  const root = document.documentElement;\n  if (theme === 'auto') {\n    root.removeAttribute('data-theme');\n  } else {\n    root.setAttribute('data-theme', theme);\n  }\n}\n","truncated":false},{"path":"js/pages/sources.js","size":2316,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Sources Library Page\n */\nimport { getSources, getVersions } from '../db/db.js';\nimport { navigate } from '../router.js';\n\nexport async function renderSources() {\n  const sources = await getSources();\n  const container = document.getElementById('page-container');\n\n  if (sources.length === 0) {\n    container.innerHTML = `\n      \u003cdiv class=\"page-header\">\n        \u003ch1 class=\"page-title\">منابع\u003c/h1>\n      \u003c/div>\n      \u003cdiv class=\"empty-state\">\n        \u003cdiv class=\"empty-state-icon\">📚\u003c/div>\n        \u003ch3>هنوز منبعی وجود ندارد\u003c/h3>\n        \u003cp>از بخش «افزودن» یک آدرس وب اضافه کنید.\u003c/p>\n        \u003ca href=\"/ingest\" data-route=\"/ingest\" class=\"btn btn-primary mt-2\">افزودن منبع\u003c/a>\n      \u003c/div>\n    `;\n    return;\n  }\n\n  let html = `\n    \u003cdiv class=\"page-header\">\n      \u003ch1 class=\"page-title\">منابع دانش\u003c/h1>\n      \u003cp class=\"page-subtitle\">${sources.length} منبع\u003c/p>\n    \u003c/div>\n  `;\n\n  for (const s of sources) {\n    const versions = await getVersions(s.id);\n    const approved = versions.filter(v => v.approved);\n\n    html += `\n      \u003cdiv class=\"card\" data-source-id=\"${s.id}\">\n        \u003cdiv class=\"card-header\">\n          \u003cdiv style=\"flex:1;\">\n            \u003cdiv class=\"card-title\">${escapeHtml(s.title || 'بدون عنوان')}\u003c/div>\n            \u003cdiv class=\"card-meta ltr\" style=\"word-break:break-all;\">${escapeHtml(s.finalUrl || s.url)}\u003c/div>\n          \u003c/div>\n          \u003cspan class=\"badge ${s.status === 'active' ? 'badge-success' : 'badge-warning'}\">\n            ${s.status === 'active' ? 'فعال' : 'در انتظار'}\n          \u003c/span>\n        \u003c/div>\n        \u003cdiv class=\"card-body\">\n          \u003cdiv class=\"card-meta\">\n            نسخه‌ها: ${versions.length} |\n            تأییدشده: ${approved.length} |\n            آخرین به‌روزرسانی: ${formatDate(s.updatedAt)}\n          \u003c/div>\n        \u003c/div>\n      \u003c/div>\n    `;\n  }\n\n  container.innerHTML = html;\n}\n\nfunction formatDate(ts) {\n  if (!ts) return '—';\n  return new Date(ts).toLocaleDateString('fa-IR', {\n    year: 'numeric', month: 'short', day: 'numeric'\n  });\n}\n\nfunction escapeHtml(str) {\n  if (!str) return '';\n  return String(str)\n    .replace(/&/g, '&amp;')\n    .replace(/\u003c/g, '&lt;')\n    .replace(/>/g, '&gt;')\n    .replace(/\"/g, '&quot;');\n}\n","truncated":false},{"path":"js/router.js","size":2244,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Lightweight client-side router using History API\n */\n\nconst routes = {};\nlet currentRoute = null;\nlet pageContainer = null;\n\nexport function initRouter(containerSelector = '#page-container') {\n  pageContainer = document.querySelector(containerSelector);\n  if (!pageContainer) throw new Error('Page container not found');\n\n  // Intercept link clicks\n  document.addEventListener('click', (e) => {\n    const link = e.target.closest('[data-route]');\n    if (link) {\n      e.preventDefault();\n      navigate(link.getAttribute('data-route'));\n    }\n  });\n\n  // Handle browser back/forward\n  window.addEventListener('popstate', () => {\n    render(window.location.pathname);\n  });\n\n  // Initial render\n  render(window.location.pathname || '/');\n}\n\nexport function register(path, handler) {\n  routes[path] = handler;\n}\n\nexport function navigate(path) {\n  if (path === currentRoute) return;\n  window.history.pushState({}, '', path);\n  render(path);\n}\n\nasync function render(path) {\n  // Normalize\n  path = path.split('?')[0];\n  if (path.length > 1 && path.endsWith('/')) path = path.slice(0, -1);\n\n  currentRoute = path;\n\n  // Update nav active state\n  document.querySelectorAll('.nav-item').forEach(item => {\n    const route = item.getAttribute('data-route');\n    item.classList.toggle('active', route === path);\n  });\n\n  const handler = routes[path] || routes['/404'] || routes['/'];\n\n  if (!handler) {\n    pageContainer.innerHTML = `\u003cdiv class=\"empty-state\">\u003ch3>صفحه یافت نشد\u003c/h3>\u003c/div>`;\n    return;\n  }\n\n  // Show loading\n  pageContainer.innerHTML = `\n    \u003cdiv class=\"loading-screen\">\n      \u003cdiv class=\"spinner\">\u003c/div>\n      \u003cp>در حال بارگذاری...\u003c/p>\n    \u003c/div>\n  `;\n\n  try {\n    const content = await handler();\n    if (typeof content === 'string') {\n      pageContainer.innerHTML = content;\n    }\n    // If handler returns nothing, it is expected to have rendered itself\n  } catch (err) {\n    console.error('Route error', err);\n    pageContainer.innerHTML = `\n      \u003cdiv class=\"empty-state\">\n        \u003cdiv class=\"empty-state-icon\">⚠️\u003c/div>\n        \u003ch3>خطا در بارگذاری صفحه\u003c/h3>\n        \u003cp>${err.message}\u003c/p>\n      \u003c/div>\n    `;\n  }\n}\n\nexport function getCurrentRoute() {\n  return currentRoute;\n}\n","truncated":false},{"path":"js/services/chunker.js","size":1908,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Heading-aware text chunker\n */\nexport function chunkText(text, options = {}) {\n  const {\n    chunkSize = 500,\n    chunkOverlap = 80\n  } = options;\n\n  if (!text || text.length === 0) return [];\n\n  // Split by headings first (simple heuristic)\n  const headingRegex = /^(#{1,6}\\s+.+|[A-Z][^\\n]{10,80})\\n/gm;\n  const sections = [];\n  let lastIndex = 0;\n  let match;\n\n  // Simple paragraph-based chunking (more reliable without full markdown)\n  const paragraphs = text.split(/\\n\\s*\\n/).filter(p => p.trim().length > 0);\n\n  const chunks = [];\n  let current = '';\n  let currentHeading = null;\n\n  for (const para of paragraphs) {\n    const trimmed = para.trim();\n\n    // Detect possible heading\n    const isHeading = trimmed.length \u003c 100 &&\n      (trimmed.endsWith(':') || /^[۰-۹0-9]+\\./.test(trimmed) || trimmed === trimmed.toUpperCase());\n\n    if (isHeading && current.length > 0) {\n      // flush current\n      chunks.push({\n        heading: currentHeading,\n        text: current.trim(),\n        startOffset: 0,\n        endOffset: current.length\n      });\n      current = '';\n      currentHeading = trimmed;\n    } else if (isHeading) {\n      currentHeading = trimmed;\n    }\n\n    if (current.length + trimmed.length + 1 > chunkSize && current.length > 0) {\n      chunks.push({\n        heading: currentHeading,\n        text: current.trim(),\n        startOffset: 0,\n        endOffset: current.length\n      });\n\n      // overlap\n      const words = current.split(/\\s+/);\n      const overlapWords = words.slice(-Math.floor(chunkOverlap / 5));\n      current = overlapWords.join(' ') + '\\n\\n' + trimmed;\n    } else {\n      current = current ? current + '\\n\\n' + trimmed : trimmed;\n    }\n  }\n\n  if (current.trim()) {\n    chunks.push({\n      heading: currentHeading,\n      text: current.trim(),\n      startOffset: 0,\n      endOffset: current.length\n    });\n  }\n\n  return chunks.filter(c => c.text.length > 30);\n}\n","truncated":false},{"path":"js/services/ingestion.js","size":6523,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Client-side URL Ingestion Engine\n */\nimport { validateUrl } from '../utils/url-validator.js';\nimport { sha256 } from '../utils/hash.js';\nimport {\n  createSource,\n  createVersion,\n  updateSource,\n  getSource\n} from '../db/db.js';\n\nconst MAX_RESPONSE_SIZE = 2 * 1024 * 1024; // 2 MB\nconst FETCH_TIMEOUT = 15000;\n\n/**\n * Extract main content using a simple readability-like approach\n * (In production you would load Mozilla Readability via import)\n */\nfunction extractContent(html, url) {\n  const parser = new DOMParser();\n  const doc = parser.parseFromString(html, 'text/html');\n\n  // Remove unwanted elements\n  const removeSelectors = [\n    'script', 'style', 'noscript', 'iframe', 'nav', 'footer',\n    'header', 'aside', '.sidebar', '.nav', '.menu', '.advertisement',\n    '.ads', '#comments', '.comment', '[role=\"navigation\"]'\n  ];\n  removeSelectors.forEach(sel => {\n    doc.querySelectorAll(sel).forEach(el => el.remove());\n  });\n\n  // Try article or main first\n  let contentEl = doc.querySelector('article') ||\n                  doc.querySelector('main') ||\n                  doc.querySelector('[role=\"main\"]') ||\n                  doc.querySelector('.post-content') ||\n                  doc.querySelector('.entry-content') ||\n                  doc.body;\n\n  const title = doc.querySelector('title')?.textContent?.trim() ||\n                doc.querySelector('h1')?.textContent?.trim() ||\n                url;\n\n  // Get text with some structure\n  const text = contentEl.innerText || contentEl.textContent || '';\n  const cleanText = text\n    .replace(/\\n{3,}/g, '\\n\\n')\n    .replace(/[ \\t]+/g, ' ')\n    .trim();\n\n  return {\n    title: title.substring(0, 300),\n    text: cleanText,\n    length: cleanText.length\n  };\n}\n\n/**\n * Generate quality report\n */\nfunction buildQualityReport(extracted, httpStatus, contentType) {\n  const report = {\n    httpStatus,\n    contentType,\n    textLength: extracted.length,\n    hasTitle: !!extracted.title && extracted.title.length > 5,\n    warnings: [],\n    score: 100\n  };\n\n  if (extracted.length \u003c 200) {\n    report.warnings.push('متن استخراج‌شده بسیار کوتاه است');\n    report.score -= 40;\n  } else if (extracted.length \u003c 500) {\n    report.warnings.push('متن نسبتاً کوتاه است');\n    report.score -= 15;\n  }\n\n  if (!report.hasTitle) {\n    report.warnings.push('عنوان معتبری یافت نشد');\n    report.score -= 10;\n  }\n\n  if (httpStatus && httpStatus >= 400) {\n    report.warnings.push(`کد وضعیت HTTP: ${httpStatus}`);\n    report.score -= 30;\n  }\n\n  if (contentType && !contentType.includes('text/html') && !contentType.includes('text/plain')) {\n    report.warnings.push(`نوع محتوا پشتیبانی محدود دارد: ${contentType}`);\n    report.score -= 20;\n  }\n\n  report.score = Math.max(0, report.score);\n  report.level = report.score >= 70 ? 'good' : report.score >= 40 ? 'medium' : 'poor';\n\n  return report;\n}\n\n/**\n * Fetch and extract a URL\n */\nexport async function previewUrl(rawUrl) {\n  const validation = validateUrl(rawUrl);\n  if (!validation.valid) {\n    throw new Error(validation.error);\n  }\n\n  const controller = new AbortController();\n  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);\n\n  try {\n    const response = await fetch(validation.url, {\n      method: 'GET',\n      signal: controller.signal,\n      redirect: 'follow',\n      headers: {\n        'Accept': 'text/html,application/xhtml+xml,text/plain;q=0.9,*/*;q=0.8'\n      }\n    });\n\n    clearTimeout(timeoutId);\n\n    const contentType = response.headers.get('content-type') || '';\n    const contentLength = parseInt(response.headers.get('content-length') || '0', 10);\n\n    if (contentLength > MAX_RESPONSE_SIZE) {\n      throw new Error('حجم صفحه بیش از حد مجاز است (۲ مگابایت)');\n    }\n\n    const buffer = await response.arrayBuffer();\n    if (buffer.byteLength > MAX_RESPONSE_SIZE) {\n      throw new Error('حجم صفحه بیش از حد مجاز است');\n    }\n\n    const decoder = new TextDecoder('utf-8');\n    const html = decoder.decode(buffer);\n\n    const extracted = extractContent(html, validation.url);\n    const contentHash = await sha256(extracted.text);\n    const qualityReport = buildQualityReport(extracted, response.status, contentType);\n\n    return {\n      requestedUrl: rawUrl,\n      finalUrl: response.url,\n      httpStatus: response.status,\n      contentType,\n      title: extracted.title,\n      extractedText: extracted.text,\n      contentHash,\n      qualityReport,\n      retrievedAt: Date.now()\n    };\n  } catch (err) {\n    clearTimeout(timeoutId);\n    if (err.name === 'AbortError') {\n      throw new Error('زمان درخواست به پایان رسید');\n    }\n    // CORS or network errors are common in pure client-side\n    throw new Error(\n      err.message.includes('Failed to fetch') || err.name === 'TypeError'\n        ? 'دسترسی به این آدرس از مرورگر ممکن نیست (احتمالاً محدودیت CORS). بسیاری از سایت‌ها اجازه خواندن مستقیم از مرورگر را نمی‌دهند.'\n        : err.message\n    );\n  }\n}\n\n/**\n * Save preview as a new source + version (pending approval)\n */\nexport async function savePreview(previewData) {\n  // Check if source with same finalUrl exists\n  let sourceId;\n  const existingSources = await (await import('../db/db.js')).db.sources\n    .where('finalUrl').equals(previewData.finalUrl).first();\n\n  if (existingSources) {\n    sourceId = existingSources.id;\n    // Check for duplicate content hash\n    const versions = await (await import('../db/db.js')).db.versions\n      .where('sourceId').equals(sourceId).toArray();\n    const duplicate = versions.find(v => v.contentHash === previewData.contentHash);\n    if (duplicate) {\n      throw new Error('محتوای یکسان قبلاً ذخیره شده است (نسخه ' + duplicate.versionNumber + ')');\n    }\n  } else {\n    sourceId = await createSource({\n      url: previewData.requestedUrl,\n      finalUrl: previewData.finalUrl,\n      title: previewData.title\n    });\n  }\n\n  const versionId = await createVersion({\n    sourceId,\n    contentHash: previewData.contentHash,\n    title: previewData.title,\n    extractedText: previewData.extractedText,\n    qualityReport: previewData.qualityReport,\n    retrievedAt: previewData.retrievedAt,\n    httpStatus: previewData.httpStatus,\n    contentType: previewData.contentType,\n    finalUrl: previewData.finalUrl\n  });\n\n  return { sourceId, versionId };\n}\n","truncated":false},{"path":"js/services/retriever.js","size":3142,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Hybrid local retriever (Full-text first)\n * Vector search can be added later with Transformers.js\n */\nimport { getApprovedChunks, getVersion, getSource } from '../db/db.js';\nimport { chunkText } from './chunker.js';\nimport { saveChunks } from '../db/db.js';\n\nlet miniSearch = null;\nlet indexedVersionIds = new Set();\n\n/**\n * Build or rebuild the full-text index from approved chunks\n */\nexport async function buildIndex() {\n  const chunks = await getApprovedChunks();\n\n  miniSearch = new MiniSearch({\n    fields: ['text', 'heading'],\n    storeFields: ['id', 'versionId', 'sourceId', 'heading', 'text', 'order'],\n    searchOptions: {\n      boost: { heading: 2 },\n      fuzzy: 0.2,\n      prefix: true\n    }\n  });\n\n  if (chunks.length > 0) {\n    // MiniSearch needs an id field\n    const docs = chunks.map(c => ({\n      ...c,\n      id: c.id\n    }));\n    miniSearch.addAll(docs);\n    indexedVersionIds = new Set(chunks.map(c => c.versionId));\n  }\n\n  console.log(`[Retriever] Indexed ${chunks.length} chunks`);\n  return chunks.length;\n}\n\n/**\n * Ensure a newly approved version is chunked and indexed\n */\nexport async function indexVersion(versionId) {\n  const version = await getVersion(versionId);\n  if (!version || !version.approved) return;\n\n  // Check if already chunked\n  const existing = await (await import('../db/db.js')).db.chunks\n    .where('versionId').equals(versionId).count();\n\n  if (existing === 0) {\n    const chunks = chunkText(version.extractedText, {\n      chunkSize: 500,\n      chunkOverlap: 80\n    });\n    await saveChunks(versionId, version.sourceId, chunks);\n  }\n\n  // Rebuild index (simple approach for small personal knowledge bases)\n  await buildIndex();\n}\n\n/**\n * Search approved knowledge\n */\nexport async function search(query, options = {}) {\n  const { topK = 6 } = options;\n\n  if (!miniSearch) {\n    await buildIndex();\n  }\n\n  if (!miniSearch || miniSearch.documentCount === 0) {\n    return {\n      results: [],\n      mode: 'empty',\n      message: 'هنوز دانشی تأیید نشده است'\n    };\n  }\n\n  const results = miniSearch.search(query, { combineWith: 'AND' });\n\n  // Enrich with source info\n  const enriched = [];\n  for (const r of results.slice(0, topK)) {\n    const version = await getVersion(r.versionId);\n    const source = await getSource(r.sourceId);\n    enriched.push({\n      chunkId: r.id,\n      versionId: r.versionId,\n      sourceId: r.sourceId,\n      score: r.score,\n      heading: r.heading,\n      text: r.text,\n      excerpt: r.text.substring(0, 280) + (r.text.length > 280 ? '…' : ''),\n      sourceTitle: source?.title || version?.title || 'بدون عنوان',\n      sourceUrl: source?.finalUrl || version?.finalUrl,\n      retrievedAt: version?.retrievedAt,\n      versionNumber: version?.versionNumber\n    });\n  }\n\n  return {\n    results: enriched,\n    mode: 'fulltext',\n    total: results.length\n  };\n}\n\n/**\n * Get context string for LLM prompt\n */\nexport function buildContext(results) {\n  if (!results.length) return '';\n\n  return results.map((r, i) => {\n    return `[${i + 1}] منبع: ${r.sourceTitle} (نسخه ${r.versionNumber})\\n${r.excerpt}`;\n  }).join('\\n\\n');\n}\n","truncated":false},{"path":"js/utils/hash.js","size":578,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Simple content hashing using Web Crypto\n */\nexport async function sha256(text) {\n  const encoder = new TextEncoder();\n  const data = encoder.encode(text);\n  const hashBuffer = await crypto.subtle.digest('SHA-256', data);\n  const hashArray = Array.from(new Uint8Array(hashBuffer));\n  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');\n}\n\nexport function simpleHash(str) {\n  let hash = 0;\n  for (let i = 0; i \u003c str.length; i++) {\n    const char = str.charCodeAt(i);\n    hash = ((hash \u003c\u003c 5) - hash) + char;\n    hash |= 0;\n  }\n  return hash.toString(16);\n}\n","truncated":false},{"path":"js/utils/toast.js","size":510,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Simple toast notifications\n */\nexport function showToast(message, type = 'info', duration = 3500) {\n  const container = document.getElementById('toast-container');\n  if (!container) return;\n\n  const toast = document.createElement('div');\n  toast.className = `toast toast-${type}`;\n  toast.textContent = message;\n  container.appendChild(toast);\n\n  setTimeout(() => {\n    toast.style.opacity = '0';\n    toast.style.transition = 'opacity 0.3s';\n    setTimeout(() => toast.remove(), 300);\n  }, duration);\n}\n","truncated":false},{"path":"js/utils/url-validator.js","size":1614,"mime":"text/javascript","ext":"js","kind":"text","text":"/**\n * Client-side URL validation (best-effort)\n * Note: Real SSRF protection is impossible in the browser.\n */\n\nconst PRIVATE_IP_RANGES = [\n  /^localhost$/i,\n  /^127\\./,\n  /^10\\./,\n  /^172\\.(1[6-9]|2[0-9]|3[0-1])\\./,\n  /^192\\.168\\./,\n  /^169\\.254\\./,\n  /^0\\./,\n  /^\\[::1\\]$/,\n  /^\\[fc/i,\n  /^\\[fd/i,\n  /^\\[fe80/i\n];\n\nexport function validateUrl(input) {\n  const result = {\n    valid: false,\n    url: null,\n    error: null\n  };\n\n  if (!input || typeof input !== 'string') {\n    result.error = 'آدرس وارد نشده است';\n    return result;\n  }\n\n  let urlString = input.trim();\n\n  // Auto-add https if missing\n  if (!/^https?:\\/\\//i.test(urlString)) {\n    urlString = 'https://' + urlString;\n  }\n\n  let parsed;\n  try {\n    parsed = new URL(urlString);\n  } catch {\n    result.error = 'آدرس نامعتبر است';\n    return result;\n  }\n\n  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {\n    result.error = 'فقط پروتکل‌های http و https مجاز هستند';\n    return result;\n  }\n\n  const hostname = parsed.hostname;\n\n  for (const pattern of PRIVATE_IP_RANGES) {\n    if (pattern.test(hostname)) {\n      result.error = 'آدرس‌های محلی و خصوصی مجاز نیستند';\n      return result;\n    }\n  }\n\n  // Block obvious metadata endpoints\n  if (hostname === 'metadata.google.internal' ||\n      hostname.endsWith('.internal') ||\n      hostname === '169.254.169.254') {\n    result.error = 'آدرس‌های داخلی و متادیتا مجاز نیستند';\n    return result;\n  }\n\n  result.valid = true;\n  result.url = parsed.href;\n  return result;\n}\n","truncated":false},{"path":"manifest.webmanifest","size":1035,"mime":"application/octet-stream","ext":"webmanifest","kind":"binary"},{"path":"README.md","size":3235,"mime":"text/markdown","ext":"md","kind":"text","text":"# دانش خصوصی — Private Knowledge AI (Client-Only)\n\nنسخه **کاملاً بدون سرور** سیستم دانش شخصی.\n\n- تمام داده‌ها فقط در IndexedDB مرورگر ذخیره می‌شوند\n- هیچ بک‌اند یا دیتابیس خارجی وجود ندارد\n- قابل نصب به عنوان PWA روی آیفون (Add to Home Screen)\n- رابط فارسی‌محور (RTL)\n\n## قابلیت‌های پیاده‌سازی‌شده\n\n- SPA واقعی با History API\n- PWA (manifest + service worker)\n- ذخیره‌سازی نسخه‌دار منابع در IndexedDB (Dexie)\n- استخراج محتوا از URL (با محدودیت CORS مرورگر)\n- گزارش کیفیت استخراج + تأیید دستی\n- Chunking و Full-text Search (MiniSearch)\n- گفتگو مبتنی بر شواهد (استخراجی)\n- جستجوی کامل‌متن\n- خروجی / بازیابی پشتیبان JSON\n- پوسته روشن / تاریک\n- طراحی موبایل‌اول برای iPhone\n\n## محدودیت‌های مهم (صادقانه)\n\n1. **CORS**: بسیاری از سایت‌ها اجازه `fetch` مستقیم از مرورگر را نمی‌دهند. در این موارد استخراج شکست می‌خورد.\n2. **محافظت SSRF**: در محیط کلاینت محافظت واقعی ممکن نیست.\n3. **مدل زبانی**: در این نسخه پایه از پاسخ استخراجی استفاده شده. برای تولید واقعی می‌توان WebLLM اضافه کرد.\n4. **حجم ذخیره‌سازی**: محدود به سهمیه IndexedDB مرورگر.\n5. **Jobهای پس‌زمینه**: محدود به قابلیت‌های Service Worker.\n\n## نحوه اجرا\n\n### روش ساده (توصیه‌شده برای تست)\n\nچون اپ از ES Modules و مسیرهای absolute استفاده می‌کند، باید با یک HTTP server محلی اجرا شود:\n\n```bash\ncd private-knowledge-pwa\nnpx serve .\n# یا\npython3 -m http.server 8080\n```\n\nسپس در مرورگر به آدرس نشان‌داده‌شده بروید (معمولاً http://localhost:3000 یا 8080).\n\n### نصب روی آیفون\n\n1. اپ را روی یک هاست HTTPS قرار دهید (یا از سرویس‌هایی مثل ngrok / Cloudflare Tunnel استفاده کنید).\n2. در Safari آدرس را باز کنید.\n3. دکمه Share → Add to Home Screen.\n4. اپ به صورت مستقل باز می‌شود.\n\n## ساختار پروژه\n\n```\nprivate-knowledge-pwa/\n├── index.html\n├── manifest.webmanifest\n├── sw.js\n├── css/\n├── js/\n│   ├── app.js\n│   ├── router.js\n│   ├── db/\n│   ├── services/\n│   ├── pages/\n│   └── utils/\n├── icons/\n└── README.md\n```\n\n## توسعه بعدی پیشنهادی\n\n- اضافه کردن WebLLM برای پاسخ تولیدی واقعی\n- Transformers.js برای embedding و جستجوی برداری\n- PIN lock با Web Crypto\n- Diff بین نسخه‌ها\n- بهبود استخراج با Mozilla Readability (از طریق bundle)\n\n## مجوز\n\nاین کد برای استفاده شخصی و آموزشی ارائه شده است.\n","truncated":false},{"path":"sw.js","size":1929,"mime":"text/javascript","ext":"js","kind":"text","text":"const CACHE_NAME = 'private-knowledge-v1';\nconst STATIC_ASSETS = [\n  '/',\n  '/index.html',\n  '/manifest.webmanifest',\n  '/css/base.css',\n  '/css/themes.css',\n  '/css/components.css',\n  '/css/rtl.css',\n  '/js/app.js',\n  '/js/router.js',\n  '/js/db/db.js',\n  '/js/db/schema.js',\n  '/icons/icon-192.png',\n  '/icons/icon-512.png'\n];\n\n// Install\nself.addEventListener('install', (event) => {\n  event.waitUntil(\n    caches.open(CACHE_NAME).then((cache) => {\n      return cache.addAll(STATIC_ASSETS).catch(err => {\n        console.warn('Some assets failed to cache', err);\n      });\n    })\n  );\n  self.skipWaiting();\n});\n\n// Activate\nself.addEventListener('activate', (event) => {\n  event.waitUntil(\n    caches.keys().then((keys) => {\n      return Promise.all(\n        keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))\n      );\n    })\n  );\n  self.clients.claim();\n});\n\n// Fetch strategy: Network first for HTML, Cache first for static\nself.addEventListener('fetch', (event) => {\n  const url = new URL(event.request.url);\n\n  // Never cache API-like or external requests\n  if (url.origin !== self.location.origin) {\n    return; // let browser handle\n  }\n\n  // For navigation requests → network first, fallback to cache\n  if (event.request.mode === 'navigate') {\n    event.respondWith(\n      fetch(event.request)\n        .then(res => {\n          const clone = res.clone();\n          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));\n          return res;\n        })\n        .catch(() => caches.match('/index.html'))\n    );\n    return;\n  }\n\n  // Static assets → cache first\n  event.respondWith(\n    caches.match(event.request).then((cached) => {\n      return cached || fetch(event.request).then((res) => {\n        if (res.ok) {\n          const clone = res.clone();\n          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));\n        }\n        return res;\n      });\n    })\n  );\n});\n","truncated":false}],"select":"README.md"}</script>
+<script>/**
+ * marked v15.0.12 - a markdown parser
+ * Copyright (c) 2011-2025, Christopher Jeffrey. (MIT Licensed)
+ * https://github.com/markedjs/marked
+ */
+
+/**
+ * DO NOT EDIT THIS FILE
+ * The code in this file is generated from files in ./src/
+ */
+(function(g,f){if(typeof exports=="object"&&typeof module<"u"){module.exports=f()}else if("function"==typeof define && define.amd){define("marked",f)}else {g["marked"]=f()}}(typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : this,function(){var exports={};var __exports=exports;var module={exports};
+"use strict";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/marked.ts
+var marked_exports = {};
+__export(marked_exports, {
+  Hooks: () => _Hooks,
+  Lexer: () => _Lexer,
+  Marked: () => Marked,
+  Parser: () => _Parser,
+  Renderer: () => _Renderer,
+  TextRenderer: () => _TextRenderer,
+  Tokenizer: () => _Tokenizer,
+  defaults: () => _defaults,
+  getDefaults: () => _getDefaults,
+  lexer: () => lexer,
+  marked: () => marked,
+  options: () => options,
+  parse: () => parse,
+  parseInline: () => parseInline,
+  parser: () => parser,
+  setOptions: () => setOptions,
+  use: () => use,
+  walkTokens: () => walkTokens
+});
+module.exports = __toCommonJS(marked_exports);
+
+// src/defaults.ts
+function _getDefaults() {
+  return {
+    async: false,
+    breaks: false,
+    extensions: null,
+    gfm: true,
+    hooks: null,
+    pedantic: false,
+    renderer: null,
+    silent: false,
+    tokenizer: null,
+    walkTokens: null
+  };
+}
+var _defaults = _getDefaults();
+function changeDefaults(newDefaults) {
+  _defaults = newDefaults;
+}
+
+// src/rules.ts
+var noopTest = { exec: () => null };
+function edit(regex, opt = "") {
+  let source = typeof regex === "string" ? regex : regex.source;
+  const obj = {
+    replace: (name, val) => {
+      let valSource = typeof val === "string" ? val : val.source;
+      valSource = valSource.replace(other.caret, "$1");
+      source = source.replace(name, valSource);
+      return obj;
+    },
+    getRegex: () => {
+      return new RegExp(source, opt);
+    }
+  };
+  return obj;
+}
+var other = {
+  codeRemoveIndent: /^(?: {1,4}| {0,3}\t)/gm,
+  outputLinkReplace: /\\([\[\]])/g,
+  indentCodeCompensation: /^(\s+)(?:```)/,
+  beginningSpace: /^\s+/,
+  endingHash: /#$/,
+  startingSpaceChar: /^ /,
+  endingSpaceChar: / $/,
+  nonSpaceChar: /[^ ]/,
+  newLineCharGlobal: /\n/g,
+  tabCharGlobal: /\t/g,
+  multipleSpaceGlobal: /\s+/g,
+  blankLine: /^[ \t]*$/,
+  doubleBlankLine: /\n[ \t]*\n[ \t]*$/,
+  blockquoteStart: /^ {0,3}>/,
+  blockquoteSetextReplace: /\n {0,3}((?:=+|-+) *)(?=\n|$)/g,
+  blockquoteSetextReplace2: /^ {0,3}>[ \t]?/gm,
+  listReplaceTabs: /^\t+/,
+  listReplaceNesting: /^ {1,4}(?=( {4})*[^ ])/g,
+  listIsTask: /^\[[ xX]\] /,
+  listReplaceTask: /^\[[ xX]\] +/,
+  anyLine: /\n.*\n/,
+  hrefBrackets: /^<(.*)>$/,
+  tableDelimiter: /[:|]/,
+  tableAlignChars: /^\||\| *$/g,
+  tableRowBlankLine: /\n[ \t]*$/,
+  tableAlignRight: /^ *-+: *$/,
+  tableAlignCenter: /^ *:-+: *$/,
+  tableAlignLeft: /^ *:-+ *$/,
+  startATag: /^<a /i,
+  endATag: /^<\/a>/i,
+  startPreScriptTag: /^<(pre|code|kbd|script)(\s|>)/i,
+  endPreScriptTag: /^<\/(pre|code|kbd|script)(\s|>)/i,
+  startAngleBracket: /^</,
+  endAngleBracket: />$/,
+  pedanticHrefTitle: /^([^'"]*[^\s])\s+(['"])(.*)\2/,
+  unicodeAlphaNumeric: /[\p{L}\p{N}]/u,
+  escapeTest: /[&<>"']/,
+  escapeReplace: /[&<>"']/g,
+  escapeTestNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/,
+  escapeReplaceNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/g,
+  unescapeTest: /&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/ig,
+  caret: /(^|[^\[])\^/g,
+  percentDecode: /%25/g,
+  findPipe: /\|/g,
+  splitPipe: / \|/,
+  slashPipe: /\\\|/g,
+  carriageReturn: /\r\n|\r/g,
+  spaceLine: /^ +$/gm,
+  notSpaceStart: /^\S*/,
+  endingNewline: /\n$/,
+  listItemRegex: (bull) => new RegExp(`^( {0,3}${bull})((?:[	 ][^\\n]*)?(?:\\n|$))`),
+  nextBulletRegex: (indent) => new RegExp(`^ {0,${Math.min(3, indent - 1)}}(?:[*+-]|\\d{1,9}[.)])((?:[ 	][^\\n]*)?(?:\\n|$))`),
+  hrRegex: (indent) => new RegExp(`^ {0,${Math.min(3, indent - 1)}}((?:- *){3,}|(?:_ *){3,}|(?:\\* *){3,})(?:\\n+|$)`),
+  fencesBeginRegex: (indent) => new RegExp(`^ {0,${Math.min(3, indent - 1)}}(?:\`\`\`|~~~)`),
+  headingBeginRegex: (indent) => new RegExp(`^ {0,${Math.min(3, indent - 1)}}#`),
+  htmlBeginRegex: (indent) => new RegExp(`^ {0,${Math.min(3, indent - 1)}}<(?:[a-z].*>|!--)`, "i")
+};
+var newline = /^(?:[ \t]*(?:\n|$))+/;
+var blockCode = /^((?: {4}| {0,3}\t)[^\n]+(?:\n(?:[ \t]*(?:\n|$))*)?)+/;
+var fences = /^ {0,3}(`{3,}(?=[^`\n]*(?:\n|$))|~{3,})([^\n]*)(?:\n|$)(?:|([\s\S]*?)(?:\n|$))(?: {0,3}\1[~`]* *(?=\n|$)|$)/;
+var hr = /^ {0,3}((?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/;
+var heading = /^ {0,3}(#{1,6})(?=\s|$)(.*)(?:\n+|$)/;
+var bullet = /(?:[*+-]|\d{1,9}[.)])/;
+var lheadingCore = /^(?!bull |blockCode|fences|blockquote|heading|html|table)((?:.|\n(?!\s*?\n|bull |blockCode|fences|blockquote|heading|html|table))+?)\n {0,3}(=+|-+) *(?:\n+|$)/;
+var lheading = edit(lheadingCore).replace(/bull/g, bullet).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/\|table/g, "").getRegex();
+var lheadingGfm = edit(lheadingCore).replace(/bull/g, bullet).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/table/g, / {0,3}\|?(?:[:\- ]*\|)+[\:\- ]*\n/).getRegex();
+var _paragraph = /^([^\n]+(?:\n(?!hr|heading|lheading|blockquote|fences|list|html|table| +\n)[^\n]+)*)/;
+var blockText = /^[^\n]+/;
+var _blockLabel = /(?!\s*\])(?:\\.|[^\[\]\\])+/;
+var def = edit(/^ {0,3}\[(label)\]: *(?:\n[ \t]*)?([^<\s][^\s]*|<.*?>)(?:(?: +(?:\n[ \t]*)?| *\n[ \t]*)(title))? *(?:\n+|$)/).replace("label", _blockLabel).replace("title", /(?:"(?:\\"?|[^"\\])*"|'[^'\n]*(?:\n[^'\n]+)*\n?'|\([^()]*\))/).getRegex();
+var list = edit(/^( {0,3}bull)([ \t][^\n]+?)?(?:\n|$)/).replace(/bull/g, bullet).getRegex();
+var _tag = "address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|optgroup|option|p|param|search|section|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul";
+var _comment = /<\!--(?:-?>|[\s\S]*?(?:-->|$))/;
+var html = edit(
+  "^ {0,3}(?:<(script|pre|style|textarea)[\\s>][\\s\\S]*?(?:</\\1>[^\\n]*\\n+|$)|comment[^\\n]*(\\n+|$)|<\\?[\\s\\S]*?(?:\\?>\\n*|$)|<![A-Z][\\s\\S]*?(?:>\\n*|$)|<!\\[CDATA\\[[\\s\\S]*?(?:\\]\\]>\\n*|$)|</?(tag)(?: +|\\n|/?>)[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|<(?!script|pre|style|textarea)([a-z][\\w-]*)(?:attribute)*? */?>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|</(?!script|pre|style|textarea)[a-z][\\w-]*\\s*>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$))",
+  "i"
+).replace("comment", _comment).replace("tag", _tag).replace("attribute", / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/).getRegex();
+var paragraph = edit(_paragraph).replace("hr", hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("|table", "").replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", _tag).getRegex();
+var blockquote = edit(/^( {0,3}> ?(paragraph|[^\n]*)(?:\n|$))+/).replace("paragraph", paragraph).getRegex();
+var blockNormal = {
+  blockquote,
+  code: blockCode,
+  def,
+  fences,
+  heading,
+  hr,
+  html,
+  lheading,
+  list,
+  newline,
+  paragraph,
+  table: noopTest,
+  text: blockText
+};
+var gfmTable = edit(
+  "^ *([^\\n ].*)\\n {0,3}((?:\\| *)?:?-+:? *(?:\\| *:?-+:? *)*(?:\\| *)?)(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)"
+).replace("hr", hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("blockquote", " {0,3}>").replace("code", "(?: {4}| {0,3}	)[^\\n]").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", _tag).getRegex();
+var blockGfm = {
+  ...blockNormal,
+  lheading: lheadingGfm,
+  table: gfmTable,
+  paragraph: edit(_paragraph).replace("hr", hr).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("table", gfmTable).replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)]) ").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", _tag).getRegex()
+};
+var blockPedantic = {
+  ...blockNormal,
+  html: edit(
+    `^ *(?:comment *(?:\\n|\\s*$)|<(tag)[\\s\\S]+?</\\1> *(?:\\n{2,}|\\s*$)|<tag(?:"[^"]*"|'[^']*'|\\s[^'"/>\\s]*)*?/?> *(?:\\n{2,}|\\s*$))`
+  ).replace("comment", _comment).replace(/tag/g, "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:|[^\\w\\s@]*@)\\b").getRegex(),
+  def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +(["(][^\n]+[")]))? *(?:\n+|$)/,
+  heading: /^(#{1,6})(.*)(?:\n+|$)/,
+  fences: noopTest,
+  // fences not supported
+  lheading: /^(.+?)\n {0,3}(=+|-+) *(?:\n+|$)/,
+  paragraph: edit(_paragraph).replace("hr", hr).replace("heading", " *#{1,6} *[^\n]").replace("lheading", lheading).replace("|table", "").replace("blockquote", " {0,3}>").replace("|fences", "").replace("|list", "").replace("|html", "").replace("|tag", "").getRegex()
+};
+var escape = /^\\([!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{|}~])/;
+var inlineCode = /^(`+)([^`]|[^`][\s\S]*?[^`])\1(?!`)/;
+var br = /^( {2,}|\\)\n(?!\s*$)/;
+var inlineText = /^(`+|[^`])(?:(?= {2,}\n)|[\s\S]*?(?:(?=[\\<!\[`*_]|\b_|$)|[^ ](?= {2,}\n)))/;
+var _punctuation = /[\p{P}\p{S}]/u;
+var _punctuationOrSpace = /[\s\p{P}\p{S}]/u;
+var _notPunctuationOrSpace = /[^\s\p{P}\p{S}]/u;
+var punctuation = edit(/^((?![*_])punctSpace)/, "u").replace(/punctSpace/g, _punctuationOrSpace).getRegex();
+var _punctuationGfmStrongEm = /(?!~)[\p{P}\p{S}]/u;
+var _punctuationOrSpaceGfmStrongEm = /(?!~)[\s\p{P}\p{S}]/u;
+var _notPunctuationOrSpaceGfmStrongEm = /(?:[^\s\p{P}\p{S}]|~)/u;
+var blockSkip = /\[[^[\]]*?\]\((?:\\.|[^\\\(\)]|\((?:\\.|[^\\\(\)])*\))*\)|`[^`]*?`|<[^<>]*?>/g;
+var emStrongLDelimCore = /^(?:\*+(?:((?!\*)punct)|[^\s*]))|^_+(?:((?!_)punct)|([^\s_]))/;
+var emStrongLDelim = edit(emStrongLDelimCore, "u").replace(/punct/g, _punctuation).getRegex();
+var emStrongLDelimGfm = edit(emStrongLDelimCore, "u").replace(/punct/g, _punctuationGfmStrongEm).getRegex();
+var emStrongRDelimAstCore = "^[^_*]*?__[^_*]*?\\*[^_*]*?(?=__)|[^*]+(?=[^*])|(?!\\*)punct(\\*+)(?=[\\s]|$)|notPunctSpace(\\*+)(?!\\*)(?=punctSpace|$)|(?!\\*)punctSpace(\\*+)(?=notPunctSpace)|[\\s](\\*+)(?!\\*)(?=punct)|(?!\\*)punct(\\*+)(?!\\*)(?=punct)|notPunctSpace(\\*+)(?=notPunctSpace)";
+var emStrongRDelimAst = edit(emStrongRDelimAstCore, "gu").replace(/notPunctSpace/g, _notPunctuationOrSpace).replace(/punctSpace/g, _punctuationOrSpace).replace(/punct/g, _punctuation).getRegex();
+var emStrongRDelimAstGfm = edit(emStrongRDelimAstCore, "gu").replace(/notPunctSpace/g, _notPunctuationOrSpaceGfmStrongEm).replace(/punctSpace/g, _punctuationOrSpaceGfmStrongEm).replace(/punct/g, _punctuationGfmStrongEm).getRegex();
+var emStrongRDelimUnd = edit(
+  "^[^_*]*?\\*\\*[^_*]*?_[^_*]*?(?=\\*\\*)|[^_]+(?=[^_])|(?!_)punct(_+)(?=[\\s]|$)|notPunctSpace(_+)(?!_)(?=punctSpace|$)|(?!_)punctSpace(_+)(?=notPunctSpace)|[\\s](_+)(?!_)(?=punct)|(?!_)punct(_+)(?!_)(?=punct)",
+  "gu"
+).replace(/notPunctSpace/g, _notPunctuationOrSpace).replace(/punctSpace/g, _punctuationOrSpace).replace(/punct/g, _punctuation).getRegex();
+var anyPunctuation = edit(/\\(punct)/, "gu").replace(/punct/g, _punctuation).getRegex();
+var autolink = edit(/^<(scheme:[^\s\x00-\x1f<>]*|email)>/).replace("scheme", /[a-zA-Z][a-zA-Z0-9+.-]{1,31}/).replace("email", /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])/).getRegex();
+var _inlineComment = edit(_comment).replace("(?:-->|$)", "-->").getRegex();
+var tag = edit(
+  "^comment|^</[a-zA-Z][\\w:-]*\\s*>|^<[a-zA-Z][\\w-]*(?:attribute)*?\\s*/?>|^<\\?[\\s\\S]*?\\?>|^<![a-zA-Z]+\\s[\\s\\S]*?>|^<!\\[CDATA\\[[\\s\\S]*?\\]\\]>"
+).replace("comment", _inlineComment).replace("attribute", /\s+[a-zA-Z:_][\w.:-]*(?:\s*=\s*"[^"]*"|\s*=\s*'[^']*'|\s*=\s*[^\s"'=<>`]+)?/).getRegex();
+var _inlineLabel = /(?:\[(?:\\.|[^\[\]\\])*\]|\\.|`[^`]*`|[^\[\]\\`])*?/;
+var link = edit(/^!?\[(label)\]\(\s*(href)(?:(?:[ \t]*(?:\n[ \t]*)?)(title))?\s*\)/).replace("label", _inlineLabel).replace("href", /<(?:\\.|[^\n<>\\])+>|[^ \t\n\x00-\x1f]*/).replace("title", /"(?:\\"?|[^"\\])*"|'(?:\\'?|[^'\\])*'|\((?:\\\)?|[^)\\])*\)/).getRegex();
+var reflink = edit(/^!?\[(label)\]\[(ref)\]/).replace("label", _inlineLabel).replace("ref", _blockLabel).getRegex();
+var nolink = edit(/^!?\[(ref)\](?:\[\])?/).replace("ref", _blockLabel).getRegex();
+var reflinkSearch = edit("reflink|nolink(?!\\()", "g").replace("reflink", reflink).replace("nolink", nolink).getRegex();
+var inlineNormal = {
+  _backpedal: noopTest,
+  // only used for GFM url
+  anyPunctuation,
+  autolink,
+  blockSkip,
+  br,
+  code: inlineCode,
+  del: noopTest,
+  emStrongLDelim,
+  emStrongRDelimAst,
+  emStrongRDelimUnd,
+  escape,
+  link,
+  nolink,
+  punctuation,
+  reflink,
+  reflinkSearch,
+  tag,
+  text: inlineText,
+  url: noopTest
+};
+var inlinePedantic = {
+  ...inlineNormal,
+  link: edit(/^!?\[(label)\]\((.*?)\)/).replace("label", _inlineLabel).getRegex(),
+  reflink: edit(/^!?\[(label)\]\s*\[([^\]]*)\]/).replace("label", _inlineLabel).getRegex()
+};
+var inlineGfm = {
+  ...inlineNormal,
+  emStrongRDelimAst: emStrongRDelimAstGfm,
+  emStrongLDelim: emStrongLDelimGfm,
+  url: edit(/^((?:ftp|https?):\/\/|www\.)(?:[a-zA-Z0-9\-]+\.?)+[^\s<]*|^email/, "i").replace("email", /[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![-_])/).getRegex(),
+  _backpedal: /(?:[^?!.,:;*_'"~()&]+|\([^)]*\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_'"~)]+(?!$))+/,
+  del: /^(~~?)(?=[^\s~])((?:\\.|[^\\])*?(?:\\.|[^\s~\\]))\1(?=[^~]|$)/,
+  text: /^([`~]+|[^`~])(?:(?= {2,}\n)|(?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)|[\s\S]*?(?:(?=[\\<!\[`*~_]|\b_|https?:\/\/|ftp:\/\/|www\.|$)|[^ ](?= {2,}\n)|[^a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-](?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)))/
+};
+var inlineBreaks = {
+  ...inlineGfm,
+  br: edit(br).replace("{2,}", "*").getRegex(),
+  text: edit(inlineGfm.text).replace("\\b_", "\\b_| {2,}\\n").replace(/\{2,\}/g, "*").getRegex()
+};
+var block = {
+  normal: blockNormal,
+  gfm: blockGfm,
+  pedantic: blockPedantic
+};
+var inline = {
+  normal: inlineNormal,
+  gfm: inlineGfm,
+  breaks: inlineBreaks,
+  pedantic: inlinePedantic
+};
+
+// src/helpers.ts
+var escapeReplacements = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;"
+};
+var getEscapeReplacement = (ch) => escapeReplacements[ch];
+function escape2(html2, encode) {
+  if (encode) {
+    if (other.escapeTest.test(html2)) {
+      return html2.replace(other.escapeReplace, getEscapeReplacement);
+    }
+  } else {
+    if (other.escapeTestNoEncode.test(html2)) {
+      return html2.replace(other.escapeReplaceNoEncode, getEscapeReplacement);
+    }
+  }
+  return html2;
+}
+function cleanUrl(href) {
+  try {
+    href = encodeURI(href).replace(other.percentDecode, "%");
+  } catch {
+    return null;
+  }
+  return href;
+}
+function splitCells(tableRow, count) {
+  const row = tableRow.replace(other.findPipe, (match, offset, str) => {
+    let escaped = false;
+    let curr = offset;
+    while (--curr >= 0 && str[curr] === "\\") escaped = !escaped;
+    if (escaped) {
+      return "|";
+    } else {
+      return " |";
+    }
+  }), cells = row.split(other.splitPipe);
+  let i = 0;
+  if (!cells[0].trim()) {
+    cells.shift();
+  }
+  if (cells.length > 0 && !cells.at(-1)?.trim()) {
+    cells.pop();
+  }
+  if (count) {
+    if (cells.length > count) {
+      cells.splice(count);
+    } else {
+      while (cells.length < count) cells.push("");
+    }
+  }
+  for (; i < cells.length; i++) {
+    cells[i] = cells[i].trim().replace(other.slashPipe, "|");
+  }
+  return cells;
+}
+function rtrim(str, c, invert) {
+  const l = str.length;
+  if (l === 0) {
+    return "";
+  }
+  let suffLen = 0;
+  while (suffLen < l) {
+    const currChar = str.charAt(l - suffLen - 1);
+    if (currChar === c && !invert) {
+      suffLen++;
+    } else if (currChar !== c && invert) {
+      suffLen++;
+    } else {
+      break;
+    }
+  }
+  return str.slice(0, l - suffLen);
+}
+function findClosingBracket(str, b) {
+  if (str.indexOf(b[1]) === -1) {
+    return -1;
+  }
+  let level = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === "\\") {
+      i++;
+    } else if (str[i] === b[0]) {
+      level++;
+    } else if (str[i] === b[1]) {
+      level--;
+      if (level < 0) {
+        return i;
+      }
+    }
+  }
+  if (level > 0) {
+    return -2;
+  }
+  return -1;
+}
+
+// src/Tokenizer.ts
+function outputLink(cap, link2, raw, lexer2, rules) {
+  const href = link2.href;
+  const title = link2.title || null;
+  const text = cap[1].replace(rules.other.outputLinkReplace, "$1");
+  lexer2.state.inLink = true;
+  const token = {
+    type: cap[0].charAt(0) === "!" ? "image" : "link",
+    raw,
+    href,
+    title,
+    text,
+    tokens: lexer2.inlineTokens(text)
+  };
+  lexer2.state.inLink = false;
+  return token;
+}
+function indentCodeCompensation(raw, text, rules) {
+  const matchIndentToCode = raw.match(rules.other.indentCodeCompensation);
+  if (matchIndentToCode === null) {
+    return text;
+  }
+  const indentToCode = matchIndentToCode[1];
+  return text.split("\n").map((node) => {
+    const matchIndentInNode = node.match(rules.other.beginningSpace);
+    if (matchIndentInNode === null) {
+      return node;
+    }
+    const [indentInNode] = matchIndentInNode;
+    if (indentInNode.length >= indentToCode.length) {
+      return node.slice(indentToCode.length);
+    }
+    return node;
+  }).join("\n");
+}
+var _Tokenizer = class {
+  options;
+  rules;
+  // set by the lexer
+  lexer;
+  // set by the lexer
+  constructor(options2) {
+    this.options = options2 || _defaults;
+  }
+  space(src) {
+    const cap = this.rules.block.newline.exec(src);
+    if (cap && cap[0].length > 0) {
+      return {
+        type: "space",
+        raw: cap[0]
+      };
+    }
+  }
+  code(src) {
+    const cap = this.rules.block.code.exec(src);
+    if (cap) {
+      const text = cap[0].replace(this.rules.other.codeRemoveIndent, "");
+      return {
+        type: "code",
+        raw: cap[0],
+        codeBlockStyle: "indented",
+        text: !this.options.pedantic ? rtrim(text, "\n") : text
+      };
+    }
+  }
+  fences(src) {
+    const cap = this.rules.block.fences.exec(src);
+    if (cap) {
+      const raw = cap[0];
+      const text = indentCodeCompensation(raw, cap[3] || "", this.rules);
+      return {
+        type: "code",
+        raw,
+        lang: cap[2] ? cap[2].trim().replace(this.rules.inline.anyPunctuation, "$1") : cap[2],
+        text
+      };
+    }
+  }
+  heading(src) {
+    const cap = this.rules.block.heading.exec(src);
+    if (cap) {
+      let text = cap[2].trim();
+      if (this.rules.other.endingHash.test(text)) {
+        const trimmed = rtrim(text, "#");
+        if (this.options.pedantic) {
+          text = trimmed.trim();
+        } else if (!trimmed || this.rules.other.endingSpaceChar.test(trimmed)) {
+          text = trimmed.trim();
+        }
+      }
+      return {
+        type: "heading",
+        raw: cap[0],
+        depth: cap[1].length,
+        text,
+        tokens: this.lexer.inline(text)
+      };
+    }
+  }
+  hr(src) {
+    const cap = this.rules.block.hr.exec(src);
+    if (cap) {
+      return {
+        type: "hr",
+        raw: rtrim(cap[0], "\n")
+      };
+    }
+  }
+  blockquote(src) {
+    const cap = this.rules.block.blockquote.exec(src);
+    if (cap) {
+      let lines = rtrim(cap[0], "\n").split("\n");
+      let raw = "";
+      let text = "";
+      const tokens = [];
+      while (lines.length > 0) {
+        let inBlockquote = false;
+        const currentLines = [];
+        let i;
+        for (i = 0; i < lines.length; i++) {
+          if (this.rules.other.blockquoteStart.test(lines[i])) {
+            currentLines.push(lines[i]);
+            inBlockquote = true;
+          } else if (!inBlockquote) {
+            currentLines.push(lines[i]);
+          } else {
+            break;
+          }
+        }
+        lines = lines.slice(i);
+        const currentRaw = currentLines.join("\n");
+        const currentText = currentRaw.replace(this.rules.other.blockquoteSetextReplace, "\n    $1").replace(this.rules.other.blockquoteSetextReplace2, "");
+        raw = raw ? `${raw}
+${currentRaw}` : currentRaw;
+        text = text ? `${text}
+${currentText}` : currentText;
+        const top = this.lexer.state.top;
+        this.lexer.state.top = true;
+        this.lexer.blockTokens(currentText, tokens, true);
+        this.lexer.state.top = top;
+        if (lines.length === 0) {
+          break;
+        }
+        const lastToken = tokens.at(-1);
+        if (lastToken?.type === "code") {
+          break;
+        } else if (lastToken?.type === "blockquote") {
+          const oldToken = lastToken;
+          const newText = oldToken.raw + "\n" + lines.join("\n");
+          const newToken = this.blockquote(newText);
+          tokens[tokens.length - 1] = newToken;
+          raw = raw.substring(0, raw.length - oldToken.raw.length) + newToken.raw;
+          text = text.substring(0, text.length - oldToken.text.length) + newToken.text;
+          break;
+        } else if (lastToken?.type === "list") {
+          const oldToken = lastToken;
+          const newText = oldToken.raw + "\n" + lines.join("\n");
+          const newToken = this.list(newText);
+          tokens[tokens.length - 1] = newToken;
+          raw = raw.substring(0, raw.length - lastToken.raw.length) + newToken.raw;
+          text = text.substring(0, text.length - oldToken.raw.length) + newToken.raw;
+          lines = newText.substring(tokens.at(-1).raw.length).split("\n");
+          continue;
+        }
+      }
+      return {
+        type: "blockquote",
+        raw,
+        tokens,
+        text
+      };
+    }
+  }
+  list(src) {
+    let cap = this.rules.block.list.exec(src);
+    if (cap) {
+      let bull = cap[1].trim();
+      const isordered = bull.length > 1;
+      const list2 = {
+        type: "list",
+        raw: "",
+        ordered: isordered,
+        start: isordered ? +bull.slice(0, -1) : "",
+        loose: false,
+        items: []
+      };
+      bull = isordered ? `\\d{1,9}\\${bull.slice(-1)}` : `\\${bull}`;
+      if (this.options.pedantic) {
+        bull = isordered ? bull : "[*+-]";
+      }
+      const itemRegex = this.rules.other.listItemRegex(bull);
+      let endsWithBlankLine = false;
+      while (src) {
+        let endEarly = false;
+        let raw = "";
+        let itemContents = "";
+        if (!(cap = itemRegex.exec(src))) {
+          break;
+        }
+        if (this.rules.block.hr.test(src)) {
+          break;
+        }
+        raw = cap[0];
+        src = src.substring(raw.length);
+        let line = cap[2].split("\n", 1)[0].replace(this.rules.other.listReplaceTabs, (t) => " ".repeat(3 * t.length));
+        let nextLine = src.split("\n", 1)[0];
+        let blankLine = !line.trim();
+        let indent = 0;
+        if (this.options.pedantic) {
+          indent = 2;
+          itemContents = line.trimStart();
+        } else if (blankLine) {
+          indent = cap[1].length + 1;
+        } else {
+          indent = cap[2].search(this.rules.other.nonSpaceChar);
+          indent = indent > 4 ? 1 : indent;
+          itemContents = line.slice(indent);
+          indent += cap[1].length;
+        }
+        if (blankLine && this.rules.other.blankLine.test(nextLine)) {
+          raw += nextLine + "\n";
+          src = src.substring(nextLine.length + 1);
+          endEarly = true;
+        }
+        if (!endEarly) {
+          const nextBulletRegex = this.rules.other.nextBulletRegex(indent);
+          const hrRegex = this.rules.other.hrRegex(indent);
+          const fencesBeginRegex = this.rules.other.fencesBeginRegex(indent);
+          const headingBeginRegex = this.rules.other.headingBeginRegex(indent);
+          const htmlBeginRegex = this.rules.other.htmlBeginRegex(indent);
+          while (src) {
+            const rawLine = src.split("\n", 1)[0];
+            let nextLineWithoutTabs;
+            nextLine = rawLine;
+            if (this.options.pedantic) {
+              nextLine = nextLine.replace(this.rules.other.listReplaceNesting, "  ");
+              nextLineWithoutTabs = nextLine;
+            } else {
+              nextLineWithoutTabs = nextLine.replace(this.rules.other.tabCharGlobal, "    ");
+            }
+            if (fencesBeginRegex.test(nextLine)) {
+              break;
+            }
+            if (headingBeginRegex.test(nextLine)) {
+              break;
+            }
+            if (htmlBeginRegex.test(nextLine)) {
+              break;
+            }
+            if (nextBulletRegex.test(nextLine)) {
+              break;
+            }
+            if (hrRegex.test(nextLine)) {
+              break;
+            }
+            if (nextLineWithoutTabs.search(this.rules.other.nonSpaceChar) >= indent || !nextLine.trim()) {
+              itemContents += "\n" + nextLineWithoutTabs.slice(indent);
+            } else {
+              if (blankLine) {
+                break;
+              }
+              if (line.replace(this.rules.other.tabCharGlobal, "    ").search(this.rules.other.nonSpaceChar) >= 4) {
+                break;
+              }
+              if (fencesBeginRegex.test(line)) {
+                break;
+              }
+              if (headingBeginRegex.test(line)) {
+                break;
+              }
+              if (hrRegex.test(line)) {
+                break;
+              }
+              itemContents += "\n" + nextLine;
+            }
+            if (!blankLine && !nextLine.trim()) {
+              blankLine = true;
+            }
+            raw += rawLine + "\n";
+            src = src.substring(rawLine.length + 1);
+            line = nextLineWithoutTabs.slice(indent);
+          }
+        }
+        if (!list2.loose) {
+          if (endsWithBlankLine) {
+            list2.loose = true;
+          } else if (this.rules.other.doubleBlankLine.test(raw)) {
+            endsWithBlankLine = true;
+          }
+        }
+        let istask = null;
+        let ischecked;
+        if (this.options.gfm) {
+          istask = this.rules.other.listIsTask.exec(itemContents);
+          if (istask) {
+            ischecked = istask[0] !== "[ ] ";
+            itemContents = itemContents.replace(this.rules.other.listReplaceTask, "");
+          }
+        }
+        list2.items.push({
+          type: "list_item",
+          raw,
+          task: !!istask,
+          checked: ischecked,
+          loose: false,
+          text: itemContents,
+          tokens: []
+        });
+        list2.raw += raw;
+      }
+      const lastItem = list2.items.at(-1);
+      if (lastItem) {
+        lastItem.raw = lastItem.raw.trimEnd();
+        lastItem.text = lastItem.text.trimEnd();
+      } else {
+        return;
+      }
+      list2.raw = list2.raw.trimEnd();
+      for (let i = 0; i < list2.items.length; i++) {
+        this.lexer.state.top = false;
+        list2.items[i].tokens = this.lexer.blockTokens(list2.items[i].text, []);
+        if (!list2.loose) {
+          const spacers = list2.items[i].tokens.filter((t) => t.type === "space");
+          const hasMultipleLineBreaks = spacers.length > 0 && spacers.some((t) => this.rules.other.anyLine.test(t.raw));
+          list2.loose = hasMultipleLineBreaks;
+        }
+      }
+      if (list2.loose) {
+        for (let i = 0; i < list2.items.length; i++) {
+          list2.items[i].loose = true;
+        }
+      }
+      return list2;
+    }
+  }
+  html(src) {
+    const cap = this.rules.block.html.exec(src);
+    if (cap) {
+      const token = {
+        type: "html",
+        block: true,
+        raw: cap[0],
+        pre: cap[1] === "pre" || cap[1] === "script" || cap[1] === "style",
+        text: cap[0]
+      };
+      return token;
+    }
+  }
+  def(src) {
+    const cap = this.rules.block.def.exec(src);
+    if (cap) {
+      const tag2 = cap[1].toLowerCase().replace(this.rules.other.multipleSpaceGlobal, " ");
+      const href = cap[2] ? cap[2].replace(this.rules.other.hrefBrackets, "$1").replace(this.rules.inline.anyPunctuation, "$1") : "";
+      const title = cap[3] ? cap[3].substring(1, cap[3].length - 1).replace(this.rules.inline.anyPunctuation, "$1") : cap[3];
+      return {
+        type: "def",
+        tag: tag2,
+        raw: cap[0],
+        href,
+        title
+      };
+    }
+  }
+  table(src) {
+    const cap = this.rules.block.table.exec(src);
+    if (!cap) {
+      return;
+    }
+    if (!this.rules.other.tableDelimiter.test(cap[2])) {
+      return;
+    }
+    const headers = splitCells(cap[1]);
+    const aligns = cap[2].replace(this.rules.other.tableAlignChars, "").split("|");
+    const rows = cap[3]?.trim() ? cap[3].replace(this.rules.other.tableRowBlankLine, "").split("\n") : [];
+    const item = {
+      type: "table",
+      raw: cap[0],
+      header: [],
+      align: [],
+      rows: []
+    };
+    if (headers.length !== aligns.length) {
+      return;
+    }
+    for (const align of aligns) {
+      if (this.rules.other.tableAlignRight.test(align)) {
+        item.align.push("right");
+      } else if (this.rules.other.tableAlignCenter.test(align)) {
+        item.align.push("center");
+      } else if (this.rules.other.tableAlignLeft.test(align)) {
+        item.align.push("left");
+      } else {
+        item.align.push(null);
+      }
+    }
+    for (let i = 0; i < headers.length; i++) {
+      item.header.push({
+        text: headers[i],
+        tokens: this.lexer.inline(headers[i]),
+        header: true,
+        align: item.align[i]
+      });
+    }
+    for (const row of rows) {
+      item.rows.push(splitCells(row, item.header.length).map((cell, i) => {
+        return {
+          text: cell,
+          tokens: this.lexer.inline(cell),
+          header: false,
+          align: item.align[i]
+        };
+      }));
+    }
+    return item;
+  }
+  lheading(src) {
+    const cap = this.rules.block.lheading.exec(src);
+    if (cap) {
+      return {
+        type: "heading",
+        raw: cap[0],
+        depth: cap[2].charAt(0) === "=" ? 1 : 2,
+        text: cap[1],
+        tokens: this.lexer.inline(cap[1])
+      };
+    }
+  }
+  paragraph(src) {
+    const cap = this.rules.block.paragraph.exec(src);
+    if (cap) {
+      const text = cap[1].charAt(cap[1].length - 1) === "\n" ? cap[1].slice(0, -1) : cap[1];
+      return {
+        type: "paragraph",
+        raw: cap[0],
+        text,
+        tokens: this.lexer.inline(text)
+      };
+    }
+  }
+  text(src) {
+    const cap = this.rules.block.text.exec(src);
+    if (cap) {
+      return {
+        type: "text",
+        raw: cap[0],
+        text: cap[0],
+        tokens: this.lexer.inline(cap[0])
+      };
+    }
+  }
+  escape(src) {
+    const cap = this.rules.inline.escape.exec(src);
+    if (cap) {
+      return {
+        type: "escape",
+        raw: cap[0],
+        text: cap[1]
+      };
+    }
+  }
+  tag(src) {
+    const cap = this.rules.inline.tag.exec(src);
+    if (cap) {
+      if (!this.lexer.state.inLink && this.rules.other.startATag.test(cap[0])) {
+        this.lexer.state.inLink = true;
+      } else if (this.lexer.state.inLink && this.rules.other.endATag.test(cap[0])) {
+        this.lexer.state.inLink = false;
+      }
+      if (!this.lexer.state.inRawBlock && this.rules.other.startPreScriptTag.test(cap[0])) {
+        this.lexer.state.inRawBlock = true;
+      } else if (this.lexer.state.inRawBlock && this.rules.other.endPreScriptTag.test(cap[0])) {
+        this.lexer.state.inRawBlock = false;
+      }
+      return {
+        type: "html",
+        raw: cap[0],
+        inLink: this.lexer.state.inLink,
+        inRawBlock: this.lexer.state.inRawBlock,
+        block: false,
+        text: cap[0]
+      };
+    }
+  }
+  link(src) {
+    const cap = this.rules.inline.link.exec(src);
+    if (cap) {
+      const trimmedUrl = cap[2].trim();
+      if (!this.options.pedantic && this.rules.other.startAngleBracket.test(trimmedUrl)) {
+        if (!this.rules.other.endAngleBracket.test(trimmedUrl)) {
+          return;
+        }
+        const rtrimSlash = rtrim(trimmedUrl.slice(0, -1), "\\");
+        if ((trimmedUrl.length - rtrimSlash.length) % 2 === 0) {
+          return;
+        }
+      } else {
+        const lastParenIndex = findClosingBracket(cap[2], "()");
+        if (lastParenIndex === -2) {
+          return;
+        }
+        if (lastParenIndex > -1) {
+          const start = cap[0].indexOf("!") === 0 ? 5 : 4;
+          const linkLen = start + cap[1].length + lastParenIndex;
+          cap[2] = cap[2].substring(0, lastParenIndex);
+          cap[0] = cap[0].substring(0, linkLen).trim();
+          cap[3] = "";
+        }
+      }
+      let href = cap[2];
+      let title = "";
+      if (this.options.pedantic) {
+        const link2 = this.rules.other.pedanticHrefTitle.exec(href);
+        if (link2) {
+          href = link2[1];
+          title = link2[3];
+        }
+      } else {
+        title = cap[3] ? cap[3].slice(1, -1) : "";
+      }
+      href = href.trim();
+      if (this.rules.other.startAngleBracket.test(href)) {
+        if (this.options.pedantic && !this.rules.other.endAngleBracket.test(trimmedUrl)) {
+          href = href.slice(1);
+        } else {
+          href = href.slice(1, -1);
+        }
+      }
+      return outputLink(cap, {
+        href: href ? href.replace(this.rules.inline.anyPunctuation, "$1") : href,
+        title: title ? title.replace(this.rules.inline.anyPunctuation, "$1") : title
+      }, cap[0], this.lexer, this.rules);
+    }
+  }
+  reflink(src, links) {
+    let cap;
+    if ((cap = this.rules.inline.reflink.exec(src)) || (cap = this.rules.inline.nolink.exec(src))) {
+      const linkString = (cap[2] || cap[1]).replace(this.rules.other.multipleSpaceGlobal, " ");
+      const link2 = links[linkString.toLowerCase()];
+      if (!link2) {
+        const text = cap[0].charAt(0);
+        return {
+          type: "text",
+          raw: text,
+          text
+        };
+      }
+      return outputLink(cap, link2, cap[0], this.lexer, this.rules);
+    }
+  }
+  emStrong(src, maskedSrc, prevChar = "") {
+    let match = this.rules.inline.emStrongLDelim.exec(src);
+    if (!match) return;
+    if (match[3] && prevChar.match(this.rules.other.unicodeAlphaNumeric)) return;
+    const nextChar = match[1] || match[2] || "";
+    if (!nextChar || !prevChar || this.rules.inline.punctuation.exec(prevChar)) {
+      const lLength = [...match[0]].length - 1;
+      let rDelim, rLength, delimTotal = lLength, midDelimTotal = 0;
+      const endReg = match[0][0] === "*" ? this.rules.inline.emStrongRDelimAst : this.rules.inline.emStrongRDelimUnd;
+      endReg.lastIndex = 0;
+      maskedSrc = maskedSrc.slice(-1 * src.length + lLength);
+      while ((match = endReg.exec(maskedSrc)) != null) {
+        rDelim = match[1] || match[2] || match[3] || match[4] || match[5] || match[6];
+        if (!rDelim) continue;
+        rLength = [...rDelim].length;
+        if (match[3] || match[4]) {
+          delimTotal += rLength;
+          continue;
+        } else if (match[5] || match[6]) {
+          if (lLength % 3 && !((lLength + rLength) % 3)) {
+            midDelimTotal += rLength;
+            continue;
+          }
+        }
+        delimTotal -= rLength;
+        if (delimTotal > 0) continue;
+        rLength = Math.min(rLength, rLength + delimTotal + midDelimTotal);
+        const lastCharLength = [...match[0]][0].length;
+        const raw = src.slice(0, lLength + match.index + lastCharLength + rLength);
+        if (Math.min(lLength, rLength) % 2) {
+          const text2 = raw.slice(1, -1);
+          return {
+            type: "em",
+            raw,
+            text: text2,
+            tokens: this.lexer.inlineTokens(text2)
+          };
+        }
+        const text = raw.slice(2, -2);
+        return {
+          type: "strong",
+          raw,
+          text,
+          tokens: this.lexer.inlineTokens(text)
+        };
+      }
+    }
+  }
+  codespan(src) {
+    const cap = this.rules.inline.code.exec(src);
+    if (cap) {
+      let text = cap[2].replace(this.rules.other.newLineCharGlobal, " ");
+      const hasNonSpaceChars = this.rules.other.nonSpaceChar.test(text);
+      const hasSpaceCharsOnBothEnds = this.rules.other.startingSpaceChar.test(text) && this.rules.other.endingSpaceChar.test(text);
+      if (hasNonSpaceChars && hasSpaceCharsOnBothEnds) {
+        text = text.substring(1, text.length - 1);
+      }
+      return {
+        type: "codespan",
+        raw: cap[0],
+        text
+      };
+    }
+  }
+  br(src) {
+    const cap = this.rules.inline.br.exec(src);
+    if (cap) {
+      return {
+        type: "br",
+        raw: cap[0]
+      };
+    }
+  }
+  del(src) {
+    const cap = this.rules.inline.del.exec(src);
+    if (cap) {
+      return {
+        type: "del",
+        raw: cap[0],
+        text: cap[2],
+        tokens: this.lexer.inlineTokens(cap[2])
+      };
+    }
+  }
+  autolink(src) {
+    const cap = this.rules.inline.autolink.exec(src);
+    if (cap) {
+      let text, href;
+      if (cap[2] === "@") {
+        text = cap[1];
+        href = "mailto:" + text;
+      } else {
+        text = cap[1];
+        href = text;
+      }
+      return {
+        type: "link",
+        raw: cap[0],
+        text,
+        href,
+        tokens: [
+          {
+            type: "text",
+            raw: text,
+            text
+          }
+        ]
+      };
+    }
+  }
+  url(src) {
+    let cap;
+    if (cap = this.rules.inline.url.exec(src)) {
+      let text, href;
+      if (cap[2] === "@") {
+        text = cap[0];
+        href = "mailto:" + text;
+      } else {
+        let prevCapZero;
+        do {
+          prevCapZero = cap[0];
+          cap[0] = this.rules.inline._backpedal.exec(cap[0])?.[0] ?? "";
+        } while (prevCapZero !== cap[0]);
+        text = cap[0];
+        if (cap[1] === "www.") {
+          href = "http://" + cap[0];
+        } else {
+          href = cap[0];
+        }
+      }
+      return {
+        type: "link",
+        raw: cap[0],
+        text,
+        href,
+        tokens: [
+          {
+            type: "text",
+            raw: text,
+            text
+          }
+        ]
+      };
+    }
+  }
+  inlineText(src) {
+    const cap = this.rules.inline.text.exec(src);
+    if (cap) {
+      const escaped = this.lexer.state.inRawBlock;
+      return {
+        type: "text",
+        raw: cap[0],
+        text: cap[0],
+        escaped
+      };
+    }
+  }
+};
+
+// src/Lexer.ts
+var _Lexer = class __Lexer {
+  tokens;
+  options;
+  state;
+  tokenizer;
+  inlineQueue;
+  constructor(options2) {
+    this.tokens = [];
+    this.tokens.links = /* @__PURE__ */ Object.create(null);
+    this.options = options2 || _defaults;
+    this.options.tokenizer = this.options.tokenizer || new _Tokenizer();
+    this.tokenizer = this.options.tokenizer;
+    this.tokenizer.options = this.options;
+    this.tokenizer.lexer = this;
+    this.inlineQueue = [];
+    this.state = {
+      inLink: false,
+      inRawBlock: false,
+      top: true
+    };
+    const rules = {
+      other,
+      block: block.normal,
+      inline: inline.normal
+    };
+    if (this.options.pedantic) {
+      rules.block = block.pedantic;
+      rules.inline = inline.pedantic;
+    } else if (this.options.gfm) {
+      rules.block = block.gfm;
+      if (this.options.breaks) {
+        rules.inline = inline.breaks;
+      } else {
+        rules.inline = inline.gfm;
+      }
+    }
+    this.tokenizer.rules = rules;
+  }
+  /**
+   * Expose Rules
+   */
+  static get rules() {
+    return {
+      block,
+      inline
+    };
+  }
+  /**
+   * Static Lex Method
+   */
+  static lex(src, options2) {
+    const lexer2 = new __Lexer(options2);
+    return lexer2.lex(src);
+  }
+  /**
+   * Static Lex Inline Method
+   */
+  static lexInline(src, options2) {
+    const lexer2 = new __Lexer(options2);
+    return lexer2.inlineTokens(src);
+  }
+  /**
+   * Preprocessing
+   */
+  lex(src) {
+    src = src.replace(other.carriageReturn, "\n");
+    this.blockTokens(src, this.tokens);
+    for (let i = 0; i < this.inlineQueue.length; i++) {
+      const next = this.inlineQueue[i];
+      this.inlineTokens(next.src, next.tokens);
+    }
+    this.inlineQueue = [];
+    return this.tokens;
+  }
+  blockTokens(src, tokens = [], lastParagraphClipped = false) {
+    if (this.options.pedantic) {
+      src = src.replace(other.tabCharGlobal, "    ").replace(other.spaceLine, "");
+    }
+    while (src) {
+      let token;
+      if (this.options.extensions?.block?.some((extTokenizer) => {
+        if (token = extTokenizer.call({ lexer: this }, src, tokens)) {
+          src = src.substring(token.raw.length);
+          tokens.push(token);
+          return true;
+        }
+        return false;
+      })) {
+        continue;
+      }
+      if (token = this.tokenizer.space(src)) {
+        src = src.substring(token.raw.length);
+        const lastToken = tokens.at(-1);
+        if (token.raw.length === 1 && lastToken !== void 0) {
+          lastToken.raw += "\n";
+        } else {
+          tokens.push(token);
+        }
+        continue;
+      }
+      if (token = this.tokenizer.code(src)) {
+        src = src.substring(token.raw.length);
+        const lastToken = tokens.at(-1);
+        if (lastToken?.type === "paragraph" || lastToken?.type === "text") {
+          lastToken.raw += "\n" + token.raw;
+          lastToken.text += "\n" + token.text;
+          this.inlineQueue.at(-1).src = lastToken.text;
+        } else {
+          tokens.push(token);
+        }
+        continue;
+      }
+      if (token = this.tokenizer.fences(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.heading(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.hr(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.blockquote(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.list(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.html(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.def(src)) {
+        src = src.substring(token.raw.length);
+        const lastToken = tokens.at(-1);
+        if (lastToken?.type === "paragraph" || lastToken?.type === "text") {
+          lastToken.raw += "\n" + token.raw;
+          lastToken.text += "\n" + token.raw;
+          this.inlineQueue.at(-1).src = lastToken.text;
+        } else if (!this.tokens.links[token.tag]) {
+          this.tokens.links[token.tag] = {
+            href: token.href,
+            title: token.title
+          };
+        }
+        continue;
+      }
+      if (token = this.tokenizer.table(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.lheading(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      let cutSrc = src;
+      if (this.options.extensions?.startBlock) {
+        let startIndex = Infinity;
+        const tempSrc = src.slice(1);
+        let tempStart;
+        this.options.extensions.startBlock.forEach((getStartIndex) => {
+          tempStart = getStartIndex.call({ lexer: this }, tempSrc);
+          if (typeof tempStart === "number" && tempStart >= 0) {
+            startIndex = Math.min(startIndex, tempStart);
+          }
+        });
+        if (startIndex < Infinity && startIndex >= 0) {
+          cutSrc = src.substring(0, startIndex + 1);
+        }
+      }
+      if (this.state.top && (token = this.tokenizer.paragraph(cutSrc))) {
+        const lastToken = tokens.at(-1);
+        if (lastParagraphClipped && lastToken?.type === "paragraph") {
+          lastToken.raw += "\n" + token.raw;
+          lastToken.text += "\n" + token.text;
+          this.inlineQueue.pop();
+          this.inlineQueue.at(-1).src = lastToken.text;
+        } else {
+          tokens.push(token);
+        }
+        lastParagraphClipped = cutSrc.length !== src.length;
+        src = src.substring(token.raw.length);
+        continue;
+      }
+      if (token = this.tokenizer.text(src)) {
+        src = src.substring(token.raw.length);
+        const lastToken = tokens.at(-1);
+        if (lastToken?.type === "text") {
+          lastToken.raw += "\n" + token.raw;
+          lastToken.text += "\n" + token.text;
+          this.inlineQueue.pop();
+          this.inlineQueue.at(-1).src = lastToken.text;
+        } else {
+          tokens.push(token);
+        }
+        continue;
+      }
+      if (src) {
+        const errMsg = "Infinite loop on byte: " + src.charCodeAt(0);
+        if (this.options.silent) {
+          console.error(errMsg);
+          break;
+        } else {
+          throw new Error(errMsg);
+        }
+      }
+    }
+    this.state.top = true;
+    return tokens;
+  }
+  inline(src, tokens = []) {
+    this.inlineQueue.push({ src, tokens });
+    return tokens;
+  }
+  /**
+   * Lexing/Compiling
+   */
+  inlineTokens(src, tokens = []) {
+    let maskedSrc = src;
+    let match = null;
+    if (this.tokens.links) {
+      const links = Object.keys(this.tokens.links);
+      if (links.length > 0) {
+        while ((match = this.tokenizer.rules.inline.reflinkSearch.exec(maskedSrc)) != null) {
+          if (links.includes(match[0].slice(match[0].lastIndexOf("[") + 1, -1))) {
+            maskedSrc = maskedSrc.slice(0, match.index) + "[" + "a".repeat(match[0].length - 2) + "]" + maskedSrc.slice(this.tokenizer.rules.inline.reflinkSearch.lastIndex);
+          }
+        }
+      }
+    }
+    while ((match = this.tokenizer.rules.inline.anyPunctuation.exec(maskedSrc)) != null) {
+      maskedSrc = maskedSrc.slice(0, match.index) + "++" + maskedSrc.slice(this.tokenizer.rules.inline.anyPunctuation.lastIndex);
+    }
+    while ((match = this.tokenizer.rules.inline.blockSkip.exec(maskedSrc)) != null) {
+      maskedSrc = maskedSrc.slice(0, match.index) + "[" + "a".repeat(match[0].length - 2) + "]" + maskedSrc.slice(this.tokenizer.rules.inline.blockSkip.lastIndex);
+    }
+    let keepPrevChar = false;
+    let prevChar = "";
+    while (src) {
+      if (!keepPrevChar) {
+        prevChar = "";
+      }
+      keepPrevChar = false;
+      let token;
+      if (this.options.extensions?.inline?.some((extTokenizer) => {
+        if (token = extTokenizer.call({ lexer: this }, src, tokens)) {
+          src = src.substring(token.raw.length);
+          tokens.push(token);
+          return true;
+        }
+        return false;
+      })) {
+        continue;
+      }
+      if (token = this.tokenizer.escape(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.tag(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.link(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.reflink(src, this.tokens.links)) {
+        src = src.substring(token.raw.length);
+        const lastToken = tokens.at(-1);
+        if (token.type === "text" && lastToken?.type === "text") {
+          lastToken.raw += token.raw;
+          lastToken.text += token.text;
+        } else {
+          tokens.push(token);
+        }
+        continue;
+      }
+      if (token = this.tokenizer.emStrong(src, maskedSrc, prevChar)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.codespan(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.br(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.del(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (token = this.tokenizer.autolink(src)) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      if (!this.state.inLink && (token = this.tokenizer.url(src))) {
+        src = src.substring(token.raw.length);
+        tokens.push(token);
+        continue;
+      }
+      let cutSrc = src;
+      if (this.options.extensions?.startInline) {
+        let startIndex = Infinity;
+        const tempSrc = src.slice(1);
+        let tempStart;
+        this.options.extensions.startInline.forEach((getStartIndex) => {
+          tempStart = getStartIndex.call({ lexer: this }, tempSrc);
+          if (typeof tempStart === "number" && tempStart >= 0) {
+            startIndex = Math.min(startIndex, tempStart);
+          }
+        });
+        if (startIndex < Infinity && startIndex >= 0) {
+          cutSrc = src.substring(0, startIndex + 1);
+        }
+      }
+      if (token = this.tokenizer.inlineText(cutSrc)) {
+        src = src.substring(token.raw.length);
+        if (token.raw.slice(-1) !== "_") {
+          prevChar = token.raw.slice(-1);
+        }
+        keepPrevChar = true;
+        const lastToken = tokens.at(-1);
+        if (lastToken?.type === "text") {
+          lastToken.raw += token.raw;
+          lastToken.text += token.text;
+        } else {
+          tokens.push(token);
+        }
+        continue;
+      }
+      if (src) {
+        const errMsg = "Infinite loop on byte: " + src.charCodeAt(0);
+        if (this.options.silent) {
+          console.error(errMsg);
+          break;
+        } else {
+          throw new Error(errMsg);
+        }
+      }
+    }
+    return tokens;
+  }
+};
+
+// src/Renderer.ts
+var _Renderer = class {
+  options;
+  parser;
+  // set by the parser
+  constructor(options2) {
+    this.options = options2 || _defaults;
+  }
+  space(token) {
+    return "";
+  }
+  code({ text, lang, escaped }) {
+    const langString = (lang || "").match(other.notSpaceStart)?.[0];
+    const code = text.replace(other.endingNewline, "") + "\n";
+    if (!langString) {
+      return "<pre><code>" + (escaped ? code : escape2(code, true)) + "</code></pre>\n";
+    }
+    return '<pre><code class="language-' + escape2(langString) + '">' + (escaped ? code : escape2(code, true)) + "</code></pre>\n";
+  }
+  blockquote({ tokens }) {
+    const body = this.parser.parse(tokens);
+    return `<blockquote>
+${body}</blockquote>
+`;
+  }
+  html({ text }) {
+    return text;
+  }
+  heading({ tokens, depth }) {
+    return `<h${depth}>${this.parser.parseInline(tokens)}</h${depth}>
+`;
+  }
+  hr(token) {
+    return "<hr>\n";
+  }
+  list(token) {
+    const ordered = token.ordered;
+    const start = token.start;
+    let body = "";
+    for (let j = 0; j < token.items.length; j++) {
+      const item = token.items[j];
+      body += this.listitem(item);
+    }
+    const type = ordered ? "ol" : "ul";
+    const startAttr = ordered && start !== 1 ? ' start="' + start + '"' : "";
+    return "<" + type + startAttr + ">\n" + body + "</" + type + ">\n";
+  }
+  listitem(item) {
+    let itemBody = "";
+    if (item.task) {
+      const checkbox = this.checkbox({ checked: !!item.checked });
+      if (item.loose) {
+        if (item.tokens[0]?.type === "paragraph") {
+          item.tokens[0].text = checkbox + " " + item.tokens[0].text;
+          if (item.tokens[0].tokens && item.tokens[0].tokens.length > 0 && item.tokens[0].tokens[0].type === "text") {
+            item.tokens[0].tokens[0].text = checkbox + " " + escape2(item.tokens[0].tokens[0].text);
+            item.tokens[0].tokens[0].escaped = true;
+          }
+        } else {
+          item.tokens.unshift({
+            type: "text",
+            raw: checkbox + " ",
+            text: checkbox + " ",
+            escaped: true
+          });
+        }
+      } else {
+        itemBody += checkbox + " ";
+      }
+    }
+    itemBody += this.parser.parse(item.tokens, !!item.loose);
+    return `<li>${itemBody}</li>
+`;
+  }
+  checkbox({ checked }) {
+    return "<input " + (checked ? 'checked="" ' : "") + 'disabled="" type="checkbox">';
+  }
+  paragraph({ tokens }) {
+    return `<p>${this.parser.parseInline(tokens)}</p>
+`;
+  }
+  table(token) {
+    let header = "";
+    let cell = "";
+    for (let j = 0; j < token.header.length; j++) {
+      cell += this.tablecell(token.header[j]);
+    }
+    header += this.tablerow({ text: cell });
+    let body = "";
+    for (let j = 0; j < token.rows.length; j++) {
+      const row = token.rows[j];
+      cell = "";
+      for (let k = 0; k < row.length; k++) {
+        cell += this.tablecell(row[k]);
+      }
+      body += this.tablerow({ text: cell });
+    }
+    if (body) body = `<tbody>${body}</tbody>`;
+    return "<table>\n<thead>\n" + header + "</thead>\n" + body + "</table>\n";
+  }
+  tablerow({ text }) {
+    return `<tr>
+${text}</tr>
+`;
+  }
+  tablecell(token) {
+    const content = this.parser.parseInline(token.tokens);
+    const type = token.header ? "th" : "td";
+    const tag2 = token.align ? `<${type} align="${token.align}">` : `<${type}>`;
+    return tag2 + content + `</${type}>
+`;
+  }
+  /**
+   * span level renderer
+   */
+  strong({ tokens }) {
+    return `<strong>${this.parser.parseInline(tokens)}</strong>`;
+  }
+  em({ tokens }) {
+    return `<em>${this.parser.parseInline(tokens)}</em>`;
+  }
+  codespan({ text }) {
+    return `<code>${escape2(text, true)}</code>`;
+  }
+  br(token) {
+    return "<br>";
+  }
+  del({ tokens }) {
+    return `<del>${this.parser.parseInline(tokens)}</del>`;
+  }
+  link({ href, title, tokens }) {
+    const text = this.parser.parseInline(tokens);
+    const cleanHref = cleanUrl(href);
+    if (cleanHref === null) {
+      return text;
+    }
+    href = cleanHref;
+    let out = '<a href="' + href + '"';
+    if (title) {
+      out += ' title="' + escape2(title) + '"';
+    }
+    out += ">" + text + "</a>";
+    return out;
+  }
+  image({ href, title, text, tokens }) {
+    if (tokens) {
+      text = this.parser.parseInline(tokens, this.parser.textRenderer);
+    }
+    const cleanHref = cleanUrl(href);
+    if (cleanHref === null) {
+      return escape2(text);
+    }
+    href = cleanHref;
+    let out = `<img src="${href}" alt="${text}"`;
+    if (title) {
+      out += ` title="${escape2(title)}"`;
+    }
+    out += ">";
+    return out;
+  }
+  text(token) {
+    return "tokens" in token && token.tokens ? this.parser.parseInline(token.tokens) : "escaped" in token && token.escaped ? token.text : escape2(token.text);
+  }
+};
+
+// src/TextRenderer.ts
+var _TextRenderer = class {
+  // no need for block level renderers
+  strong({ text }) {
+    return text;
+  }
+  em({ text }) {
+    return text;
+  }
+  codespan({ text }) {
+    return text;
+  }
+  del({ text }) {
+    return text;
+  }
+  html({ text }) {
+    return text;
+  }
+  text({ text }) {
+    return text;
+  }
+  link({ text }) {
+    return "" + text;
+  }
+  image({ text }) {
+    return "" + text;
+  }
+  br() {
+    return "";
+  }
+};
+
+// src/Parser.ts
+var _Parser = class __Parser {
+  options;
+  renderer;
+  textRenderer;
+  constructor(options2) {
+    this.options = options2 || _defaults;
+    this.options.renderer = this.options.renderer || new _Renderer();
+    this.renderer = this.options.renderer;
+    this.renderer.options = this.options;
+    this.renderer.parser = this;
+    this.textRenderer = new _TextRenderer();
+  }
+  /**
+   * Static Parse Method
+   */
+  static parse(tokens, options2) {
+    const parser2 = new __Parser(options2);
+    return parser2.parse(tokens);
+  }
+  /**
+   * Static Parse Inline Method
+   */
+  static parseInline(tokens, options2) {
+    const parser2 = new __Parser(options2);
+    return parser2.parseInline(tokens);
+  }
+  /**
+   * Parse Loop
+   */
+  parse(tokens, top = true) {
+    let out = "";
+    for (let i = 0; i < tokens.length; i++) {
+      const anyToken = tokens[i];
+      if (this.options.extensions?.renderers?.[anyToken.type]) {
+        const genericToken = anyToken;
+        const ret = this.options.extensions.renderers[genericToken.type].call({ parser: this }, genericToken);
+        if (ret !== false || !["space", "hr", "heading", "code", "table", "blockquote", "list", "html", "paragraph", "text"].includes(genericToken.type)) {
+          out += ret || "";
+          continue;
+        }
+      }
+      const token = anyToken;
+      switch (token.type) {
+        case "space": {
+          out += this.renderer.space(token);
+          continue;
+        }
+        case "hr": {
+          out += this.renderer.hr(token);
+          continue;
+        }
+        case "heading": {
+          out += this.renderer.heading(token);
+          continue;
+        }
+        case "code": {
+          out += this.renderer.code(token);
+          continue;
+        }
+        case "table": {
+          out += this.renderer.table(token);
+          continue;
+        }
+        case "blockquote": {
+          out += this.renderer.blockquote(token);
+          continue;
+        }
+        case "list": {
+          out += this.renderer.list(token);
+          continue;
+        }
+        case "html": {
+          out += this.renderer.html(token);
+          continue;
+        }
+        case "paragraph": {
+          out += this.renderer.paragraph(token);
+          continue;
+        }
+        case "text": {
+          let textToken = token;
+          let body = this.renderer.text(textToken);
+          while (i + 1 < tokens.length && tokens[i + 1].type === "text") {
+            textToken = tokens[++i];
+            body += "\n" + this.renderer.text(textToken);
+          }
+          if (top) {
+            out += this.renderer.paragraph({
+              type: "paragraph",
+              raw: body,
+              text: body,
+              tokens: [{ type: "text", raw: body, text: body, escaped: true }]
+            });
+          } else {
+            out += body;
+          }
+          continue;
+        }
+        default: {
+          const errMsg = 'Token with "' + token.type + '" type was not found.';
+          if (this.options.silent) {
+            console.error(errMsg);
+            return "";
+          } else {
+            throw new Error(errMsg);
+          }
+        }
+      }
+    }
+    return out;
+  }
+  /**
+   * Parse Inline Tokens
+   */
+  parseInline(tokens, renderer = this.renderer) {
+    let out = "";
+    for (let i = 0; i < tokens.length; i++) {
+      const anyToken = tokens[i];
+      if (this.options.extensions?.renderers?.[anyToken.type]) {
+        const ret = this.options.extensions.renderers[anyToken.type].call({ parser: this }, anyToken);
+        if (ret !== false || !["escape", "html", "link", "image", "strong", "em", "codespan", "br", "del", "text"].includes(anyToken.type)) {
+          out += ret || "";
+          continue;
+        }
+      }
+      const token = anyToken;
+      switch (token.type) {
+        case "escape": {
+          out += renderer.text(token);
+          break;
+        }
+        case "html": {
+          out += renderer.html(token);
+          break;
+        }
+        case "link": {
+          out += renderer.link(token);
+          break;
+        }
+        case "image": {
+          out += renderer.image(token);
+          break;
+        }
+        case "strong": {
+          out += renderer.strong(token);
+          break;
+        }
+        case "em": {
+          out += renderer.em(token);
+          break;
+        }
+        case "codespan": {
+          out += renderer.codespan(token);
+          break;
+        }
+        case "br": {
+          out += renderer.br(token);
+          break;
+        }
+        case "del": {
+          out += renderer.del(token);
+          break;
+        }
+        case "text": {
+          out += renderer.text(token);
+          break;
+        }
+        default: {
+          const errMsg = 'Token with "' + token.type + '" type was not found.';
+          if (this.options.silent) {
+            console.error(errMsg);
+            return "";
+          } else {
+            throw new Error(errMsg);
+          }
+        }
+      }
+    }
+    return out;
+  }
+};
+
+// src/Hooks.ts
+var _Hooks = class {
+  options;
+  block;
+  constructor(options2) {
+    this.options = options2 || _defaults;
+  }
+  static passThroughHooks = /* @__PURE__ */ new Set([
+    "preprocess",
+    "postprocess",
+    "processAllTokens"
+  ]);
+  /**
+   * Process markdown before marked
+   */
+  preprocess(markdown) {
+    return markdown;
+  }
+  /**
+   * Process HTML after marked is finished
+   */
+  postprocess(html2) {
+    return html2;
+  }
+  /**
+   * Process all tokens before walk tokens
+   */
+  processAllTokens(tokens) {
+    return tokens;
+  }
+  /**
+   * Provide function to tokenize markdown
+   */
+  provideLexer() {
+    return this.block ? _Lexer.lex : _Lexer.lexInline;
+  }
+  /**
+   * Provide function to parse tokens
+   */
+  provideParser() {
+    return this.block ? _Parser.parse : _Parser.parseInline;
+  }
+};
+
+// src/Instance.ts
+var Marked = class {
+  defaults = _getDefaults();
+  options = this.setOptions;
+  parse = this.parseMarkdown(true);
+  parseInline = this.parseMarkdown(false);
+  Parser = _Parser;
+  Renderer = _Renderer;
+  TextRenderer = _TextRenderer;
+  Lexer = _Lexer;
+  Tokenizer = _Tokenizer;
+  Hooks = _Hooks;
+  constructor(...args) {
+    this.use(...args);
+  }
+  /**
+   * Run callback for every token
+   */
+  walkTokens(tokens, callback) {
+    let values = [];
+    for (const token of tokens) {
+      values = values.concat(callback.call(this, token));
+      switch (token.type) {
+        case "table": {
+          const tableToken = token;
+          for (const cell of tableToken.header) {
+            values = values.concat(this.walkTokens(cell.tokens, callback));
+          }
+          for (const row of tableToken.rows) {
+            for (const cell of row) {
+              values = values.concat(this.walkTokens(cell.tokens, callback));
+            }
+          }
+          break;
+        }
+        case "list": {
+          const listToken = token;
+          values = values.concat(this.walkTokens(listToken.items, callback));
+          break;
+        }
+        default: {
+          const genericToken = token;
+          if (this.defaults.extensions?.childTokens?.[genericToken.type]) {
+            this.defaults.extensions.childTokens[genericToken.type].forEach((childTokens) => {
+              const tokens2 = genericToken[childTokens].flat(Infinity);
+              values = values.concat(this.walkTokens(tokens2, callback));
+            });
+          } else if (genericToken.tokens) {
+            values = values.concat(this.walkTokens(genericToken.tokens, callback));
+          }
+        }
+      }
+    }
+    return values;
+  }
+  use(...args) {
+    const extensions = this.defaults.extensions || { renderers: {}, childTokens: {} };
+    args.forEach((pack) => {
+      const opts = { ...pack };
+      opts.async = this.defaults.async || opts.async || false;
+      if (pack.extensions) {
+        pack.extensions.forEach((ext) => {
+          if (!ext.name) {
+            throw new Error("extension name required");
+          }
+          if ("renderer" in ext) {
+            const prevRenderer = extensions.renderers[ext.name];
+            if (prevRenderer) {
+              extensions.renderers[ext.name] = function(...args2) {
+                let ret = ext.renderer.apply(this, args2);
+                if (ret === false) {
+                  ret = prevRenderer.apply(this, args2);
+                }
+                return ret;
+              };
+            } else {
+              extensions.renderers[ext.name] = ext.renderer;
+            }
+          }
+          if ("tokenizer" in ext) {
+            if (!ext.level || ext.level !== "block" && ext.level !== "inline") {
+              throw new Error("extension level must be 'block' or 'inline'");
+            }
+            const extLevel = extensions[ext.level];
+            if (extLevel) {
+              extLevel.unshift(ext.tokenizer);
+            } else {
+              extensions[ext.level] = [ext.tokenizer];
+            }
+            if (ext.start) {
+              if (ext.level === "block") {
+                if (extensions.startBlock) {
+                  extensions.startBlock.push(ext.start);
+                } else {
+                  extensions.startBlock = [ext.start];
+                }
+              } else if (ext.level === "inline") {
+                if (extensions.startInline) {
+                  extensions.startInline.push(ext.start);
+                } else {
+                  extensions.startInline = [ext.start];
+                }
+              }
+            }
+          }
+          if ("childTokens" in ext && ext.childTokens) {
+            extensions.childTokens[ext.name] = ext.childTokens;
+          }
+        });
+        opts.extensions = extensions;
+      }
+      if (pack.renderer) {
+        const renderer = this.defaults.renderer || new _Renderer(this.defaults);
+        for (const prop in pack.renderer) {
+          if (!(prop in renderer)) {
+            throw new Error(`renderer '${prop}' does not exist`);
+          }
+          if (["options", "parser"].includes(prop)) {
+            continue;
+          }
+          const rendererProp = prop;
+          const rendererFunc = pack.renderer[rendererProp];
+          const prevRenderer = renderer[rendererProp];
+          renderer[rendererProp] = (...args2) => {
+            let ret = rendererFunc.apply(renderer, args2);
+            if (ret === false) {
+              ret = prevRenderer.apply(renderer, args2);
+            }
+            return ret || "";
+          };
+        }
+        opts.renderer = renderer;
+      }
+      if (pack.tokenizer) {
+        const tokenizer = this.defaults.tokenizer || new _Tokenizer(this.defaults);
+        for (const prop in pack.tokenizer) {
+          if (!(prop in tokenizer)) {
+            throw new Error(`tokenizer '${prop}' does not exist`);
+          }
+          if (["options", "rules", "lexer"].includes(prop)) {
+            continue;
+          }
+          const tokenizerProp = prop;
+          const tokenizerFunc = pack.tokenizer[tokenizerProp];
+          const prevTokenizer = tokenizer[tokenizerProp];
+          tokenizer[tokenizerProp] = (...args2) => {
+            let ret = tokenizerFunc.apply(tokenizer, args2);
+            if (ret === false) {
+              ret = prevTokenizer.apply(tokenizer, args2);
+            }
+            return ret;
+          };
+        }
+        opts.tokenizer = tokenizer;
+      }
+      if (pack.hooks) {
+        const hooks = this.defaults.hooks || new _Hooks();
+        for (const prop in pack.hooks) {
+          if (!(prop in hooks)) {
+            throw new Error(`hook '${prop}' does not exist`);
+          }
+          if (["options", "block"].includes(prop)) {
+            continue;
+          }
+          const hooksProp = prop;
+          const hooksFunc = pack.hooks[hooksProp];
+          const prevHook = hooks[hooksProp];
+          if (_Hooks.passThroughHooks.has(prop)) {
+            hooks[hooksProp] = (arg) => {
+              if (this.defaults.async) {
+                return Promise.resolve(hooksFunc.call(hooks, arg)).then((ret2) => {
+                  return prevHook.call(hooks, ret2);
+                });
+              }
+              const ret = hooksFunc.call(hooks, arg);
+              return prevHook.call(hooks, ret);
+            };
+          } else {
+            hooks[hooksProp] = (...args2) => {
+              let ret = hooksFunc.apply(hooks, args2);
+              if (ret === false) {
+                ret = prevHook.apply(hooks, args2);
+              }
+              return ret;
+            };
+          }
+        }
+        opts.hooks = hooks;
+      }
+      if (pack.walkTokens) {
+        const walkTokens2 = this.defaults.walkTokens;
+        const packWalktokens = pack.walkTokens;
+        opts.walkTokens = function(token) {
+          let values = [];
+          values.push(packWalktokens.call(this, token));
+          if (walkTokens2) {
+            values = values.concat(walkTokens2.call(this, token));
+          }
+          return values;
+        };
+      }
+      this.defaults = { ...this.defaults, ...opts };
+    });
+    return this;
+  }
+  setOptions(opt) {
+    this.defaults = { ...this.defaults, ...opt };
+    return this;
+  }
+  lexer(src, options2) {
+    return _Lexer.lex(src, options2 ?? this.defaults);
+  }
+  parser(tokens, options2) {
+    return _Parser.parse(tokens, options2 ?? this.defaults);
+  }
+  parseMarkdown(blockType) {
+    const parse2 = (src, options2) => {
+      const origOpt = { ...options2 };
+      const opt = { ...this.defaults, ...origOpt };
+      const throwError = this.onError(!!opt.silent, !!opt.async);
+      if (this.defaults.async === true && origOpt.async === false) {
+        return throwError(new Error("marked(): The async option was set to true by an extension. Remove async: false from the parse options object to return a Promise."));
+      }
+      if (typeof src === "undefined" || src === null) {
+        return throwError(new Error("marked(): input parameter is undefined or null"));
+      }
+      if (typeof src !== "string") {
+        return throwError(new Error("marked(): input parameter is of type " + Object.prototype.toString.call(src) + ", string expected"));
+      }
+      if (opt.hooks) {
+        opt.hooks.options = opt;
+        opt.hooks.block = blockType;
+      }
+      const lexer2 = opt.hooks ? opt.hooks.provideLexer() : blockType ? _Lexer.lex : _Lexer.lexInline;
+      const parser2 = opt.hooks ? opt.hooks.provideParser() : blockType ? _Parser.parse : _Parser.parseInline;
+      if (opt.async) {
+        return Promise.resolve(opt.hooks ? opt.hooks.preprocess(src) : src).then((src2) => lexer2(src2, opt)).then((tokens) => opt.hooks ? opt.hooks.processAllTokens(tokens) : tokens).then((tokens) => opt.walkTokens ? Promise.all(this.walkTokens(tokens, opt.walkTokens)).then(() => tokens) : tokens).then((tokens) => parser2(tokens, opt)).then((html2) => opt.hooks ? opt.hooks.postprocess(html2) : html2).catch(throwError);
+      }
+      try {
+        if (opt.hooks) {
+          src = opt.hooks.preprocess(src);
+        }
+        let tokens = lexer2(src, opt);
+        if (opt.hooks) {
+          tokens = opt.hooks.processAllTokens(tokens);
+        }
+        if (opt.walkTokens) {
+          this.walkTokens(tokens, opt.walkTokens);
+        }
+        let html2 = parser2(tokens, opt);
+        if (opt.hooks) {
+          html2 = opt.hooks.postprocess(html2);
+        }
+        return html2;
+      } catch (e) {
+        return throwError(e);
+      }
+    };
+    return parse2;
+  }
+  onError(silent, async) {
+    return (e) => {
+      e.message += "\nPlease report this to https://github.com/markedjs/marked.";
+      if (silent) {
+        const msg = "<p>An error occurred:</p><pre>" + escape2(e.message + "", true) + "</pre>";
+        if (async) {
+          return Promise.resolve(msg);
+        }
+        return msg;
+      }
+      if (async) {
+        return Promise.reject(e);
+      }
+      throw e;
+    };
+  }
+};
+
+// src/marked.ts
+var markedInstance = new Marked();
+function marked(src, opt) {
+  return markedInstance.parse(src, opt);
+}
+marked.options = marked.setOptions = function(options2) {
+  markedInstance.setOptions(options2);
+  marked.defaults = markedInstance.defaults;
+  changeDefaults(marked.defaults);
+  return marked;
+};
+marked.getDefaults = _getDefaults;
+marked.defaults = _defaults;
+marked.use = function(...args) {
+  markedInstance.use(...args);
+  marked.defaults = markedInstance.defaults;
+  changeDefaults(marked.defaults);
+  return marked;
+};
+marked.walkTokens = function(tokens, callback) {
+  return markedInstance.walkTokens(tokens, callback);
+};
+marked.parseInline = markedInstance.parseInline;
+marked.Parser = _Parser;
+marked.parser = _Parser.parse;
+marked.Renderer = _Renderer;
+marked.TextRenderer = _TextRenderer;
+marked.Lexer = _Lexer;
+marked.lexer = _Lexer.lex;
+marked.Tokenizer = _Tokenizer;
+marked.Hooks = _Hooks;
+marked.parse = marked;
+var options = marked.options;
+var setOptions = marked.setOptions;
+var use = marked.use;
+var walkTokens = marked.walkTokens;
+var parseInline = marked.parseInline;
+var parse = marked;
+var parser = _Parser.parse;
+var lexer = _Lexer.lex;
+
+if(__exports != exports)module.exports = exports;return module.exports}));
+//# sourceMappingURL=marked.umd.js.map
+</script>
+<script>
+(function(){
+var D=JSON.parse(document.getElementById('data').textContent),F=D.files;
+var nav=document.getElementById('nav'),view=document.getElementById('view'),scrim=document.getElementById('scrim');
+document.getElementById('ttl').textContent=D.title+' — '+F.length+' فایل';
+function esc(s){return s.replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function sz(n){return n<1024?n+' B':n<1048576?(n/1024).toFixed(1)+' KB':(n/1048576).toFixed(1)+' MB'}
+function bytes(b64){var s=atob(b64),u=new Uint8Array(s.length);for(var i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u}
+function blobUrl(f){return URL.createObjectURL(new Blob([bytes(f.b64)],{type:f.mime}))}
+function csv(t,sep){var rows=[],r=[],c='',q=false;for(var i=0;i<t.length;i++){var ch=t[i];if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}else if(ch=='"')q=true;else if(ch==sep){r.push(c);c=''}else if(ch=='\n'){r.push(c.replace(/\r$/,''));rows.push(r);r=[];c=''}else c+=ch}if(c||r.length){r.push(c);rows.push(r)}return rows}
+function srcdoc(body){return '<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><style>body{font:16px/1.7 -apple-system,Tahoma,sans-serif;padding:16px;max-width:820px;margin:auto;color:#161a24}pre,code{background:#f1f3f8;border-radius:6px}pre{padding:12px;overflow:auto}code{padding:1px 5px}img{max-width:100%}table{border-collapse:collapse}td,th{border:1px solid #ccd;padding:4px 8px}</style>'+body}
+var cur=null,wrap=false;
+function show(i){
+  cur=i;var f=F[i];location.hash='#'+encodeURIComponent(f.path);
+  [].forEach.call(nav.children,function(a,k){a.classList.toggle('sel',k===i)});
+  nav.classList.remove('open');scrim.classList.remove('open');
+  view.className=wrap?'wrap':'';view.innerHTML='';
+  var m=document.createElement('div');m.className='meta';m.textContent=f.path+'  ·  '+sz(f.size||0)+(f.truncated?'  ·  (truncated)':'');view.appendChild(m);
+  var ext=f.ext;
+  if(f.kind==='text'){
+    if(/^(md|markdown)$/.test(ext)){
+      var b=document.createElement('div');b.className='btns';var fr=document.createElement('iframe');fr.setAttribute('sandbox','');
+      var raw=document.createElement('pre');raw.style.display='none';raw.textContent=f.text;
+      var t1=document.createElement('button');t1.textContent='متن خام';t1.onclick=function(){var s=raw.style.display==='none';raw.style.display=s?'':'none';fr.style.display=s?'none':'';t1.classList.toggle('on',s)};
+      b.appendChild(t1);view.appendChild(b);fr.srcdoc=srcdoc(window.marked.parse(f.text));view.appendChild(fr);view.appendChild(raw);
+    }else if(/^(html?|svg)$/.test(ext)){
+      var b2=document.createElement('div');b2.className='btns';var fr2=document.createElement('iframe');fr2.setAttribute('sandbox','');fr2.srcdoc=f.text;fr2.style.display='none';
+      var pre=document.createElement('pre');pre.textContent=f.text;
+      var t2=document.createElement('button');t2.textContent='پیش‌نمایش (بدون اسکریپت)';t2.onclick=function(){var s=fr2.style.display==='none';fr2.style.display=s?'':'none';pre.style.display=s?'none':'';t2.classList.toggle('on',s)};
+      b2.appendChild(t2);view.appendChild(b2);view.appendChild(fr2);view.appendChild(pre);
+    }else if(/^(csv|tsv)$/.test(ext)){
+      var rows=csv(f.text,ext==='tsv'?'\t':',').slice(0,2000);var h='<table>';
+      rows.forEach(function(r,k){h+='<tr>'+r.map(function(c){return k?'<td>'+esc(c)+'</td>':'<th>'+esc(c)+'</th>'}).join('')+'</tr>'});
+      var d=document.createElement('div');d.innerHTML=h+'</table>';view.appendChild(d);
+    }else{
+      var txt=f.text;if(ext==='json'){try{txt=JSON.stringify(JSON.parse(f.text),null,2)}catch(e){}}
+      var p=document.createElement('pre');p.textContent=txt;view.appendChild(p);
+    }
+  }else if(f.kind==='image'&&f.b64){var im=document.createElement('img');im.src='data:'+f.mime+';base64,'+f.b64;view.appendChild(im)}
+  else if(f.kind==='pdf'&&f.b64){var u=blobUrl(f);var a=document.createElement('a');a.className='dl';a.href=u;a.target='_blank';a.textContent='باز کردن PDF در تب جدید';view.appendChild(a);var ifr=document.createElement('iframe');ifr.src=u;view.appendChild(ifr)}
+  else if(f.kind==='audio'&&f.b64){var au=document.createElement('audio');au.controls=true;au.src=blobUrl(f);view.appendChild(au)}
+  else if(f.kind==='video'&&f.b64){var vi=document.createElement('video');vi.controls=true;vi.playsInline=true;vi.src=blobUrl(f);view.appendChild(vi)}
+  else if(f.b64){var dl=document.createElement('a');dl.className='dl';dl.textContent='دانلود فایل';dl.href=blobUrl(f);dl.download=f.path.split('/').pop();view.appendChild(dl)}
+  else{var pp=document.createElement('p');pp.textContent='این فایل باینری یا بزرگ است و داخل صفحه جاسازی نشده.';view.appendChild(pp)}
+  window.scrollTo(0,0);
+}
+F.forEach(function(f,i){var a=document.createElement('a');a.innerHTML=esc(f.path)+'<small>'+sz(f.size||0)+'</small>';a.onclick=function(){show(i)};nav.appendChild(a)});
+document.getElementById('menu').onclick=function(){nav.classList.add('open');scrim.classList.add('open')};
+scrim.onclick=function(){nav.classList.remove('open');scrim.classList.remove('open')};
+document.getElementById('wrapb').onclick=function(){wrap=!wrap;this.classList.toggle('on',wrap);view.className=wrap?'wrap':''};
+var want=decodeURIComponent((location.hash||'').slice(1))||D.select,idx=F.findIndex(function(f){return f.path===want});
+show(idx>=0?idx:0);
+})();
+</script>
+</body>
+</html>
