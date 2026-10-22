@@ -1,0 +1,11 @@
+root: . | package.json: false | html files: 1 | py: - | php: false
+── strategy: static
+stylesheet not inlined: ./css/app.css
+stylesheet not inlined: ./css/editor.css
+stylesheet not inlined: styles.css
+script not inlined: ./js/app.js
+script not inlined: app.js
+asset not inlined: ./assets/icon.svg
+asset not inlined: ./assets/icon-192.png
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvk04tse-code.html (0.14 MB)

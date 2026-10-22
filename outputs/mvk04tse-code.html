@@ -1,4 +1,4 @@
-NONONICK FORGE — Milestone 1
+<html lang="fa" dir="rtl"><head><style data-anyhtml="">html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}</style></head><body style="background:#050609;color:#ff6b7a;font-family:monospace;padding:24px">NONONICK FORGE — Milestone 1
  
 This is a real, deployable Milestone 1 of NONONICK FORGE: a mobile-first, iPhone-oriented web IDE with actual IndexedDB persistence, CodeMirror 6 editing, project/file management, sandboxed HTML/CSS/JS preview, ZIP import/export, PWA/offline shell, search, settings, and honest degradation.
  
@@ -163,16 +163,14 @@ console.log('PNG icons generated.');
 3. Core source files
  
 index.html
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
+
+
+
   <meta charset="utf-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
   <meta name="theme-color" content="#050609">
   <meta name="description" content="NONONICK FORGE — mobile-first web IDE">
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self';
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self';
                  script-src 'self' blob:;
                  style-src 'self' 'unsafe-inline';
                  img-src 'self' data: blob:;
@@ -188,14 +186,14 @@ index.html
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="FORGE">
-  <link rel="manifest" href="./manifest.webmanifest">
+  
   <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./assets/icon-192.png">
   <link rel="stylesheet" href="./css/app.css">
   <link rel="stylesheet" href="./css/editor.css">
   <title>NONONICK FORGE</title>
-</head>
-<body>
+
+
   <div id="app" class="app">
     <header class="topbar">
       <button id="btn-files-toggle" class="icon-btn" type="button" aria-label="فایل‌ها">
@@ -231,7 +229,7 @@ npm run build:vendor</code></pre>
       <button type="button" data-cmd="pair" data-open="[" data-close="]" aria-label="براکت">[ ]</button>
       <button type="button" data-cmd="pair" data-open="{" data-close="}" aria-label="آکولاد">{ }</button>
       <button type="button" data-cmd="pair" data-open="'" data-close="'" aria-label="گیومه">' '</button>
-      <button type="button" data-cmd="pair" data-open='"' data-close='"' aria-label="گیومهٔ دوتایی">" "</button>
+      <button type="button" data-cmd="pair" data-open="&quot;" data-close="&quot;" aria-label="گیومهٔ دوتایی">" "</button>
       <button type="button" data-cmd="pair" data-open="`" data-close="`" aria-label="بک‌تیک">` `</button>
       <button type="button" data-cmd="semicolon" aria-label="سمی‌کالن">;</button>
       <button type="button" data-cmd="left" aria-label="چپ">←</button>
@@ -291,8 +289,8 @@ npm run build:vendor</code></pre>
   <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
 
   <script type="module" src="./js/app.js"></script>
-</body>
-</html>
+
+
  
  
 manifest.webmanifest
@@ -360,10 +358,10 @@ const APP_SHELL = [
   './assets/icon-512.png'
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil((async () => {
+self.addEventListener('install', (event) =&gt; {
+  event.waitUntil((async () =&gt; {
     const cache = await caches.open(CACHE_VERSION);
-    await Promise.all(APP_SHELL.map(async (url) => {
+    await Promise.all(APP_SHELL.map(async (url) =&gt; {
       try {
         await cache.add(new Request(url, { cache: 'reload' }));
       } catch (error) {
@@ -373,21 +371,21 @@ self.addEventListener('install', (event) => {
   })());
 });
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil((async () => {
+self.addEventListener('activate', (event) =&gt; {
+  event.waitUntil((async () =&gt; {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((key) => key !== CACHE_VERSION).map((key) => caches.delete(key)));
+    await Promise.all(keys.filter((key) =&gt; key !== CACHE_VERSION).map((key) =&gt; caches.delete(key)));
     await self.clients.claim();
   })());
 });
 
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
+self.addEventListener('message', (event) =&gt; {
+  if (event.data &amp;&amp; event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', (event) =&gt; {
   const request = event.request;
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
@@ -395,7 +393,7 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.startsWith('/api/')) return;
 
   if (request.mode === 'navigate') {
-    event.respondWith((async () => {
+    event.respondWith((async () =&gt; {
       try {
         return await fetch(request);
       } catch {
@@ -406,7 +404,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  event.respondWith((async () => {
+  event.respondWith((async () =&gt; {
     const cache = await caches.open(CACHE_VERSION);
     const cached = await cache.match(request);
     if (cached) return cached;
@@ -1005,9 +1003,9 @@ export const TEXT_EXTENSIONS = new Set([
 export function uuid() {
   if (crypto.randomUUID) return crypto.randomUUID();
   const bytes = crypto.getRandomValues(new Uint8Array(16));
-  bytes[6] = (bytes[6] & 0x0f) | 0x40;
-  bytes[8] = (bytes[8] & 0x3f) | 0x80;
-  const hex = [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('');
+  bytes[6] = (bytes[6] &amp; 0x0f) | 0x40;
+  bytes[8] = (bytes[8] &amp; 0x3f) | 0x80;
+  const hex = [...bytes].map((b) =&gt; b.toString(16).padStart(2, '0')).join('');
   return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
 }
 
@@ -1016,13 +1014,13 @@ export function normalizePath(input) {
   path = path.replace(/^\/+/, '').replace(/\/+$/, '');
   if (!path) throw new Error('مسیر نمی‌تواند خالی باشد.');
   if (path.includes('\0')) throw new Error('مسیر شامل نویسهٔ غیرمجاز است.');
-  if (path.length > 240) throw new Error('مسیر بیش از حد طولانی است.');
+  if (path.length &gt; 240) throw new Error('مسیر بیش از حد طولانی است.');
   const parts = path.split('/');
   for (const part of parts) {
     if (!part || part === '.' || part === '..') {
       throw new Error('مسیر باید نسبی و بدون بخش‌های . یا .. باشد.');
     }
-    if (/[<>:"|?*]/.test(part)) {
+    if (/[&lt;&gt;:"|?*]/.test(part)) {
       throw new Error('مسیر شامل نویسهٔ غیرمجاز ویندوز است.');
     }
   }
@@ -1032,7 +1030,7 @@ export function normalizePath(input) {
 export function extname(path) {
   const name = path.split('/').pop() || '';
   const index = name.lastIndexOf('.');
-  return index > 0 ? name.slice(index + 1).toLowerCase() : '';
+  return index &gt; 0 ? name.slice(index + 1).toLowerCase() : '';
 }
 
 export function basename(path) {
@@ -1065,24 +1063,24 @@ export function mimeFor(path) {
 
 export function debounce(fn, wait = 300) {
   let timer = null;
-  const debounced = (...args) => {
+  const debounced = (...args) =&gt; {
     clearTimeout(timer);
-    timer = setTimeout(() => fn(...args), wait);
+    timer = setTimeout(() =&gt; fn(...args), wait);
   };
-  debounced.flush = (...args) => {
+  debounced.flush = (...args) =&gt; {
     clearTimeout(timer);
     fn(...args);
   };
-  debounced.cancel = () => clearTimeout(timer);
+  debounced.cancel = () =&gt; clearTimeout(timer);
   return debounced;
 }
 
 export function formatBytes(bytes) {
-  if (!Number.isFinite(bytes) || bytes <= 0) return '0 B';
+  if (!Number.isFinite(bytes) || bytes &lt;= 0) return '0 B';
   const units = ['B','KB','MB','GB'];
   let value = bytes;
   let index = 0;
-  while (value >= 1024 && index < units.length - 1) {
+  while (value &gt;= 1024 &amp;&amp; index &lt; units.length - 1) {
     value /= 1024;
     index += 1;
   }
@@ -1098,13 +1096,13 @@ export function downloadBlob(blob, filename) {
   document.body.append(link);
   link.click();
   link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 30000);
+  setTimeout(() =&gt; URL.revokeObjectURL(url), 30000);
 }
 
 export function bytesToBase64(bytes) {
   let binary = '';
   const chunk = 0x8000;
-  for (let i = 0; i < bytes.length; i += chunk) {
+  for (let i = 0; i &lt; bytes.length; i += chunk) {
     binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
   }
   return btoa(binary);
@@ -1118,12 +1116,12 @@ export function dataUrlFromFile(file) {
 }
 
 export function sanitizeFilename(name) {
-  return String(name || 'project').replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, '-').slice(0, 80);
+  return String(name || 'project').replace(/[\\/:*?"&lt;&gt;|]+/g, '-').replace(/\s+/g, '-').slice(0, 80);
 }
 
 export function escapeForHtmlText(value) {
-  return String(value).replace(/[&<>"']/g, (char) => ({
-    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  return String(value).replace(/[&amp;&lt;&gt;"']/g, (char) =&gt; ({
+    '&amp;':'&amp;', '&lt;':'&lt;', '&gt;':'&gt;', '"':'"', "'":'''
   }[char]));
 }
  
@@ -1160,7 +1158,7 @@ export class ForgeDB {
   async open() {
     if (this.db) return this.db;
     if (!this._opening) {
-      this._opening = this._openInternal().catch((error) => {
+      this._opening = this._openInternal().catch((error) =&gt; {
         this._opening = null;
         throw new StorageError('باز کردن پایگاه‌داده ممکن نشد. آیا حالت خصوصی Safari فعال است؟', error);
       });
@@ -1169,10 +1167,10 @@ export class ForgeDB {
   }
 
   _openInternal() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const request = indexedDB.open(DB_NAME, DB_VERSION);
 
-      request.onupgradeneeded = (event) => {
+      request.onupgradeneeded = (event) =&gt; {
         const db = request.result;
         const tx = request.transaction;
         const oldVersion = event.oldVersion;
@@ -1187,12 +1185,12 @@ export class ForgeDB {
           const store = db.createObjectStore(STORES.files, { keyPath: ['projectId', 'path'] });
           store.createIndex('projectId', 'projectId');
           store.createIndex('projectId_updatedAt', ['projectId', 'updatedAt']);
-        } else if (oldVersion < 3) {
+        } else if (oldVersion &lt; 3) {
           const store = tx.objectStore(STORES.files);
           if (!store.indexNames.contains('projectId_updatedAt')) {
             store.createIndex('projectId_updatedAt', ['projectId', 'updatedAt']);
           }
-          store.openCursor().onsuccess = (cursorEvent) => {
+          store.openCursor().onsuccess = (cursorEvent) =&gt; {
             const cursor = cursorEvent.target.result;
             if (!cursor) return;
             const value = cursor.value;
@@ -1228,9 +1226,9 @@ export class ForgeDB {
         }
       };
 
-      request.onsuccess = () => {
+      request.onsuccess = () =&gt; {
         this.db = request.result;
-        this.db.onversionchange = () => {
+        this.db.onversionchange = () =&gt; {
           this.db.close();
           this.db = null;
           this._opening = null;
@@ -1238,38 +1236,38 @@ export class ForgeDB {
         resolve(this.db);
       };
 
-      request.onerror = () => reject(request.error);
-      request.onblocked = () => reject(new Error('پایگاه‌داده توسط نسخهٔ دیگری از برنامه باز نگه داشته شده است.'));
+      request.onerror = () =&gt; reject(request.error);
+      request.onblocked = () =&gt; reject(new Error('پایگاه‌داده توسط نسخهٔ دیگری از برنامه باز نگه داشته شده است.'));
     });
   }
 
   async listProjects() {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.projects, 'readonly');
       const request = tx.objectStore(STORES.projects).getAll();
-      request.onsuccess = () => resolve(request.result.sort((a, b) => b.updatedAt - a.updatedAt));
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () =&gt; resolve(request.result.sort((a, b) =&gt; b.updatedAt - a.updatedAt));
+      request.onerror = () =&gt; reject(request.error);
     });
   }
 
   async getProject(id) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const request = db.transaction(STORES.projects, 'readonly')
         .objectStore(STORES.projects).get(id);
-      request.onsuccess = () => resolve(request.result || null);
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () =&gt; resolve(request.result || null);
+      request.onerror = () =&gt; reject(request.error);
     });
   }
 
   async createProject(project, entries) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction([STORES.projects, STORES.files], 'readwrite');
-      tx.oncomplete = () => resolve(project);
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error || new Error('ساخت پروژه لغو شد.'));
+      tx.oncomplete = () =&gt; resolve(project);
+      tx.onerror = () =&gt; reject(tx.error);
+      tx.onabort = () =&gt; reject(tx.error || new Error('ساخت پروژه لغو شد.'));
       tx.objectStore(STORES.projects).add(project);
       const files = tx.objectStore(STORES.files);
       for (const entry of entries) {
@@ -1289,29 +1287,29 @@ export class ForgeDB {
 
   async updateProject(project) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.projects, 'readwrite');
       tx.objectStore(STORES.projects).put({ ...project, updatedAt: Date.now() });
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
+      tx.oncomplete = () =&gt; resolve();
+      tx.onerror = () =&gt; reject(tx.error);
     });
   }
 
   async deleteProject(projectId) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(
         [STORES.projects, STORES.files, STORES.snapshots, STORES.syncState],
         'readwrite'
       );
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error || new Error('حذف پروژه لغو شد.'));
+      tx.oncomplete = () =&gt; resolve();
+      tx.onerror = () =&gt; reject(tx.error);
+      tx.onabort = () =&gt; reject(tx.error || new Error('حذف پروژه لغو شد.'));
 
       tx.objectStore(STORES.projects).delete(projectId);
 
       const filesIndex = tx.objectStore(STORES.files).index('projectId');
-      filesIndex.openCursor(IDBKeyRange.only(projectId)).onsuccess = (event) => {
+      filesIndex.openCursor(IDBKeyRange.only(projectId)).onsuccess = (event) =&gt; {
         const cursor = event.target.result;
         if (!cursor) return;
         cursor.delete();
@@ -1319,7 +1317,7 @@ export class ForgeDB {
       };
 
       const snapshotsIndex = tx.objectStore(STORES.snapshots).index('projectId');
-      snapshotsIndex.openCursor(IDBKeyRange.only(projectId)).onsuccess = (event) => {
+      snapshotsIndex.openCursor(IDBKeyRange.only(projectId)).onsuccess = (event) =&gt; {
         const cursor = event.target.result;
         if (!cursor) return;
         cursor.delete();
@@ -1332,26 +1330,26 @@ export class ForgeDB {
 
   async getFiles(projectId) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.files, 'readonly');
       const request = tx.objectStore(STORES.files).index('projectId').getAll(IDBKeyRange.only(projectId));
-      request.onsuccess = () => resolve(request.result.sort((a, b) => a.path.localeCompare(b.path)));
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () =&gt; resolve(request.result.sort((a, b) =&gt; a.path.localeCompare(b.path)));
+      request.onerror = () =&gt; reject(request.error);
     });
   }
 
   async putFile(file) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction([STORES.files, STORES.projects], 'readwrite');
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error || new Error('ذخیرهٔ فایل لغو شد.'));
+      tx.oncomplete = () =&gt; resolve();
+      tx.onerror = () =&gt; reject(tx.error);
+      tx.onabort = () =&gt; reject(tx.error || new Error('ذخیرهٔ فایل لغو شد.'));
       tx.objectStore(STORES.files).put(file);
 
       const projects = tx.objectStore(STORES.projects);
       const request = projects.get(file.projectId);
-      request.onsuccess = () => {
+      request.onsuccess = () =&gt; {
         if (request.result) {
           projects.put({ ...request.result, updatedAt: Date.now() });
         }
@@ -1361,11 +1359,11 @@ export class ForgeDB {
 
   async putFilesBatch(files) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.files, 'readwrite');
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error || new Error('ذخیرهٔ دسته‌ای لغو شد.'));
+      tx.oncomplete = () =&gt; resolve();
+      tx.onerror = () =&gt; reject(tx.error);
+      tx.onabort = () =&gt; reject(tx.error || new Error('ذخیرهٔ دسته‌ای لغو شد.'));
       const store = tx.objectStore(STORES.files);
       for (const file of files) store.put(file);
     });
@@ -1373,13 +1371,13 @@ export class ForgeDB {
 
   async replaceProjectFiles(projectId, files) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.files, 'readwrite');
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error || new Error('جای‌گذاری فایل‌ها لغو شد.'));
+      tx.oncomplete = () =&gt; resolve();
+      tx.onerror = () =&gt; reject(tx.error);
+      tx.onabort = () =&gt; reject(tx.error || new Error('جای‌گذاری فایل‌ها لغو شد.'));
       const store = tx.objectStore(STORES.files);
-      store.index('projectId').openCursor(IDBKeyRange.only(projectId)).onsuccess = (event) => {
+      store.index('projectId').openCursor(IDBKeyRange.only(projectId)).onsuccess = (event) =&gt; {
         const cursor = event.target.result;
         if (cursor) {
           cursor.delete();
@@ -1394,16 +1392,16 @@ export class ForgeDB {
   async deleteEntry(projectId, path) {
     const normalized = normalizePath(path);
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.files, 'readwrite');
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error || new Error('حذف لغو شد.'));
+      tx.oncomplete = () =&gt; resolve();
+      tx.onerror = () =&gt; reject(tx.error);
+      tx.onabort = () =&gt; reject(tx.error || new Error('حذف لغو شد.'));
       const store = tx.objectStore(STORES.files);
       const request = store.index('projectId').getAll(IDBKeyRange.only(projectId));
-      request.onsuccess = () => {
+      request.onsuccess = () =&gt; {
         const targets = request.result.filter(
-          (file) => file.path === normalized || file.path.startsWith(`${normalized}/`)
+          (file) =&gt; file.path === normalized || file.path.startsWith(`${normalized}/`)
         );
         if (!targets.length) {
           reject(new Error('مسیر موردنظر پیدا نشد.'));
@@ -1424,18 +1422,18 @@ export class ForgeDB {
     }
 
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.files, 'readwrite');
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error || new Error('تغییر نام لغو شد.'));
+      tx.oncomplete = () =&gt; resolve();
+      tx.onerror = () =&gt; reject(tx.error);
+      tx.onabort = () =&gt; reject(tx.error || new Error('تغییر نام لغو شد.'));
 
       const store = tx.objectStore(STORES.files);
       const request = store.index('projectId').getAll(IDBKeyRange.only(projectId));
-      request.onsuccess = () => {
+      request.onsuccess = () =&gt; {
         const all = request.result;
         const moving = all.filter(
-          (file) => file.path === source || file.path.startsWith(`${source}/`)
+          (file) =&gt; file.path === source || file.path.startsWith(`${source}/`)
         );
         if (!moving.length) {
           reject(new Error('مسیر مبدأ پیدا نشد.'));
@@ -1443,13 +1441,13 @@ export class ForgeDB {
           return;
         }
 
-        const movingPaths = new Set(moving.map((file) => file.path));
+        const movingPaths = new Set(moving.map((file) =&gt; file.path));
         const updates = [];
 
         for (const file of moving) {
           const suffix = file.path.slice(source.length);
           const nextPath = normalizePath(target + suffix);
-          const conflict = all.find((other) => other.path === nextPath && !movingPaths.has(other.path));
+          const conflict = all.find((other) =&gt; other.path === nextPath &amp;&amp; !movingPaths.has(other.path));
           if (conflict) {
             reject(new Error(`مسیر مقصد «${nextPath}» از قبل وجود دارد.`));
             tx.abort();
@@ -1472,18 +1470,18 @@ export class ForgeDB {
     }
 
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.files, 'readwrite');
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error || new Error('تکثیر لغو شد.'));
+      tx.oncomplete = () =&gt; resolve();
+      tx.onerror = () =&gt; reject(tx.error);
+      tx.onabort = () =&gt; reject(tx.error || new Error('تکثیر لغو شد.'));
 
       const store = tx.objectStore(STORES.files);
       const request = store.index('projectId').getAll(IDBKeyRange.only(projectId));
-      request.onsuccess = () => {
+      request.onsuccess = () =&gt; {
         const all = request.result;
         const copies = all.filter(
-          (file) => file.path === source || file.path.startsWith(`${source}/`)
+          (file) =&gt; file.path === source || file.path.startsWith(`${source}/`)
         );
         if (!copies.length) {
           reject(new Error('مسیر مبدأ پیدا نشد.'));
@@ -1495,7 +1493,7 @@ export class ForgeDB {
         for (const file of copies) {
           const suffix = file.path.slice(source.length);
           const nextPath = normalizePath(target + suffix);
-          if (all.some((other) => other.path === nextPath)) {
+          if (all.some((other) =&gt; other.path === nextPath)) {
             reject(new Error(`مسیر مقصد «${nextPath}» از قبل وجود دارد.`));
             tx.abort();
             return;
@@ -1510,27 +1508,27 @@ export class ForgeDB {
 
   async getWorkspace() {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const request = db.transaction(STORES.workspace, 'readonly')
         .objectStore(STORES.workspace).get('session');
-      request.onsuccess = () => resolve(request.result || null);
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () =&gt; resolve(request.result || null);
+      request.onerror = () =&gt; reject(request.error);
     });
   }
 
   async saveWorkspace(session) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.workspace, 'readwrite');
       tx.objectStore(STORES.workspace).put({ ...session, id: 'session', updatedAt: Date.now() });
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
+      tx.oncomplete = () =&gt; resolve();
+      tx.onerror = () =&gt; reject(tx.error);
     });
   }
 
   async createSnapshot(projectId, reason, files) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.snapshots, 'readwrite');
       const store = tx.objectStore(STORES.snapshots);
       const snapshot = {
@@ -1538,34 +1536,34 @@ export class ForgeDB {
         projectId,
         reason,
         createdAt: Date.now(),
-        files: files.map((file) => ({ ...file }))
+        files: files.map((file) =&gt; ({ ...file }))
       };
       store.add(snapshot);
-      tx.oncomplete = () => resolve(snapshot);
-      tx.onerror = () => reject(tx.error);
-      tx.onabort = () => reject(tx.error || new Error('ساخت نسخهٔ پشتیبان لغو شد.'));
+      tx.oncomplete = () =&gt; resolve(snapshot);
+      tx.onerror = () =&gt; reject(tx.error);
+      tx.onabort = () =&gt; reject(tx.error || new Error('ساخت نسخهٔ پشتیبان لغو شد.'));
     });
   }
 
   async listSnapshots(projectId) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const request = db.transaction(STORES.snapshots, 'readonly')
         .objectStore(STORES.snapshots)
         .index('projectId_createdAt')
         .getAll(IDBKeyRange.only(projectId));
-      request.onsuccess = () => resolve(request.result.sort((a, b) => b.createdAt - a.createdAt));
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () =&gt; resolve(request.result.sort((a, b) =&gt; b.createdAt - a.createdAt));
+      request.onerror = () =&gt; reject(request.error);
     });
   }
 
   async restoreSnapshot(projectId, snapshotId) {
     const db = await this.open();
-    const snapshot = await new Promise((resolve, reject) => {
+    const snapshot = await new Promise((resolve, reject) =&gt; {
       const request = db.transaction(STORES.snapshots, 'readonly')
         .objectStore(STORES.snapshots).get(snapshotId);
-      request.onsuccess = () => resolve(request.result || null);
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () =&gt; resolve(request.result || null);
+      request.onerror = () =&gt; reject(request.error);
     });
     if (!snapshot || snapshot.projectId !== projectId) {
       throw new Error('نسخهٔ پشتیبان پیدا نشد.');
@@ -1576,21 +1574,21 @@ export class ForgeDB {
 
   async getPrefs() {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const request = db.transaction(STORES.prefs, 'readonly')
         .objectStore(STORES.prefs).getAll();
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () =&gt; resolve(request.result);
+      request.onerror = () =&gt; reject(request.error);
     });
   }
 
   async setPref(key, value) {
     const db = await this.open();
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) =&gt; {
       const tx = db.transaction(STORES.prefs, 'readwrite');
       tx.objectStore(STORES.prefs).put({ key, value });
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
+      tx.oncomplete = () =&gt; resolve();
+      tx.onerror = () =&gt; reject(tx.error);
     });
   }
 
@@ -1619,15 +1617,15 @@ import { uuid, normalizePath, isTextPath, mimeFor, basename } from './utils.js';
 const STARTER_FILES = [
   {
     path: 'index.html',
-    content: `<!doctype html>
-<html lang="en">
-<head>
+    content: `
+
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Forge Project</title>
   <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+
+
   <main class="app">
     <h1>Hello, Forge.</h1>
     <p>Edit this project on your iPhone.</p>
@@ -1635,8 +1633,8 @@ const STARTER_FILES = [
     <output id="result"></output>
   </main>
   <script src="app.js"></script>
-</body>
-</html>`
+
+`
   },
   {
     path: 'styles.css',
@@ -1662,7 +1660,7 @@ output { display: block; margin-top: 16px; font-family: ui-monospace, monospace;
     content: `const button = document.getElementById('action');
 const result = document.getElementById('result');
 let count = 0;
-button.addEventListener('click', () => {
+button.addEventListener('click', () =&gt; {
   count += 1;
   result.textContent = 'Tapped ' + count + ' time' + (count === 1 ? '' : 's');
   console.log('Forge action', count);
@@ -1691,7 +1689,7 @@ export class Workspace {
   on(event, handler) {
     if (!this._listeners.has(event)) this._listeners.set(event, new Set());
     this._listeners.get(event).add(handler);
-    return () => this._listeners.get(event)?.delete(handler);
+    return () =&gt; this._listeners.get(event)?.delete(handler);
   }
 
   emit(event, payload) {
@@ -1705,11 +1703,11 @@ export class Workspace {
   }
 
   entry(path) {
-    return this.files.find((file) => file.path === path) || null;
+    return this.files.find((file) =&gt; file.path === path) || null;
   }
 
   textFiles() {
-    return this.files.filter((file) => file.kind === 'file' && !file.binary && isTextPath(file.path));
+    return this.files.filter((file) =&gt; file.kind === 'file' &amp;&amp; !file.binary &amp;&amp; isTextPath(file.path));
   }
 
   async init() {
@@ -1721,7 +1719,7 @@ export class Workspace {
       this.projects = [project];
     }
 
-    const desiredProject = this.projects.find((project) => project.id === savedSession?.projectId)
+    const desiredProject = this.projects.find((project) =&gt; project.id === savedSession?.projectId)
       || this.projects[0];
 
     await this.openProject(desiredProject.id, savedSession);
@@ -1742,14 +1740,14 @@ export class Workspace {
     this.tabs = [];
     this.activePath = null;
 
-    const validPaths = new Set(this.files.filter((file) => file.kind === 'file' && !file.binary).map((file) => file.path));
+    const validPaths = new Set(this.files.filter((file) =&gt; file.kind === 'file' &amp;&amp; !file.binary).map((file) =&gt; file.path));
 
-    if (session && session.projectId === projectId) {
-      this.tabs = (session.openPaths || []).filter((path) => validPaths.has(path));
+    if (session &amp;&amp; session.projectId === projectId) {
+      this.tabs = (session.openPaths || []).filter((path) =&gt; validPaths.has(path));
       this.activePath = validPaths.has(session.activePath) ? session.activePath : (this.tabs[0] || null);
-      if (this.activePath && !this.tabs.includes(this.activePath)) this.tabs.unshift(this.activePath);
+      if (this.activePath &amp;&amp; !this.tabs.includes(this.activePath)) this.tabs.unshift(this.activePath);
     } else {
-      const index = this.files.find((file) => file.path === 'index.html');
+      const index = this.files.find((file) =&gt; file.path === 'index.html');
       if (index) {
         this.tabs = [index.path];
         this.activePath = index.path;
@@ -1773,7 +1771,7 @@ export class Workspace {
       createdAt: now,
       updatedAt: now
     };
-    const entries = STARTER_FILES.map((file) => ({
+    const entries = STARTER_FILES.map((file) =&gt; ({
       path: file.path,
       kind: 'file',
       content: file.content,
@@ -1798,7 +1796,7 @@ export class Workspace {
   }
 
   async duplicateProject(projectId) {
-    const source = this.projects.find((project) => project.id === projectId);
+    const source = this.projects.find((project) =&gt; project.id === projectId);
     if (!source) throw new Error('پروژه پیدا نشد.');
     const files = await this.db.getFiles(projectId);
     const project = {
@@ -1807,18 +1805,18 @@ export class Workspace {
       createdAt: Date.now(),
       updatedAt: Date.now()
     };
-    await this.db.createProject(project, files.map((file) => ({ ...file })));
+    await this.db.createProject(project, files.map((file) =&gt; ({ ...file })));
     await this.refreshProjects();
     await this.openProject(project.id);
     return project;
   }
 
   async renameProject(projectId, name) {
-    const project = this.projects.find((item) => item.id === projectId);
+    const project = this.projects.find((item) =&gt; item.id === projectId);
     if (!project) throw new Error('پروژه پیدا نشد.');
     const nextName = String(name || '').trim();
     if (!nextName) throw new Error('نام پروژه خالی است.');
-    if (this.projects.some((item) => item.id !== projectId && item.name === nextName)) {
+    if (this.projects.some((item) =&gt; item.id !== projectId &amp;&amp; item.name === nextName)) {
       throw new Error('پروژه‌ای با این نام وجود دارد.');
     }
     const updated = { ...project, name: nextName };
@@ -1831,7 +1829,7 @@ export class Workspace {
   }
 
   async deleteProject(projectId) {
-    if (this.projects.length <= 1) throw new Error('حداقل یک پروژه باید باقی بماند.');
+    if (this.projects.length &lt;= 1) throw new Error('حداقل یک پروژه باید باقی بماند.');
     await this.db.deleteProject(projectId);
     await this.refreshProjects();
     if (this.project?.id === projectId) {
@@ -1851,7 +1849,7 @@ export class Workspace {
     let current = '';
     for (const part of parts) {
       current = current ? `${current}/${part}` : part;
-      if (!this.files.some((file) => file.path === current)) {
+      if (!this.files.some((file) =&gt; file.path === current)) {
         await this.db.putFile({
           projectId: this.project.id,
           path: current,
@@ -1921,12 +1919,12 @@ export class Workspace {
   }
 
   closeTab(path, { force = false } = {}) {
-    if (this.dirty.has(path) && !force) {
+    if (this.dirty.has(path) &amp;&amp; !force) {
       throw new Error('فایل تغییرات ذخیره‌نشده دارد.');
     }
     const index = this.tabs.indexOf(path);
     if (index === -1) return;
-    this.tabs = this.tabs.filter((item) => item !== path);
+    this.tabs = this.tabs.filter((item) =&gt; item !== path);
     if (this.activePath === path) {
       this.activePath = this.tabs[Math.max(0, index - 1)] || this.tabs[0] || null;
     }
@@ -1958,9 +1956,9 @@ export class Workspace {
 
   scheduleSave(path, content) {
     clearTimeout(this._saveTimers.get(path));
-    this._saveTimers.set(path, setTimeout(() => {
+    this._saveTimers.set(path, setTimeout(() =&gt; {
       this._saveTimers.delete(path);
-      this.savePath(path, content).catch(() => {});
+      this.savePath(path, content).catch(() =&gt; {});
     }, 700));
   }
 
@@ -2020,7 +2018,7 @@ export class Workspace {
     if (this.dirty.has(path)) await this.savePath(path, entry.content);
     await this.db.renameEntry(this.project.id, path, normalized);
 
-    this.tabs = this.tabs.map((tab) => {
+    this.tabs = this.tabs.map((tab) =&gt; {
       if (tab === path) return normalized;
       if (tab.startsWith(`${path}/`)) return normalized + tab.slice(path.length);
       return tab;
@@ -2048,9 +2046,9 @@ export class Workspace {
     const entry = this.entry(path);
     if (!entry) throw new Error('مسیر پیدا نشد.');
     await this.db.deleteEntry(this.project.id, path);
-    const affected = (candidate) => candidate === path || candidate.startsWith(`${path}/`);
-    this.tabs = this.tabs.filter((tab) => !affected(tab));
-    if (this.activePath && affected(this.activePath)) {
+    const affected = (candidate) =&gt; candidate === path || candidate.startsWith(`${path}/`);
+    this.tabs = this.tabs.filter((tab) =&gt; !affected(tab));
+    if (this.activePath &amp;&amp; affected(this.activePath)) {
       this.activePath = this.tabs[0] || null;
     }
     for (const dirtyPath of [...this.dirty]) {
@@ -2083,19 +2081,19 @@ export class Workspace {
 
   saveSessionSoon() {
     clearTimeout(this._sessionTimer);
-    this._sessionTimer = setTimeout(() => {
+    this._sessionTimer = setTimeout(() =&gt; {
       this._sessionWrite = this.db.saveWorkspace({
         projectId: this.project?.id || null,
         openPaths: this.tabs,
         activePath: this.activePath
-      }).catch((error) => console.error('[FORGE] session save failed', error));
+      }).catch((error) =&gt; console.error('[FORGE] session save failed', error));
     }, 250);
   }
 
   async _uniqueProjectName(base) {
     let name = base || 'Untitled Project';
     let counter = 2;
-    const existing = new Set(this.projects.map((project) => project.name));
+    const existing = new Set(this.projects.map((project) =&gt; project.name));
     while (existing.has(name)) {
       name = `${base} ${counter}`;
       counter += 1;
@@ -2157,7 +2155,7 @@ export async function createEditor({ parent, prefs, onChange, onFocusChange }) {
   let switching = false;
 
   const theme = EditorView.theme({
-    '&': {
+    '&amp;': {
       height: '100%',
       backgroundColor: '#050609',
       color: '#e6edf7',
@@ -2174,7 +2172,7 @@ export async function createEditor({ parent, prefs, onChange, onFocusChange }) {
     }
   }, { dark: true });
 
-  const extensionsFor = (path) => [
+  const extensionsFor = (path) =&gt; [
     lineNumbersCompartment.of(prefs.lineNumbers ? [lineNumbers(), highlightActiveLineGutter()] : []),
     highlightActiveLine(),
     history(),
@@ -2207,17 +2205,17 @@ export async function createEditor({ parent, prefs, onChange, onFocusChange }) {
       '.cm-content, .cm-gutters': { fontSize: `${prefs.fontSize}px` }
     })),
     theme,
-    EditorView.updateListener.of((update) => {
-      if (update.docChanged && !switching && activePath) {
+    EditorView.updateListener.of((update) =&gt; {
+      if (update.docChanged &amp;&amp; !switching &amp;&amp; activePath) {
         onChange(activePath, update.state.doc.toString());
       }
-      if (update.focusChanged && onFocusChange) {
+      if (update.focusChanged &amp;&amp; onFocusChange) {
         onFocusChange(update.view.hasFocus);
       }
     })
   ];
 
-  const makeState = (path, content) => EditorState.create({
+  const makeState = (path, content) =&gt; EditorState.create({
     doc: content,
     extensions: extensionsFor(path)
   });
@@ -2231,11 +2229,11 @@ export async function createEditor({ parent, prefs, onChange, onFocusChange }) {
     if (!states.has(path)) {
       states.set(path, makeState(path, content));
     }
-    if (activePath === path && view.state === states.get(path)) {
+    if (activePath === path &amp;&amp; view.state === states.get(path)) {
       view.focus();
       return;
     }
-    if (activePath && view.state) {
+    if (activePath &amp;&amp; view.state) {
       states.set(activePath, view.state);
     }
     switching = true;
@@ -2320,20 +2318,20 @@ export async function createEditor({ parent, prefs, onChange, onFocusChange }) {
     invalidate,
     invalidateAll,
     get activePath() { return activePath; },
-    getValue: () => view.state.doc.toString(),
-    focus: () => view.focus(),
+    getValue: () =&gt; view.state.doc.toString(),
+    focus: () =&gt; view.focus(),
     pair,
     insertText,
     move,
-    indent: () => { indentMore(view); view.focus(); },
-    outdent: () => { indentLess(view); view.focus(); },
-    semicolon: () => insertText(';'),
-    undo: () => { undo(view); view.focus(); },
-    redo: () => { redo(view); view.focus(); },
-    search: () => { openSearchPanel(view); view.focus(); },
+    indent: () =&gt; { indentMore(view); view.focus(); },
+    outdent: () =&gt; { indentLess(view); view.focus(); },
+    semicolon: () =&gt; insertText(';'),
+    undo: () =&gt; { undo(view); view.focus(); },
+    redo: () =&gt; { redo(view); view.focus(); },
+    search: () =&gt; { openSearchPanel(view); view.focus(); },
     goToLine,
     setPrefs,
-    destroy: () => view.destroy()
+    destroy: () =&gt; view.destroy()
   };
 }
  
@@ -2342,11 +2340,11 @@ js/preview.js
 import { dirname, extname, mimeFor, dataUrlFromFile, escapeForHtmlText } from './utils.js';
 
 const BOOTSTRAP_SOURCE = String.raw`
-(() => {
-  const post = (type, payload) => {
+(() =&gt; {
+  const post = (type, payload) =&gt; {
     try { parent.postMessage({ __forge: true, type, payload }, '*'); } catch {}
   };
-  const safe = (value) => {
+  const safe = (value) =&gt; {
     try {
       if (typeof value === 'string') return value.slice(0, 4000);
       if (value instanceof Error) return (value.stack || value.message || '').slice(0, 4000);
@@ -2357,31 +2355,31 @@ const BOOTSTRAP_SOURCE = String.raw`
   };
   const original = { log: console.log, warn: console.warn, error: console.error, info: console.info };
   for (const level of ['log', 'warn', 'error', 'info']) {
-    console[level] = (...args) => {
+    console[level] = (...args) =&gt; {
       post('log', { level, args: args.map(safe) });
       try { original[level](...args); } catch {}
     };
   }
-  window.addEventListener('error', (event) => {
+  window.addEventListener('error', (event) =&gt; {
     post('log', { level: 'error', args: [safe(event.message), safe(event.filename + ':' + event.lineno + ':' + event.colno)] });
   });
-  window.addEventListener('unhandledrejection', (event) => {
+  window.addEventListener('unhandledrejection', (event) =&gt; {
     post('log', { level: 'error', args: ['Unhandled rejection', safe(event.reason)] });
   });
-  document.addEventListener('click', (event) => {
-    const anchor = event.target.closest && event.target.closest('a');
+  document.addEventListener('click', (event) =&gt; {
+    const anchor = event.target.closest &amp;&amp; event.target.closest('a');
     if (!anchor) return;
     const href = anchor.getAttribute('href');
-    if (href && !href.startsWith('#')) {
+    if (href &amp;&amp; !href.startsWith('#')) {
       event.preventDefault();
       post('log', { level: 'warn', args: ['Navigation blocked in preview: ' + safe(href)] });
     }
   }, true);
-  window.addEventListener('message', (event) => {
+  window.addEventListener('message', (event) =&gt; {
     if (event.source !== parent) return;
     const data = event.data;
     if (!data || data.__forge !== true || data.type !== 'run') return;
-    const scripts = Array.isArray(data.payload && data.payload.scripts)
+    const scripts = Array.isArray(data.payload &amp;&amp; data.payload.scripts)
       ? data.payload.scripts.slice(0, 40)
       : [];
     for (const item of scripts) {
@@ -2392,7 +2390,7 @@ const BOOTSTRAP_SOURCE = String.raw`
       script.src = url;
       if (item.type === 'module') script.type = 'module';
       else script.async = false;
-      script.onerror = () => post('log', { level: 'error', args: ['Failed to load a project script.'] });
+      script.onerror = () =&gt; post('log', { level: 'error', args: ['Failed to load a project script.'] });
       document.body.appendChild(script);
     }
     post('run-accepted', { count: scripts.length });
@@ -2423,7 +2421,7 @@ function resolvePath(basePath, reference) {
 }
 
 function cssUrlToDataUrl(css, cssPath, fileMap, warnings) {
-  return css.replace(/url\(\s*(['"]?)(.*?)\1\s*\)/gi, (match, quote, reference) => {
+  return css.replace(/url\(\s*(['"]?)(.*?)\1\s*\)/gi, (match, quote, reference) =&gt; {
     if (/^(data:|https?:|blob:|#)/i.test(reference)) return match;
     const resolved = resolvePath(cssPath, reference);
     const file = resolved ? fileMap.get(resolved) : null;
@@ -2440,28 +2438,28 @@ function parseHtmlDocument(html) {
 }
 
 function serializeDocument(doc) {
-  return '<!doctype html>\n' + doc.documentElement.outerHTML;
+  return '\n' + doc.documentElement.outerHTML;
 }
 
 function buildPreviewHtml(project, files) {
-  const fileMap = new Map(files.map((file) => [file.path, file]));
+  const fileMap = new Map(files.map((file) =&gt; [file.path, file]));
   const htmlFile = fileMap.get('index.html')
-    || files.find((file) => file.kind === 'file' && file.path.toLowerCase() === 'index.html');
+    || files.find((file) =&gt; file.kind === 'file' &amp;&amp; file.path.toLowerCase() === 'index.html');
 
   const warnings = [];
   if (!htmlFile) {
     return {
-      html: `<!doctype html><meta charset="utf-8"><body style="background:#050609;color:#ff6b7a;font-family:monospace;padding:24px">
+      html: `<meta charset="utf-8">
         <h1>index.html not found</h1>
-        <p>Create an index.html at the project root to preview.</p></body>`,
+        <p>Create an index.html at the project root to preview.</p>`,
       scripts: [],
       warnings: ['index.html not found']
     };
   }
 
   const doc = parseHtmlDocument(htmlFile.content);
-  doc.querySelectorAll('meta[http-equiv="Content-Security-Policy"]').forEach((node) => node.remove());
-  doc.querySelectorAll('base').forEach((node) => node.remove());
+  doc.querySelectorAll('meta[http-equiv="Content-Security-Policy"]').forEach((node) =&gt; node.remove());
+  doc.querySelectorAll('base').forEach((node) =&gt; node.remove());
 
   const csp = doc.createElement('meta');
   csp.setAttribute('http-equiv', 'Content-Security-Policy');
@@ -2482,7 +2480,7 @@ function buildPreviewHtml(project, files) {
 
   const scripts = [];
 
-  doc.querySelectorAll('link[rel~="stylesheet"]').forEach((link) => {
+  doc.querySelectorAll('link[rel~="stylesheet"]').forEach((link) =&gt; {
     const href = link.getAttribute('href');
     if (!href) { link.remove(); return; }
     const resolved = resolvePath(htmlFile.path, href);
@@ -2497,7 +2495,7 @@ function buildPreviewHtml(project, files) {
     link.replaceWith(style);
   });
 
-  doc.querySelectorAll('script').forEach((script) => {
+  doc.querySelectorAll('script').forEach((script) =&gt; {
     const src = script.getAttribute('src');
     if (src) {
       const resolved = resolvePath(htmlFile.path, src);
@@ -2521,7 +2519,7 @@ function buildPreviewHtml(project, files) {
   });
 
   const assetAttributes = ['src', 'poster'];
-  doc.querySelectorAll('img, source, video, audio, track').forEach((element) => {
+  doc.querySelectorAll('img, source, video, audio, track').forEach((element) =&gt; {
     for (const attribute of assetAttributes) {
       const value = element.getAttribute(attribute);
       if (!value || /^(data:|https?:|blob:)/i.test(value)) continue;
@@ -2535,8 +2533,8 @@ function buildPreviewHtml(project, files) {
     }
   });
 
-  doc.querySelectorAll('iframe, object, embed').forEach((node) => {
-    warnings.push(`Embedded element removed: <${node.tagName.toLowerCase()}>`);
+  doc.querySelectorAll('iframe, object, embed').forEach((node) =&gt; {
+    warnings.push(`Embedded element removed: &lt;${node.tagName.toLowerCase()}&gt;`);
     node.remove();
   });
 
@@ -2573,7 +2571,7 @@ export class Preview {
     this.bootstrapUrl = built.bootstrapUrl;
     this.scripts = built.scripts;
 
-    this._messageHandler = (event) => {
+    this._messageHandler = (event) =&gt; {
       if (!this.iframe || event.source !== this.iframe.contentWindow) return;
       const data = event.data;
       if (!data || data.__forge !== true) return;
@@ -2635,8 +2633,8 @@ const LIMITS = {
 };
 
 function unzipAsync(data) {
-  return new Promise((resolve, reject) => {
-    unzip(data, (error, result) => {
+  return new Promise((resolve, reject) =&gt; {
+    unzip(data, (error, result) =&gt; {
       if (error) reject(error);
       else resolve(result);
     });
@@ -2645,7 +2643,7 @@ function unzipAsync(data) {
 
 export async function readZip(file) {
   if (!file) throw new Error('فایلی انتخاب نشد.');
-  if (file.size > LIMITS.maxTotalBytes * 2) {
+  if (file.size &gt; LIMITS.maxTotalBytes * 2) {
     throw new Error('حجم فایل ZIP بیش از حد مجاز است.');
   }
   const bytes = new Uint8Array(await file.arrayBuffer());
@@ -2657,7 +2655,7 @@ export async function readZip(file) {
   }
 
   const paths = Object.keys(archive);
-  if (paths.length > LIMITS.maxEntries) {
+  if (paths.length &gt; LIMITS.maxEntries) {
     throw new Error(`تعداد ورودی‌های ZIP بیش از ${LIMITS.maxEntries} است.`);
   }
 
@@ -2681,8 +2679,8 @@ export async function readZip(file) {
     const content = archive[rawPath];
     const size = content.byteLength;
     total += size;
-    if (size > LIMITS.maxFileBytes) throw new Error(`فایل «${path}» بیش از حد بزرگ است.`);
-    if (total > LIMITS.maxTotalBytes) throw new Error('حجم استخراج‌شدهٔ ZIP بیش از حد مجاز است.');
+    if (size &gt; LIMITS.maxFileBytes) throw new Error(`فایل «${path}» بیش از حد بزرگ است.`);
+    if (total &gt; LIMITS.maxTotalBytes) throw new Error('حجم استخراج‌شدهٔ ZIP بیش از حد مجاز است.');
 
     if (isDirectory) {
       entries.push({ path, kind: 'folder', content: '', binary: false, mime: '', size: 0 });
@@ -2700,7 +2698,7 @@ export async function readZip(file) {
     });
   }
 
-  const files = entries.filter((entry) => entry.kind === 'file');
+  const files = entries.filter((entry) =&gt; entry.kind === 'file');
   if (!files.length) throw new Error('ZIP هیچ فایل قابل‌استفاده‌ای ندارد.');
   return entries;
 }
@@ -2720,8 +2718,8 @@ function buildZipInput(files) {
 }
 
 function zipAsync(input) {
-  return new Promise((resolve, reject) => {
-    zip(input, { level: 6 }, (error, data) => {
+  return new Promise((resolve, reject) =&gt; {
+    zip(input, { level: 6 }, (error, data) =&gt; {
       if (error) reject(error);
       else resolve(data);
     });
@@ -2736,7 +2734,7 @@ export async function exportProjectZip(project, files) {
   const verification = unzipSync(zipped);
   const expected = Object.keys(input).sort();
   const actual = Object.keys(verification).sort();
-  if (expected.length !== actual.length || expected.some((key, index) => key !== actual[index])) {
+  if (expected.length !== actual.length || expected.some((key, index) =&gt; key !== actual[index])) {
     throw new Error('صحت ZIP ساخته‌شده تأیید نشد.');
   }
 
@@ -2767,7 +2765,7 @@ export function searchProject(files, query, { caseSensitive = false, maxResults 
   for (const file of files) {
     if (file.kind !== 'file' || file.binary || !isTextPath(file.path)) continue;
     const lines = String(file.content || '').split('\n');
-    for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+    for (let lineIndex = 0; lineIndex &lt; lines.length; lineIndex += 1) {
       const line = lines[lineIndex];
       const haystack = caseSensitive ? line : line.toLowerCase();
       let column = haystack.indexOf(haystackQuery);
@@ -2778,7 +2776,7 @@ export function searchProject(files, query, { caseSensitive = false, maxResults 
           column: column + 1,
           preview: line.trim().slice(0, 220)
         });
-        if (results.length >= maxResults) {
+        if (results.length &gt;= maxResults) {
           truncated = true;
           return { results, truncated };
         }
@@ -2804,7 +2802,7 @@ export async function replaceAll(db, projectId, files, query, replacement, { cas
       next = source.split(needle).join(replacement);
       count += source.split(needle).length - 1;
     } else {
-      const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&amp;');
       const regex = new RegExp(escaped, 'gi');
       const matches = source.match(regex);
       count += matches ? matches.length : 0;
@@ -2837,7 +2835,7 @@ export const DEFAULT_PREFS = {
 
 export async function loadPrefs(db) {
   const rows = await db.getPrefs();
-  const stored = Object.fromEntries(rows.map((row) => [row.key, row.value]));
+  const stored = Object.fromEntries(rows.map((row) =&gt; [row.key, row.value]));
   return {
     fontSize: Number.isFinite(stored.fontSize) ? stored.fontSize : DEFAULT_PREFS.fontSize,
     tabSize: Number.isFinite(stored.tabSize) ? stored.tabSize : DEFAULT_PREFS.tabSize,
@@ -2901,7 +2899,7 @@ export function getSyncStatus() {
  
 js/router.js
 export function initRouter(onRoute) {
-  const handle = () => {
+  const handle = () =&gt; {
     const route = (location.hash || '#/files').replace(/^#\/?/, '') || 'files';
     onRoute(route);
   };
@@ -2927,9 +2925,9 @@ export function el(tag, attrs = {}, ...children) {
     if (key === 'class') node.className = value;
     else if (key === 'text') node.textContent = value;
     else if (key === 'dataset') Object.assign(node.dataset, value);
-    else if (key.startsWith('on') && typeof value === 'function') {
+    else if (key.startsWith('on') &amp;&amp; typeof value === 'function') {
       node.addEventListener(key.slice(2).toLowerCase(), value);
-    } else if (value !== undefined && value !== null && value !== false) {
+    } else if (value !== undefined &amp;&amp; value !== null &amp;&amp; value !== false) {
       node.setAttribute(key, value === true ? '' : String(value));
     }
   }
@@ -2945,21 +2943,21 @@ export function toast(message, { type = 'info', duration = 4200, action = null }
   if (!root) return;
   const node = el('div', { class: 'toast', dataset: { type }, role: type === 'error' ? 'alert' : 'status' });
   node.append(el('span', { text: String(message) }));
-  if (action && typeof action.onClick === 'function') {
+  if (action &amp;&amp; typeof action.onClick === 'function') {
     node.append(el('button', {
       type: 'button',
       text: action.label || 'انجام',
-      onclick: () => {
+      onclick: () =&gt; {
         try { action.onClick(); } finally { node.remove(); }
       }
     }));
   }
   root.append(node);
-  setTimeout(() => node.remove(), duration);
+  setTimeout(() =&gt; node.remove(), duration);
 }
 
 function modal({ title, message, input = null, actions = [] }) {
-  return new Promise((resolve) => {
+  return new Promise((resolve) =&gt; {
     const root = document.getElementById('modal-root');
     const backdrop = el('div', { class: 'modal-backdrop' });
     const dialog = el('div', { class: 'modal', role: 'dialog', 'aria-modal': 'true' });
@@ -2980,7 +2978,7 @@ function modal({ title, message, input = null, actions = [] }) {
 
     const actionRow = el('div', { class: 'modal-actions' });
     let settled = false;
-    const finish = (value) => {
+    const finish = (value) =&gt; {
       if (settled) return;
       settled = true;
       backdrop.remove();
@@ -2995,13 +2993,13 @@ function modal({ title, message, input = null, actions = [] }) {
           primary: action.primary ? 'true' : 'false',
           danger: action.danger ? 'true' : 'false'
         },
-        onclick: () => finish(action.value(inputNode))
+        onclick: () =&gt; finish(action.value(inputNode))
       }));
     }
 
     dialog.append(actionRow);
     backdrop.append(dialog);
-    backdrop.addEventListener('click', (event) => {
+    backdrop.addEventListener('click', (event) =&gt; {
       if (event.target === backdrop) finish(null);
     });
     root.append(backdrop);
@@ -3015,10 +3013,10 @@ export function confirmDialog(title, message, { confirmText = 'تأیید', dang
     title,
     message,
     actions: [
-      { label: 'لغو', value: () => false },
-      { label: confirmText, primary: !danger, danger, value: () => true }
+      { label: 'لغو', value: () =&gt; false },
+      { label: confirmText, primary: !danger, danger, value: () =&gt; true }
     ]
-  }).then((value) => value === true);
+  }).then((value) =&gt; value === true);
 }
 
 export function promptDialog(title, { message = '', label = '', value = '', placeholder = '' } = {}) {
@@ -3027,8 +3025,8 @@ export function promptDialog(title, { message = '', label = '', value = '', plac
     message,
     input: { label, value, placeholder },
     actions: [
-      { label: 'لغو', value: () => null },
-      { label: 'تأیید', primary: true, value: (input) => input?.value?.trim() || null }
+      { label: 'لغو', value: () =&gt; null },
+      { label: 'تأیید', primary: true, value: (input) =&gt; input?.value?.trim() || null }
     ]
   });
 }
@@ -3037,11 +3035,11 @@ export function choiceDialog(title, message, choices) {
   return modal({
     title,
     message,
-    actions: choices.map((choice) => ({
+    actions: choices.map((choice) =&gt; ({
       label: choice.label,
       primary: choice.primary,
       danger: choice.danger,
-      value: () => choice.value
+      value: () =&gt; choice.value
     }))
   });
 }
@@ -3110,7 +3108,7 @@ function renderTabs() {
       type: 'button',
       class: `tab${workspace.activePath === path ? ' is-active' : ''}`,
       'aria-label': `باز کردن ${path}`,
-      onclick: () => workspace.setActive(path)
+      onclick: () =&gt; workspace.setActive(path)
     });
     if (dirty) tab.append(el('span', { class: 'tab-dot', 'aria-label': 'ذخیره‌نشده' }));
     tab.append(el('span', { text: basename(path) }));
@@ -3119,7 +3117,7 @@ function renderTabs() {
       class: 'tab-close',
       'aria-label': `بستن ${path}`,
       text: '✕',
-      onclick: async (event) => {
+      onclick: async (event) =&gt; {
         event.stopPropagation();
         await closeTab(path);
       }
@@ -3145,7 +3143,7 @@ async function closeTab(path) {
   } else {
     workspace.closeTab(path);
   }
-  if (workspace.activePath === null && dom.editor) {
+  if (workspace.activePath === null &amp;&amp; dom.editor) {
     dom.fallbackContent.textContent = '';
   }
 }
@@ -3177,7 +3175,7 @@ function renderFileTree(container) {
   for (const entry of workspace.files) {
     const parts = entry.path.split('/');
     let level = tree;
-    for (let index = 0; index < parts.length; index += 1) {
+    for (let index = 0; index &lt; parts.length; index += 1) {
       const name = parts[index];
       const path = parts.slice(0, index + 1).join('/');
       const isLeaf = index === parts.length - 1;
@@ -3190,13 +3188,13 @@ function renderFileTree(container) {
         });
       }
       const node = level.get(name);
-      if (isLeaf && entry.kind === 'folder') node.kind = 'folder';
+      if (isLeaf &amp;&amp; entry.kind === 'folder') node.kind = 'folder';
       if (!isLeaf) level = node.children;
     }
   }
 
-  const renderLevel = (map, depth, target) => {
-    const sorted = [...map.values()].sort((a, b) => {
+  const renderLevel = (map, depth, target) =&gt; {
+    const sorted = [...map.values()].sort((a, b) =&gt; {
       if (a.kind !== b.kind) return a.kind === 'folder' ? -1 : 1;
       return a.name.localeCompare(b.name, 'fa');
     });
@@ -3210,7 +3208,7 @@ function renderFileTree(container) {
         class: 'tree-main',
         style: `padding-inline-start:${depth * 12}px`,
         'aria-label': isFolder ? `${expanded ? 'بستن' : 'باز کردن'} پوشهٔ ${node.path}` : `باز کردن ${node.path}`,
-        onclick: async () => {
+        onclick: async () =&gt; {
           if (isFolder) {
             if (expanded) workspace.expandedFolders.delete(node.path);
             else workspace.expandedFolders.add(node.path);
@@ -3225,19 +3223,19 @@ function renderFileTree(container) {
       main.append(el('span', { class: 'name', text: node.name }));
       row.append(main);
 
-      if (!isFolder && node.entry) {
+      if (!isFolder &amp;&amp; node.entry) {
         row.append(el('button', {
           type: 'button',
           class: 'tree-action',
           'aria-label': `عملیات ${node.path}`,
           text: '⋯',
-          onclick: () => openEntryActions(node.entry)
+          onclick: () =&gt; openEntryActions(node.entry)
         }));
       }
 
       target.append(row);
 
-      if (isFolder && expanded) {
+      if (isFolder &amp;&amp; expanded) {
         renderLevel(node.children, depth + 1, target);
       }
     }
@@ -3267,7 +3265,7 @@ async function openEntryActions(entry) {
 
   content.append(el('button', {
     type: 'button', class: 'btn', text: 'تغییر نام',
-    onclick: async () => {
+    onclick: async () =&gt; {
       closeSheet();
       const next = await promptDialog('تغییر نام', { value: entry.path });
       if (!next) return;
@@ -3284,7 +3282,7 @@ async function openEntryActions(entry) {
 
   content.append(el('button', {
     type: 'button', class: 'btn', text: 'تکثیر',
-    onclick: async () => {
+    onclick: async () =&gt; {
       closeSheet();
       const next = await promptDialog('تکثیر', { value: `${entry.path}-copy` });
       if (!next) return;
@@ -3299,7 +3297,7 @@ async function openEntryActions(entry) {
 
   content.append(el('button', {
     type: 'button', class: 'btn btn-danger', text: 'حذف',
-    onclick: async () => {
+    onclick: async () =&gt; {
       closeSheet();
       const ok = await confirmDialog('حذف', `«${entry.path}» حذف شود؟`, { confirmText: 'حذف', danger: true });
       if (!ok) return;
@@ -3327,7 +3325,7 @@ function openFilesSheet() {
     if (workspace.project?.id === project.id) option.selected = true;
     select.append(option);
   }
-  select.addEventListener('change', async () => {
+  select.addEventListener('change', async () =&gt; {
     try {
       await workspace.openProject(select.value);
       editor?.invalidateAll();
@@ -3342,7 +3340,7 @@ function openFilesSheet() {
   const projectMenu = el('button', {
     type: 'button', class: 'btn', text: '⋯',
     'aria-label': 'عملیات پروژه',
-    onclick: () => openProjectActions()
+    onclick: () =&gt; openProjectActions()
   });
   projectRow.append(projectMenu);
   content.append(projectRow);
@@ -3350,7 +3348,7 @@ function openFilesSheet() {
   const actions = el('div', { class: 'row' });
   actions.append(el('button', {
     type: 'button', class: 'btn btn-accent', text: '+ فایل',
-    onclick: async () => {
+    onclick: async () =&gt; {
       const path = await promptDialog('فایل جدید', { value: 'untitled.js' });
       if (!path) return;
       try {
@@ -3363,7 +3361,7 @@ function openFilesSheet() {
   }));
   actions.append(el('button', {
     type: 'button', class: 'btn', text: '+ پوشه',
-    onclick: async () => {
+    onclick: async () =&gt; {
       const path = await promptDialog('پوشهٔ جدید', { value: 'assets' });
       if (!path) return;
       try {
@@ -3377,11 +3375,11 @@ function openFilesSheet() {
   }));
   actions.append(el('button', {
     type: 'button', class: 'btn', text: 'Import ZIP',
-    onclick: () => zipInput?.click()
+    onclick: () =&gt; zipInput?.click()
   }));
   actions.append(el('button', {
     type: 'button', class: 'btn', text: 'Export ZIP',
-    onclick: async () => {
+    onclick: async () =&gt; {
       try {
         const result = await exportProjectZip(workspace.project, workspace.files);
         toast(`ZIP ساخته شد: ${result.filename}`);
@@ -3405,7 +3403,7 @@ async function openProjectActions() {
 
   content.append(el('button', {
     type: 'button', class: 'btn', text: 'پروژهٔ جدید',
-    onclick: async () => {
+    onclick: async () =&gt; {
       closeSheet();
       const name = await promptDialog('پروژهٔ جدید', { value: 'New Project' });
       if (!name) return;
@@ -3422,7 +3420,7 @@ async function openProjectActions() {
 
   content.append(el('button', {
     type: 'button', class: 'btn', text: 'تغییر نام پروژه',
-    onclick: async () => {
+    onclick: async () =&gt; {
       closeSheet();
       const name = await promptDialog('تغییر نام پروژه', { value: workspace.project.name });
       if (!name) return;
@@ -3437,7 +3435,7 @@ async function openProjectActions() {
 
   content.append(el('button', {
     type: 'button', class: 'btn', text: 'تکثیر پروژه',
-    onclick: async () => {
+    onclick: async () =&gt; {
       closeSheet();
       try {
         await workspace.duplicateProject(workspace.project.id);
@@ -3452,7 +3450,7 @@ async function openProjectActions() {
 
   content.append(el('button', {
     type: 'button', class: 'btn btn-danger', text: 'حذف پروژه',
-    onclick: async () => {
+    onclick: async () =&gt; {
       closeSheet();
       const ok = await confirmDialog('حذف پروژه', `پروژهٔ «${workspace.project.name}» و همهٔ فایل‌های آن حذف شود؟`, { confirmText: 'حذف', danger: true });
       if (!ok) return;
@@ -3481,7 +3479,7 @@ function openSearchSheet() {
   const resultHost = el('div');
   const status = el('div', { class: 'hint' });
 
-  const runSearch = () => {
+  const runSearch = () =&gt; {
     const result = searchProject(workspace.files, queryInput.value, { caseSensitive: caseInput.checked });
     resultHost.replaceChildren();
     status.textContent = result.results.length
@@ -3494,7 +3492,7 @@ function openSearchSheet() {
         list.append(el('button', {
           type: 'button',
           class: 'result-item',
-          onclick: async () => {
+          onclick: async () =&gt; {
             await workspace.openFile(item.path);
             closeSheet();
             editor?.goToLine(item.line);
@@ -3515,7 +3513,7 @@ function openSearchSheet() {
 
   const replaceButton = el('button', {
     type: 'button', class: 'btn', text: 'جایگزینی همه',
-    onclick: async () => {
+    onclick: async () =&gt; {
       const ok = await confirmDialog(
         'جایگزینی همه',
         'همهٔ موارد منطبق در فایل‌های متنی پروژه جایگزین شوند؟',
@@ -3538,7 +3536,7 @@ function openSearchSheet() {
   const row = el('div', { class: 'row' }, queryInput, searchButton);
   content.append(row, caseLabel, replacementInput, el('div', { class: 'row' }, replaceButton), status, resultHost);
 
-  queryInput.addEventListener('keydown', (event) => {
+  queryInput.addEventListener('keydown', (event) =&gt; {
     if (event.key === 'Enter') runSearch();
   });
 
@@ -3566,7 +3564,7 @@ function openConsoleSheet() {
     el('span', { class: 'hint', text: `${consoleEntries.length} پیام` }),
     el('button', {
       type: 'button', class: 'btn', text: 'پاک کردن',
-      onclick: () => {
+      onclick: () =&gt; {
         consoleEntries = [];
         openConsoleSheet();
       }
@@ -3582,7 +3580,7 @@ async function openGitSheet() {
   content.append(el('div', { class: 'hint', text: status.reason }));
   content.append(el('button', {
     type: 'button', class: 'btn', text: 'راهنمای محدودیت‌ها',
-    onclick: async () => {
+    onclick: async () =&gt; {
       await confirmDialog(
         'GitHub در این نسخه',
         'ورود OAuth گیت‌هاب از یک اپ استاتیک بدون relay ممکن نیست؛ نقاط پایانی توکن CORS ندارند و توکن نباید در فایل پروژه یا حافظهٔ عمومی ذخیره شود. در نسخه‌های بعدی یک relay محدود و قرارداد API تعریف می‌شود.',
@@ -3605,7 +3603,7 @@ function openSettingsSheet() {
   const tabField = el('label', { class: 'field' },
     el('span', { text: 'اندازهٔ تب' }),
     el('select', { class: 'select' },
-      ...[2, 4, 8].map((size) => {
+      ...[2, 4, 8].map((size) =&gt; {
         const option = el('option', { value: size, text: String(size) });
         if (prefs.tabSize === size) option.selected = true;
         return option;
@@ -3622,7 +3620,7 @@ function openSettingsSheet() {
   lineInput.checked = prefs.lineNumbers;
   lineLabel.append(lineInput, el('span', { text: 'شماره‌های خط' }));
 
-  const apply = async () => {
+  const apply = async () =&gt; {
     prefs = {
       fontSize: Math.max(10, Math.min(24, Number(fontField.querySelector('input').value) || DEFAULT_PREFS.fontSize)),
       tabSize: Number(tabField.querySelector('select').value) || DEFAULT_PREFS.tabSize,
@@ -3647,18 +3645,18 @@ function openSettingsSheet() {
   content.append(el('div', { class: 'separator' }));
 
   const storageInfo = el('div', { class: 'hint', text: 'در حال محاسبهٔ فضای ذخیره‌سازی…' });
-  db.estimate().then(({ usage, quota }) => {
+  db.estimate().then(({ usage, quota }) =&gt; {
     storageInfo.textContent = usage != null
       ? `مصرف: ${formatBytes(usage)} از ${formatBytes(quota)}`
       : 'مرورگر اطلاعات فضای ذخیره‌سازی را ارائه نمی‌دهد.';
-  }).catch(() => {
+  }).catch(() =&gt; {
     storageInfo.textContent = 'خواندن فضای ذخیره‌سازی ناموفق بود.';
   });
   content.append(storageInfo);
 
   content.append(el('button', {
     type: 'button', class: 'btn', text: 'درخواست ذخیره‌سازی پایدار',
-    onclick: async () => {
+    onclick: async () =&gt; {
       try {
         if (!navigator.storage?.persist) throw new Error('این مرورگر از ذخیره‌سازی پایدار پشتیبانی نمی‌کند.');
         const granted = await navigator.storage.persist();
@@ -3671,7 +3669,7 @@ function openSettingsSheet() {
 
   content.append(el('button', {
     type: 'button', class: 'btn', text: 'پشتیبان کامل JSON',
-    onclick: async () => {
+    onclick: async () =&gt; {
       try {
         const result = await exportBackup(db);
         toast(`پشتیبان ساخته شد: ${result.filename} (${result.projects} پروژه)`);
@@ -3683,7 +3681,7 @@ function openSettingsSheet() {
 
   content.append(el('button', {
     type: 'button', class: 'btn', text: 'ساخت Snapshot از پروژه',
-    onclick: async () => {
+    onclick: async () =&gt; {
       try {
         await workspace.snapshot('manual');
         toast('نسخهٔ پشتیبان محلی ساخته شد.');
@@ -3706,11 +3704,11 @@ async function openPreview() {
   if (!preview) {
     preview = new Preview({
       host: dom.previewHost,
-      onLog: (entry) => {
+      onLog: (entry) =&gt; {
         consoleEntries.push(entry);
-        if (consoleEntries.length > 500) consoleEntries = consoleEntries.slice(-500);
+        if (consoleEntries.length &gt; 500) consoleEntries = consoleEntries.slice(-500);
       },
-      onError: (error) => {
+      onError: (error) =&gt; {
         consoleEntries.push({ level: 'error', args: [error.message || String(error)] });
         toast(`خطای پیش‌نمایش: ${error.message}`, { type: 'error' });
       }
@@ -3725,7 +3723,7 @@ async function openPreview() {
 }
 
 function setupToolbar() {
-  dom.toolbar.addEventListener('click', async (event) => {
+  dom.toolbar.addEventListener('click', async (event) =&gt; {
     const button = event.target.closest('button[data-cmd]');
     if (!button) return;
     if (!editor) {
@@ -3760,7 +3758,7 @@ function setupToolbar() {
 }
 
 function setupNav() {
-  dom.bottomNav.addEventListener('click', (event) => {
+  dom.bottomNav.addEventListener('click', (event) =&gt; {
     const button = event.target.closest('button[data-route]');
     if (!button) return;
     router.navigate(button.dataset.route);
@@ -3774,11 +3772,11 @@ function setActiveNav(route) {
 }
 
 function setupViewport() {
-  const sync = () => {
+  const sync = () =&gt; {
     const viewport = window.visualViewport;
     const height = viewport?.height || window.innerHeight;
     document.documentElement.style.setProperty('--app-height', `${height}px`);
-    const keyboardOpen = Boolean(viewport && window.innerHeight - viewport.height > 120);
+    const keyboardOpen = Boolean(viewport &amp;&amp; window.innerHeight - viewport.height &gt; 120);
     document.body.classList.toggle('keyboard-open', keyboardOpen);
   };
   window.visualViewport?.addEventListener('resize', sync);
@@ -3794,7 +3792,7 @@ function setupZipInput() {
     style: 'display:none'
   });
   document.body.append(zipInput);
-  zipInput.addEventListener('change', async () => {
+  zipInput.addEventListener('change', async () =&gt; {
     const file = zipInput.files?.[0];
     zipInput.value = '';
     if (!file) return;
@@ -3817,18 +3815,18 @@ async function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
   try {
     const registration = await navigator.serviceWorker.register('./sw.js', { scope: './', updateViaCache: 'none' });
-    registration.addEventListener('updatefound', () => {
+    registration.addEventListener('updatefound', () =&gt; {
       const worker = registration.installing;
       if (!worker) return;
-      worker.addEventListener('statechange', () => {
-        if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+      worker.addEventListener('statechange', () =&gt; {
+        if (worker.state === 'installed' &amp;&amp; navigator.serviceWorker.controller) {
           toast('نسخهٔ جدید FORGE آماده است.', {
             duration: 12000,
             action: {
               label: 'به‌روزرسانی',
-              onClick: () => {
+              onClick: () =&gt; {
                 worker.postMessage({ type: 'SKIP_WAITING' });
-                navigator.serviceWorker.addEventListener('controllerchange', () => location.reload(), { once: true });
+                navigator.serviceWorker.addEventListener('controllerchange', () =&gt; location.reload(), { once: true });
               }
             }
           });
@@ -3863,10 +3861,10 @@ async function boot() {
 
   workspace.on('tabs-changed', renderTabs);
   workspace.on('dirty-changed', renderTabs);
-  workspace.on('active-changed', () => { openActiveInEditor().catch(() => {}); renderTabs(); });
+  workspace.on('active-changed', () =&gt; { openActiveInEditor().catch(() =&gt; {}); renderTabs(); });
   workspace.on('status-changed', setSaveState);
-  workspace.on('storage-error', (error) => toast(`خطای ذخیره‌سازی: ${error.message}`, { type: 'error' }));
-  workspace.on('binary-selected', (file) => {
+  workspace.on('storage-error', (error) =&gt; toast(`خطای ذخیره‌سازی: ${error.message}`, { type: 'error' }));
+  workspace.on('binary-selected', (file) =&gt; {
     toast(`«${file.path}» دودویی است و در ویرایشگر متنی باز نمی‌شود.`, { type: 'warn' });
   });
 
@@ -3874,8 +3872,8 @@ async function boot() {
     editor = await createEditor({
       parent: dom.editor,
       prefs,
-      onChange: (path, content) => workspace.noteEdit(path, content),
-      onFocusChange: () => {}
+      onChange: (path, content) =&gt; workspace.noteEdit(path, content),
+      onFocusChange: () =&gt; {}
     });
   } catch (error) {
     editorError = error;
@@ -3888,7 +3886,7 @@ async function boot() {
   setSaveState();
   await openActiveInEditor();
 
-  router = initRouter((route) => {
+  router = initRouter((route) =&gt; {
     setActiveNav(route);
     if (route === 'files') openFilesSheet();
     else if (route === 'search') openSearchSheet();
@@ -3900,38 +3898,38 @@ async function boot() {
 
   dom.sheetClose.addEventListener('click', closeSheet);
   dom.sheetBackdrop.addEventListener('click', closeSheet);
-  dom.previewClose.addEventListener('click', () => {
+  dom.previewClose.addEventListener('click', () =&gt; {
     dom.previewView.classList.add('hidden');
     preview?.destroy();
     preview = null;
     router.navigate('files');
   });
   dom.previewRefresh.addEventListener('click', openPreview);
-  dom.previewSize.addEventListener('change', () => {
+  dom.previewSize.addEventListener('change', () =&gt; {
     dom.previewHost.dataset.size = dom.previewSize.value;
   });
 
-  document.addEventListener('keydown', (event) => {
+  document.addEventListener('keydown', (event) =&gt; {
     if (event.key === 'Escape') closeSheet();
   });
 
-  window.addEventListener('beforeunload', (event) => {
+  window.addEventListener('beforeunload', (event) =&gt; {
     if (workspace.dirty.size) {
       event.preventDefault();
       event.returnValue = '';
     }
   });
 
-  document.addEventListener('visibilitychange', () => {
+  document.addEventListener('visibilitychange', () =&gt; {
     if (document.visibilityState === 'hidden') {
-      workspace.flushPendingSaves().catch(() => {});
+      workspace.flushPendingSaves().catch(() =&gt; {});
     }
   });
 
   await registerServiceWorker();
 }
 
-boot().catch((error) => {
+boot().catch((error) =&gt; {
   console.error('[FORGE] fatal', error);
   toast(`خطای راه‌اندازی: ${error.message}`, { type: 'error', duration: 15000 });
 });
@@ -4169,4 +4167,4 @@ No item above is presented as complete in this milestone.
  
 8. Final honesty statement
  
-This deliverable is a functional first milestone, not a claim of full Visual Studio Code parity. Core local editing, persistence, file management, ZIP portability, preview isolation, and PWA shell are implemented in source. GitHub sync and real-device Safari verification are explicitly incomplete. Every enabled control in the provided source maps to a real function; disabled/unavailable capabilities are documented rather than simulated.
+This deliverable is a functional first milestone, not a claim of full Visual Studio Code parity. Core local editing, persistence, file management, ZIP portability, preview isolation, and PWA shell are implemented in source. GitHub sync and real-device Safari verification are explicitly incomplete. Every enabled control in the provided source maps to a real function; disabled/unavailable capabilities are documented rather than simulated.</body></html>
