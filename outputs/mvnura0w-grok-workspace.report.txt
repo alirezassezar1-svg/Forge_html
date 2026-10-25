@@ -1,0 +1,18 @@
+root: . | package.json: true | html files: 2 | py: - | php: false
+── strategy: build
+$ npm ci --no-audit --no-fund --legacy-peer-deps
+$ npm install -D vite-plugin-singlefile --no-audit --no-fund --legacy-peer-deps
+$ npx vite build --config vite.config.anyhtml.mjs
+build attempt failed: command failed (1): npx vite build --config vite.config.anyhtml.mjs
+$ npx vite build --base ./
+build attempt failed: no vite output
+$ npm run build
+build attempt failed: build finished but no output folder with index.html found
+strategy build failed: build finished but no output folder with index.html found
+── strategy: serve
+$ npm ci --no-audit --no-fund --legacy-peer-deps
+serve: starting npm run dev -- --host 127.0.0.1
+serve: up at http://127.0.0.1:8080/
+$ npx playwright-core install --with-deps chromium
+serve: snapshot of 1 page(s) (scripts removed; forms/backend calls are static)
+DONE via "serve" → /home/runner/work/Forge_html/Forge_html/outputs/mvnura0w-grok-workspace.html (0.60 MB)
