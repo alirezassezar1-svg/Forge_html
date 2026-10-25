@@ -1,0 +1,5 @@
+root: . | package.json: true | html files: 0 | py: - | php: false
+── strategy: serve
+strategy serve failed: no runnable server found
+── strategy: explorer
+DONE via "explorer" → /home/runner/work/Forge_html/Forge_html/outputs/mvnunov8-ali-phone-cpanel.html (4.11 MB)
