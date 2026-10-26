@@ -1,0 +1,9 @@
+root: nononick-forge-milestone1-main | package.json: true | html files: 1 | py: - | php: false
+── strategy: static
+stylesheet not inlined: ./css/app.css
+stylesheet not inlined: ./css/editor.css
+script not inlined: ./js/app.js
+asset not inlined: ./assets/icon.svg
+asset not inlined: ./assets/icon-192.png
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvp91nqk-nononick-forge-milestone1-main.html (0.01 MB)
