@@ -1,0 +1,15 @@
+root: . | package.json: true | html files: 2 | py: - | php: false
+── strategy: build
+$ npm install --no-audit --no-fund --legacy-peer-deps
+$ npm run build
+build attempt failed: build finished but no output folder with index.html found
+strategy build failed: build finished but no output folder with index.html found
+── strategy: serve
+$ npm ci --no-audit --no-fund --legacy-peer-deps
+$ npm run build
+serve: starting npm start
+strategy serve failed: server did not answer on any port: |   [36m3.10 kB[39m[2m | [22m |  | [1mLazy chunk files[22m    [2m | [22m[1mNames[22m           [2m | [22m [1mRaw size[22m | [32mchunk-4KZHK6NC.mjs[39m  [2m | [22m[2mindex[22m           [2m | [22m  [36m1.56 MB[39m[2m | [22m | [32mchunk-S3CLXC37.mjs[39m  [2m | [22m[2m-[22m               [2m | [22m[36m205.69 kB[39m[2m | [22m
+── strategy: static
+asset not inlined: favicon.ico
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvvlsr7k-lenis-gsap-webgl-studio-github-pages-bui.html (1.77 MB)
