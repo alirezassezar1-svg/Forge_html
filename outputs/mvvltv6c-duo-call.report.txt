@@ -1,0 +1,8 @@
+root: duo-call | package.json: true | html files: 1 | py: - | php: false
+── strategy: serve
+$ npm ci --no-audit --no-fund --legacy-peer-deps
+serve: starting npm start
+serve: up at http://127.0.0.1:4311/
+$ npx playwright-core install --with-deps chromium
+serve: snapshot of 1 page(s) (scripts removed; forms/backend calls are static)
+DONE via "serve" → /home/runner/work/Forge_html/Forge_html/outputs/mvvltv6c-duo-call.html (0.01 MB)
