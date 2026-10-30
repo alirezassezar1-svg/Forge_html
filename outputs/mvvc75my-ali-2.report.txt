@@ -1,0 +1,6 @@
+root: ali | package.json: false | html files: 1 | py: - | php: false
+── strategy: static
+stylesheet not inlined: /static/css/app.css
+script not inlined: /static/js/app.js
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvvc75my-ali-2.html (0.01 MB)
