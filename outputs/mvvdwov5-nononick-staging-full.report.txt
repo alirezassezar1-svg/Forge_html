@@ -1,0 +1,8 @@
+root: . | package.json: false | html files: 3 | py: - | php: true
+── strategy: serve
+$ command -v php >/dev/null || (sudo apt-get update -y -q && sudo apt-get install -y -q php-cli)
+serve: starting php -S 127.0.0.1:4167
+strategy serve failed: server did not answer on any port: |  2026] 127.0.0.1:49914 [503]: GET / | [Fri Oct 30 19:50:42 2026] 127.0.0.1:49914 Closing | [Fri Oct 30 19:50:43 2026] 127.0.0.1:49916 Accepted | [Fri Oct 30 19:50:43 2026] 127.0.0.1:49916 [503]: GET / | [Fri Oct 30 19:50:43 2026] 127.0.0.1:49916 Closing
+── strategy: static
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvvdwov5-nononick-staging-full.html (0.35 MB)
