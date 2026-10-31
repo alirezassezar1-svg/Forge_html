@@ -1,0 +1,15 @@
+root: . | package.json: false | html files: 1 | py: - | php: false
+── strategy: static
+script not inlined: assets/js/script-0.js
+asset not inlined: '+_.J(_.im(a.src))+'
+asset not inlined: '+_.J(_.im(c))+'
+asset not inlined: '+_.J(_.im(a.src))+'
+asset not inlined: '+(p?_.J(_.im(e)):_.J(_.im(b)))+'
+asset not inlined: https://www.gstatic.com/identity/boq/scui/consent-d1f3286c14d3d51ac7504a034c7de882.png
+asset not inlined: '+_.J(_.im(e))+'
+asset not inlined: '+_.J(_.im(a.src))+'
+asset not inlined: '+_.J(_.im(e))+'
+asset not inlined: '+_.J(_.im(c))+'
+asset not inlined: '+_.J(_.im(c))+'
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvwm1j3d-single-file.html (96.35 MB)
