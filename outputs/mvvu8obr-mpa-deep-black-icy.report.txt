@@ -1,0 +1,15 @@
+root: mpa-project | package.json: true | html files: 2 | py: - | php: false
+── strategy: build
+$ npm install --no-audit --no-fund --legacy-peer-deps
+$ npm run build
+build attempt failed: build finished but no output folder with index.html found
+strategy build failed: build finished but no output folder with index.html found
+── strategy: serve
+$ npm ci --no-audit --no-fund --legacy-peer-deps
+$ npm run build
+serve: starting npm start
+strategy serve failed: server did not answer on any port: |  [2m | [22m [1mRaw size[22m | [32mmain.server.mjs[39m     [2m | [22m[2mmain.server[22m     [2m | [22m  [36m3.07 MB[39m[2m | [22m | [32mserver.mjs[39m          [2m | [22m[2mserver[22m          [2m | [22m  [36m2.00 MB[39m[2m | [22m | [32mpolyfills.server.mjs[39m[2m | [22m[2mpolyfills.server[22m[2m | [22m[36m498.23 kB[39m[2m | [22m | [32mchunk-75HES4AD.mjs[39m  [2m | [22m[2m-[22m               [2m | [22m  [36m2.93 kB[39m[2m | [22m
+── strategy: static
+asset not inlined: favicon.ico
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvvu8obr-mpa-deep-black-icy.html (1.26 MB)
