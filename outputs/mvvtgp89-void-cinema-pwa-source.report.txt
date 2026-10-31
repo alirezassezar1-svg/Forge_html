@@ -1,0 +1,17 @@
+root: . | package.json: true | html files: 2 | py: - | php: true
+── strategy: build
+$ npm ci --no-audit --no-fund --legacy-peer-deps
+$ npm run build
+build attempt failed: build finished but no output folder with index.html found
+strategy build failed: build finished but no output folder with index.html found
+── strategy: serve
+$ npm ci --no-audit --no-fund --legacy-peer-deps
+$ npm run build
+serve: starting npm start
+strategy serve failed: server did not answer on any port: |  | > void-cinema-pwa@0.0.0 start | > ng serve |  | [1m[33mPrebundling has been configured but will not be used because caching has been disabled.[39m[22m
+── strategy: static
+asset not inlined: icons/favicon-48.png
+asset not inlined: favicon.ico
+asset not inlined: icons/apple-touch-icon.png
+static: 1 page(s) inlined
+DONE via "static" → /home/runner/work/Forge_html/Forge_html/outputs/mvvtgp89-void-cinema-pwa-source.html (0.00 MB)
